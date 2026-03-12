@@ -173,9 +173,9 @@
 
 <div class="container">
 
-  <!-- ========== RINGKASAN MATERI SESI 2 (dari PDF) ========== -->
+  <!-- ========== MATERI SESI 2  ========== -->
   <div class="card">
-    <h2>📘 RINGKASAN MATERI: KONSTRUKTOR & ENKAPSULASI</h2>
+    <h2> KONSTRUKTOR & ENKAPSULASI</h2>
     <p><strong>Review Sesi 1:</strong> OOP adalah paradigma berfokus pada objek. Kelas = blueprint, objek = instance. Constructor digunakan untuk inisialisasi objek.</p>
     <p><strong>Jenis Constructor di Dart:</strong></p>
     <ul>
@@ -187,7 +187,12 @@
     </ul>
     <p><strong>Enkapsulasi:</strong> Menyembunyikan detail implementasi dengan underscore <code>_</code>. Tujuan: keamanan, kontrol akses, fleksibilitas.</p>
     <p><strong>Getter & Setter:</strong> Memberikan akses terkontrol ke field private, bisa ditambahi validasi.</p>
-   <pre><code> class Buku {
+   <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+
+class Buku {
   String judul;
 
   // Constructor
@@ -198,20 +203,21 @@
     print("Judul buku: $judul");
   }
 }
-     void main() {
+
+void main() {
   // Membuat objek dari class Buku
   Buku buku1 = Buku("Belajar Dart");
 
   // Memanggil method
   buku1.tampilkanInfo();
-}</code></pre>
+}  </code></pre>
 <button class="btn-preview" data-src="https://dartpad.dev/embed-dart.html?id=cd4c1039963ef1bf43215952eaad92f6&run=true">Lihat Program</button>
   </div>
 
   <!-- ========== PROGRAM 1 - 11 ========== -->
   <!-- Program 1 -->
   <div class="card">
-    <h2>Named Constructor-Contoh Mobil</h2>
+    <h2>Named Constructor</h2>
     <p> Named Constructor adalah konstruktor yang memiliki nama tambahan selain nama kelas.
 Named constructor digunakan jika kita ingin membuat objek dengan cara yang berbeda dalam satu kelas.</p>
     <pre><code> //Nama: Aghista Bunga Kirani
@@ -303,7 +309,7 @@ void main() {
 
   <!-- Program 3 -->
   <div class="card">
-    <h2>Initializer List-Titik</h2>
+    <h2>Initializer List</h2>
     <p>Constructor dengan Initializer List adalah konstruktor dalam Dart yang digunakan untuk
       menginisialisasi nilai field sebelum body constructor dijalankan.</p>
     <pre><code>//Nama: Aghista Bunga Kirani
@@ -342,12 +348,12 @@ void main(){
    <!-- Program 4 -->
   <div class="card">
     <h2>Practice Mahasiswa (Bonus 1):</h2>
-    <p> Buat kelas Mahasiswa dengan:
+    <p> Membuat kelas Mahasiswa dengan:
       <p>i. Constructor default adalah constructor utama yang digunakan saat membuat objek dengan cara biasa.
-Constructor ini biasanya menerima parameter untuk mengisi nilai atribut pada class.t<p>
-      <p>ii.Named constructor adalah constructor tambahan yang memiliki nama khusus.
+Constructor ini biasanya menerima parameter untuk mengisi nilai atribut pada class.<p>
+      <p>ii. Named constructor adalah constructor tambahan yang memiliki nama khusus.
 Constructor dariMap() digunakan untuk membuat objek dari Map (biasanya data dari database atau JSON).<p>
-      <p>iii.Named constructor Mahasiswa.tanpaNama()<p>
+      <p>iii. Named constructor Mahasiswa.tanpaNama().<p>
       <p>Buat 3 objek berbeda menggunakan masing-masing constructor.<p>
     <p>Penerapan objek Mahasiswa untuk mengatur dan menyimpan data akademik.</p>
     <pre><code>//Nama: Aghista Bunga Kirani
@@ -408,20 +414,19 @@ void main() {
   <div class="card">
     <h2>Enkapsulasi</h2>
     <p>Konsep: Enkapsulasi adalah konsep dalam pemrograman berorientasi objek yang digunakan untuk menyembunyikan detail implementasi dari luar kelas.
-      Data di dalam kelas tidak bisa diakses secara langsung, tetapi melalui metode tertentu.
-    </p>
-    <p>Tujuan: Tujuan: Keamanan data – Melindungi data agar tidak diubah sembarangan.
-                       Kontrol akses – Mengatur bagaimana data dapat diakses atau diubah.
-                       Fleksibilitas perubahan – Memudahkan perubahan kode tanpa mempengaruhi bagian lain dari program.</p>
-    <p>Cara di Dart: Menggunakan underscore (_) di depan nama variabel atau metode untuk menjadikannya private members.</p>
+      Data di dalam kelas tidak bisa diakses secara langsung, tetapi melalui metode tertentu.</p>
+    <p>Tujuan: Keamanan data – Melindungi data agar tidak diubah sembarangan.</p>
+           <p> Kontrol akses – Mengatur bagaimana data dapat diakses atau diubah.</p>
+           <p> Fleksibilitas perubahan – Memudahkan perubahan kode tanpa mempengaruhi bagian lain dari program.</p>
+    <p> Cara di Dart: Menggunakan underscore (_) di depan nama variabel atau metode untuk menjadikannya private members.</p>
   </div>
 
   <!-- Program 6 -->
   <div class="card">
     <h2>Publik VS Private</h2>
-    <p>Public adalah variabel atau metode yang dapat diakses dari mana saja, baik dari dalam kelas maupun dari luar kelas atau file lain.
-       Private adalah variabel atau metode yang hanya dapat diakses di dalam file yang sama.
-       Di Dart, private dibuat dengan menambahkan underscore (_) di depan nama variabel atau metode.</p>
+    <p> Public adalah variabel atau metode yang dapat diakses dari mana saja, baik dari dalam kelas maupun dari luar kelas atau file lain.</p>
+      <p> Private adalah variabel atau metode yang hanya dapat diakses di dalam file yang sama.</p> 
+      <p> Di Dart, private dibuat dengan menambahkan underscore (_) di depan nama variabel atau metode.</p>
     <pre><code>//Nama: Aghista Bunga Kirani
 //Nim: 251410027
 //Kelas: SI2A
@@ -456,7 +461,7 @@ void main() {
 
   <!-- Program 7 -->
   <div class="card">
-    <h2>Contoh Setter & Getter</h2>
+    <h2>Setter & Getter</h2>
     <p>Getter adalah metode yang digunakan untuk mengambil atau membaca nilai dari variabel private di dalam sebuah class.</p>
     <p>Setter adalah metode yang digunakan untuk mengubah atau memberi nilai pada variabel private di dalam class.</p>
     <pre><code>//Nama: Aghista Bunga Kirani
@@ -467,76 +472,61 @@ void main() {
 class Produk {
   String _nama;
   double _harga;
-  
+
+  // Constructor
   Produk(this._nama, this._harga);
-  
+
   // Getter
   String get nama => _nama;
   double get harga => _harga;
-  
-  // Setter dengan validasi
+
+  // Setter dengan validasi nama
   set nama(String value) {
     if (value.length >= 3) {
       _nama = value;
     } else {
-      print('Gagal memperbarui nama: Nama harus memiliki minimal 3 karakter.');
+      print("Gagal: nama harus minimal 3 karakter");
     }
   }
-  
+
+  // Setter dengan validasi harga
   set harga(double value) {
     if (value > 0) {
       _harga = value;
     } else {
-      print('Gagal memperbarui harga: Harga harus lebih besar dari 0.');
+      print("Gagal: harga harus lebih dari 0");
     }
   }
 }
 
 void main() {
-  // Membuat instance dari class Produk
-  var produk1 = Produk('Monitor Samsung', 3500.0);
+  // Membuat objek
+  Produk produk = Produk("Laptop", 7500000);
 
-  print('--- Informasi Produk Awal ---');
-  print('Nama Produk: ${produk1.nama}');
-  print('Harga Produk: Rp ${produk1.harga.toStringAsFixed(2)}');
+  // Menampilkan data awal
+  print("Nama produk: ${produk.nama}");
+  print("Harga produk: ${produk.harga}");
 
-  // Menggunakan setter untuk memperbarui nilai
-  print('\n--- Memperbarui Produk ---');
-  produk1.nama = 'Keyboard Mekanik';
-  produk1.harga = 1200.0;
+  // Mengubah nilai menggunakan setter
+  produk.nama = "HP";
+  produk.harga = -5000;
 
-  print('Nama Produk (setelah update): ${produk1.nama}');
-  print('Harga Produk (setelah update): Rp ${produk1.harga.toStringAsFixed(2)}');
+  // Nilai benar
+  produk.nama = "Handphone";
+  produk.harga = 2500000;
 
-  // Menguji validasi setter
-  print('\n--- Menguji Validasi Setter ---');
-  
-  // Nama yang tidak valid (kurang dari 3 karakter)
-  print('Mencoba mengatur nama menjadi "TV"');
-  produk1.nama = 'TV'; // Ini seharusnya tidak mengubah nama
-  print('Nama Produk (setelah gagal update nama): ${produk1.nama}');
-
-  // Harga yang tidak valid (kurang dari atau sama dengan 0)
-  print('Mencoba mengatur harga menjadi -100.0');
-  produk1.harga = -100.0; // Ini seharusnya tidak mengubah harga
-  print('Harga Produk (setelah gagal update harga): Rp ${produk1.harga.toStringAsFixed(2)}');
-
-  print('Mencoba mengatur harga menjadi 0.0');
-  produk1.harga = 0.0; // Ini seharusnya tidak mengubah harga
-  print('Harga Produk (setelah gagal update harga): Rp ${produk1.harga.toStringAsFixed(2)}');
-
-  // Memastikan nilai tidak berubah setelah percobaan yang tidak valid
-  print('\n--- Status Akhir Produk ---');
-  print('Nama Produk: ${produk1.nama}');
-  print('Harga Produk: Rp ${produk1.harga.toStringAsFixed(2)}');
+  // Menampilkan data setelah diubah
+  print("\nData setelah diubah:");
+  print("Nama produk: ${produk.nama}");
+  print("Harga produk: ${produk.harga}");
 }</code></pre>
-    <button class="btn-preview" data-src="https://dartpad.dev/embed-dart.html?id=cfa2d69b3b278058a72aa214a72c1358&run=true">Lihat Program</button>
+    <button class="btn-preview" data-src="https://dartpad.dev/embed-dart.html?id=5356162cd31939f22bf5bb69bbc877db&run=true">Lihat Program</button>
   </div>
   
   <!-- Program 8 -->
   <div class="card">
-    <h2>Praktik Enkapsulasi Lengkap(Bonus 2)</h2>
-    <p>Buat kelas User dengan:
+    <h2>Praktik Enkapsulasi Lengkap (Bonus 2)</h2>
+    <p>Kelas dengan User:
       <p>i.Field private: _username _password, _email (Menggunakan _ agar tidak bisa diakses langsung dari luar class).<p>
       <p>ii.Getter untuk semua field digunakan untuk mengambil nilai dari field private.<p>
       <p>iii.Setter dengan validasi digunakan untuk mengubah nilai, tetapi dengan aturan:<p>
@@ -612,7 +602,7 @@ void main() {
 
   <!-- Program 9 -->
   <div class="card">
-    <h2>Study kasus user Login</h2>
+    <h2>Study kasus Login sederhana</h2>
     <pre><code>//Nama: Aghista Bunga Kirani
 //Nim: 251410027
 //Kelas: SI2A
@@ -677,45 +667,49 @@ void main() {
   <div class="card">
     <h2>Latihan Kelas Rekening Bank (Bonus 3)</h2>
     <p>Buat kelas RekeningBank dengan:</p>
-    </p>Field private: _nomor Rekening, saldo</p>
+    </p>Field private: _nomorRekening dan _saldo menggunakan _ agar tidak bisa diakses langsung dari luar kelas (enkapsulasi).</p>
     </p>Method: deposit(), tarik(), cekSaldo()</p>
     </p>Validasi: saldo tidak bisa negatif</p>
-    </p>Buat program sederhana untuk simulasi transaksi.</p>
-    <pre><code>//Nama: Ratu Klarisa Rahadianti
-//Nim: 251410010
+    </p>Membuat program sederhana simulasi transaksi.</p>
+    <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
 //Kelas: SI2A
 
+
 class RekeningBank {
+  // Private field
   String _nomorRekening;
   double _saldo;
 
   // Constructor
   RekeningBank(this._nomorRekening, this._saldo);
 
-  // Method deposit
+  // Method untuk menambah saldo
   void deposit(double jumlah) {
     if (jumlah > 0) {
       _saldo += jumlah;
-      print("Deposit Rp $jumlah berhasil.");
+      print("Deposit berhasil: Rp$jumlah");
     } else {
-      print("Jumlah deposit tidak valid.");
+      print("Jumlah deposit harus lebih dari 0");
     }
   }
 
-  // Method tarik
+  // Method untuk menarik saldo
   void tarik(double jumlah) {
-    if (jumlah > 0 && jumlah <= _saldo) {
-      _saldo -= jumlah;
-      print("Penarikan Rp $jumlah berhasil.");
+    if (jumlah <= 0) {
+      print("Jumlah penarikan tidak valid");
+    } else if (jumlah > _saldo) {
+      print("Saldo tidak cukup");
     } else {
-      print("Penarikan gagal. Saldo tidak cukup atau jumlah tidak valid.");
+      _saldo -= jumlah;
+      print("Penarikan berhasil: Rp$jumlah");
     }
   }
 
-  // Method cek saldo
+  // Method untuk mengecek saldo
   void cekSaldo() {
     print("Nomor Rekening : $_nomorRekening");
-    print("Saldo Saat Ini : Rp $_saldo");
+    print("Saldo saat ini : Rp$_saldo");
   }
 }
 
@@ -723,33 +717,32 @@ void main() {
   // Membuat objek rekening
   RekeningBank rekening = RekeningBank("123456789", 1000000);
 
-  print("=== SIMULASI TRANSAKSI BANK ===");
-
+  // Cek saldo awal
   rekening.cekSaldo();
-  print("----------------------");
 
-  // Simulasi deposit
+  print("------");
+
+  // Deposit
   rekening.deposit(500000);
-  rekening.cekSaldo();
-  print("----------------------");
 
-  // Simulasi penarikan
+  // Tarik uang
   rekening.tarik(300000);
-  rekening.cekSaldo();
-  print("----------------------");
 
-  // Simulasi penarikan gagal
-  rekening.tarik(2000000);
+  print("------");
+
+  // Cek saldo akhir
   rekening.cekSaldo();
 }</code></pre>
-    <button class="btn-preview" data-src="https://dartpad.dev/embed-dart.html?id=c9a421fd3ec07ecfbec803f249ec680b&run=true">Lihat Program</button>
+    <button class="btn-preview" data-src="https://dartpad.dev/embed-dart.html?id=9b0407ba1df00e4698460ec8fbf5f65f&run=true">Lihat Program</button>
   </div>
+ 
   <!-- Program 11 -->
   <div class="card">
-    <h2>Rangkumann</h2>
-    <p>1.Dart memiliki berbagai jenis constructor</p>
-    <p>2.Enkapsulasi melindungi data dengan private field</p>
-    <p>3.Getter & Setter memberikan kontrol akses yang aman</p>
+    <h2>Kesimpulan dari rangkuman:</h2>
+    <p> Materi ini menjelaskan bahwa dalam Dart terdapat beberapa konsep penting dalam Object Oriented Programming (OOP).
+      Dart memiliki berbagai jenis constructor yang digunakan untuk membuat dan menginisialisasi objek.
+      Selain itu, konsep enkapsulasi digunakan untuk melindungi data dengan membuat field bersifat private, sehingga tidak bisa diakses langsung dari luar kelas.
+      Untuk mengontrol akses terhadap data tersebut, digunakan getter dan setter agar pengambilan dan perubahan nilai dapat dilakukan dengan lebih aman dan terkontrol. </p>
   </div>
 
 <!-- Modal Popup untuk iframe -->
