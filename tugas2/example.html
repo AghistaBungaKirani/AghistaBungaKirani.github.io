@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌸 Sesi 2: Konstruktor & Enkapsulasi · Pinky Mode</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #fff0f5 0%, #ffe4ec 100%);
+            font-family: 'Segoe UI', 'Poppins', system-ui, sans-serif;
+            padding: 2rem 1.5rem;
+            color: #4a2e3b;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+
+        /* header utama */
+        .header-sesi {
+            background: #ffb6c1b3; /* soft pink */
+            backdrop-filter: blur(4px);
+            padding: 2rem 2.5rem;
+            border-radius: 60px 60px 30px 30px;
+            box-shadow: 0 15px 0 #d48c9c, 0 25px 30px -10px #faaac0;
+            border: 3px solid white;
+            text-align: center;
+        }
+
+        .header-sesi h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: #902d4e;
+            text-shadow: 4px 4px 0 #ffd9e5, 6px 6px 0 white;
+            margin-bottom: 0.4rem;
+        }
+
+        .header-sesi .durasi {
+            background: #a63b5b;
+            color: #ffeef2;
+            display: inline-block;
+            padding: 0.5rem 2rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1.3rem;
+            border: 3px solid white;
+            box-shadow: inset 0 -3px 0 #632c3a;
+        }
+
+        /* grid layout seperti slide */
+        .slide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 4px solid white;
+            border-radius: 45px 45px 35px 35px;
+            padding: 1.8rem 1.5rem;
+            box-shadow: 0 12px 0 #e1a3b3, 0 15px 25px -5px #ffb8cf;
+            transition: transform 0.2s ease, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 0 #d48c9c, 0 25px 30px -5px #ffa5c0;
+        }
+
+        .slide-number {
+            font-size: 1.2rem;
+            font-weight: 700;
+            background: white;
+            display: inline-block;
+            padding: 0.3rem 1.4rem;
+            border-radius: 60px;
+            border: 3px solid #ffb0c3;
+            color: #b84c6c;
+            margin-bottom: 1.2rem;
+            align-self: flex-start;
+            box-shadow: 0 4px 0 #eba2b5;
+        }
+
+        .card h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #802e4b;
+            margin-bottom: 0.5rem;
+            border-left: 16px solid #ffa5c0;
+            padding-left: 1rem;
+            line-height: 1.2;
+        }
+
+        .card h3 {
+            font-weight: 600;
+            color: #b34366;
+            margin: 0.75rem 0 0.25rem;
+            font-size: 1.4rem;
+        }
+
+        .code-block {
+            background: #feeef3;
+            border: 3px solid white;
+            border-radius: 28px;
+            padding: 1.2rem;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.9rem;
+            color: #2d1b22;
+            box-shadow: inset 0 0 0 2px #ffd2de, 0 6px 0 #ce8b9e;
+            margin: 1rem 0 0.5rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .pink-tag {
+            background: #ff98b9;
+            color: white;
+            border-radius: 30px;
+            padding: 0.2rem 1rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-right: 0.5rem;
+            border: 2px solid white;
+        }
+
+        .bullet-list {
+            list-style: none;
+            margin: 0.8rem 0;
+        }
+
+        .bullet-list li {
+            margin-bottom: 0.6rem;
+            padding-left: 2rem;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="%23d45d7a" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>') left center no-repeat;
+            background-size: 1.2rem;
+        }
+
+        .study-case {
+            background: #ffe2eb;
+            border-radius: 35px;
+            padding: 1.8rem;
+            border: 4px solid white;
+            box-shadow: 0 10px 0 #cf8da0;
+            grid-column: span 2;
+        }
+
+        hr {
+            border: 3px dashed #ffb8ce;
+            margin: 1rem 0;
+        }
+
+        .footer-note {
+            background: #fec7d5;
+            border-radius: 50px;
+            padding: 2rem;
+            border: 4px solid white;
+            box-shadow: 0 10px 0 #bf7d94;
+            color: #461e2b;
+        }
+
+        .footer-note h3 {
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        .btn-latihan {
+            background: #fd7e9e;
+            border: none;
+            border-radius: 60px;
+            padding: 1rem 2.5rem;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: white;
+            border: 4px solid white;
+            box-shadow: 0 7px 0 #a13554;
+            cursor: default;
+            transition: 0.07s;
+            margin-top: 1rem;
+        }
+
+        .btn-latihan:active {
+            transform: translateY(5px);
+            box-shadow: 0 2px 0 #a13554;
+        }
+
+        /* responsive */
+        @media (max-width: 700px) {
+            .header-sesi h1 {
+                font-size: 2.5rem;
+            }
+            .slide-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER besar -->
+        <div class="header-sesi">
+            <h1>🌸 SESI 2: KONSTRUKTOR & ENKAPSULASI 🌸</h1>
+            <div class="durasi">⏱️ 200 menit · 14 slide lucu</div>
+            <div style="margin-top: 0.7rem; font-weight:500;">✨ Dart OOP — dengan gaya pink manis ✨</div>
+        </div>
+
+        <!-- grid slide 1 & 2 (review + jenis constructor) -->
+        <div class="slide-grid">
+            <!-- Slide 1: Review Sesi 1 -->
+            <div class="card">
+                <span class="slide-number">📋 slide 1</span>
+                <h2>✨ Review Sesi 1</h2>
+                <ul class="bullet-list">
+                    <li>OOP = paradigma fokus objek</li>
+                    <li>Kelas = blueprint · objek = instance</li>
+                    <li>Constructor → inisialisasi objek</li>
+                </ul>
+                <div class="code-block">
+// contoh cepat
+class Buku {
+  String judul;
+  Buku(this.judul);
+}
+                </div>
+                <div style="margin-top: 0.6rem;"><span class="pink-tag">instance</span> Buku("Tere Liye")</div>
+            </div>
+
+            <!-- Slide 2: Jenis Constructor (ringkasan) -->
+            <div class="card">
+                <span class="slide-number">📋 slide 2</span>
+                <h2>🧁 5 Jenis Constructor</h2>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.8rem 0;">
+                    <span class="pink-tag"># default</span>
+                    <span class="pink-tag"># named</span>
+                    <span class="pink-tag"># parameterized</span>
+                    <span class="pink-tag"># constant</span>
+                    <span class="pink-tag"># factory</span>
+                </div>
+                <div class="code-block" style="font-size:0.9rem">
+className()               ← default
+className.name()          ← named
+className(this.param)     ← param
+const className()         ← const
+factory ...               ← lanjut
+                </div>
+                <p style="margin-top:0.5rem;">🎀 nanti dibahas lebih lanjut ✨</p>
+            </div>
+        </div>
+
+        <!-- slide 3 + 4 : named constructor detail & constant -->
+        <div class="slide-grid">
+            <!-- Slide 3: Named Constructor Contoh Detail -->
+            <div class="card">
+                <span class="slide-number">🚗 slide 3</span>
+                <h2>Named Constructor</h2>
+                <div class="code-block">
+import 'dart:convert';
+
+class Mobil {
+  String? merk;
+  int? tahun;
+
+  Mobil(this.merk, this.tahun);               // parameterized
+
+  Mobil.baru() {                               // named
+    merk = 'Toyota';
+    tahun = 2023;
+  }
+
+  Mobil.dariJson(Map&lt;String, dynamic&gt; json) {  // named + json
+    merk = json['merk'];
+    tahun = json['tahun'];
+  }
+
+  @override
+  String toString() =&gt; 'Mobil{merk: $merk, tahun: $tahun}';
+}
+                </div>
+                <p>💕 panggil: <code>Mobil.baru()</code> atau <code>Mobil.dariJson(data)</code></p>
+            </div>
+
+            <!-- Slide 4: Constant Constructor -->
+            <div class="card">
+                <span class="slide-number">🧊 slide 4</span>
+                <h2>Constant Constructor</h2>
+                <p><span class="pink-tag">immutable</span> semua field harus final</p>
+                <div class="code-block">
+class Warna {
+  final int r, g, b;
+  const Warna(this.r, this.g, this.b);
+
+  @override
+  String toString() =&gt; 'Warna(r: $r, g: $g, b: $b)';
+}
+
+void main() {
+  const merah = Warna(255, 0, 0);
+  const merahLagi = Warna(255, 0, 0);  // instance SAMA
+  print(merah);
+  print(merahLagi);
+}
+                </div>
+                <p>🌸 hemat memori, cocok untuk warna, koordinat, dll.</p>
+            </div>
+        </div>
+
+        <!-- slide 5 + 6: initializer list & praktik 1 -->
+        <div class="slide-grid">
+            <div class="card">
+                <span class="slide-number">⚙️ slide 5</span>
+                <h2>Initializer List</h2>
+                <p>inisialisasi sebelum body (final field / validasi)</p>
+                <div class="code-block">
+class Titik {
+  final double x, y;
+  Titik(double x, double y)
+      : x = x.abs(),
+        y = y.abs() {
+    print('Titik dibuat di ($x, $y)');
+  }
+}
+                </div>
+                <p>👉 bisa juga redirecting constructor (buku bab 9)</p>
+            </div>
+            <div class="card">
+                <span class="slide-number">🧪 slide 6</span>
+                <h2>Praktik 1 · Multiple Constructor</h2>
+                <p><strong>Mahasiswa</strong> dengan 3 constructor:</p>
+                <ul class="bullet-list" style="margin-top:0;">
+                    <li>default</li>
+                    <li><code>Mahasiswa.dariMap()</code></li>
+                    <li><code>Mahasiswa.tanpaNama()</code></li>
+                </ul>
+                <div style="background:#ffd9e5; border-radius:30px; padding:1rem; border:3px solid white; margin-top:1rem;">
+                    🎯 tugas: buat 3 objek berbeda dari masing-masing constructor.
+                </div>
+            </div>
+        </div>
+
+        <!-- slide 7 & 8 : enkapsulasi public/private -->
+        <div class="slide-grid">
+            <div class="card">
+                <span class="slide-number">🔒 slide 7</span>
+                <h2>Enkapsulasi</h2>
+                <ul class="bullet-list">
+                    <li>menyembunyikan detail implementasi</li>
+                    <li>tujuan: keamanan, kontrol, fleksibilitas</li>
+                    <li>di Dart: pakai underscore <code>_</code> private</li>
+                </ul>
+                <div style="background:#ffe2f0; border-radius:2rem; padding:1rem; margin-top:1rem;">
+                    💗 privat <strong>hanya dalam file yang sama</strong>
+                </div>
+            </div>
+            <div class="card">
+                <span class="slide-number">👀 slide 8</span>
+                <h2>Public vs Private</h2>
+                <div class="code-block">
+class Person {
+  String _name;   // private (hanya file ini)
+  int age;        // public (default)
+
+  Person(this._name, this.age);
+}
+                </div>
+                <p>⭐ <code>_name</code> tidak bisa diakses dari file lain.</p>
+            </div>
+        </div>
+
+        <!-- slide 9 + 10 : getter dan setter dasar -->
+        <div class="slide-grid">
+            <div class="card">
+                <span class="slide-number">🔍 slide 9</span>
+                <h2>Getter (mengakses private)</h2>
+                <div class="code-block">
+class Person {
+  String _name;
+  int age;
+
+  Person(this._name, this.age);
+
+  String get getName1 =&gt; _name;   // getter style 1
+
+  String getName() =&gt; _name;      // method style 2
+}
+                </div>
+            </div>
+            <div class="card">
+                <span class="slide-number">✏️ slide 10</span>
+                <h2>Setter (memodifikasi private)</h2>
+                <div class="code-block">
+class Person {
+  String _name;
+  int age;
+
+  Person(this._name, this.age);
+
+  set setName1(String name) =&gt; _name = name;   // setter
+
+  void setName(String name) =&gt; _name = name;   // method versi lain
+}
+                </div>
+            </div>
+        </div>
+
+        <!-- slide 11: getter setter validasi produk -->
+        <div class="card" style="grid-column: span 2;">
+            <span class="slide-number">🛍️ slide 11</span>
+            <h2>Getter & Setter + Validasi (Produk)</h2>
+            <div class="code-block" style="font-size: 0.9rem;">
+class Produk {
+  String _nama;
+  double _harga;
+
+  Produk(this._nama, this._harga);
+
+  String get nama =&gt; _nama;
+  double get harga =&gt; _harga;
+
+  set nama(String value) {
+    if (value.length &gt;= 3) {
+      _nama = value;
+    } else {
+      print('❌ nama minimal 3 karakter');
+    }
+  }
+
+  set harga(double value) {
+    if (value &gt; 0) {
+      _harga = value;
+    } else {
+      print('❌ harga harus positif');
+    }
+  }
+}
+            </div>
+            <p>🧸 data aman, tidak bisa sembarang diubah.</p>
+        </div>
+
+        <!-- slide 12: praktik enkapsulasi lengkap -->
+        <div class="card" style="grid-column: span 2; background: #ffe4f0;">
+            <span class="slide-number">📝 slide 12</span>
+            <h2>Praktik 2 · Enkapsulasi Lengkap (User)</h2>
+            <p>Buat class dengan field private: <code>_username, _password, _email</code> + getter & setter + validasi:</p>
+            <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-top: 1rem;">
+                <ul class="bullet-list" style="flex:1;">
+                    <li>username minimal 5 karakter</li>
+                    <li>password minimal 8 karakter</li>
+                    <li>email harus mengandung '@'</li>
+                </ul>
+                <div style="flex:1; background: white; border-radius: 40px; padding: 1.2rem; border: 4px solid #ffb6c1;">
+                    🎀 coba modifikasi dengan setter — validasi aktif!
+                </div>
+            </div>
+        </div>
+
+        <!-- slide 13: studi kasus sistem login -->
+        <div class="study-case">
+            <span class="slide-number">📱 slide 13</span>
+            <h2 style="font-size: 2.4rem;">Studi Kasus · Login Sederhana</h2>
+            <div class="code-block" style="background: #fff2f7;">
+class User {
+  String _username;
+  String _password;
+
+  User(this._username, this._password);
+
+  String get username =&gt; _username;
+
+  bool login(String username, String password) {
+    return _username == username &amp;&amp; _password == password;
+  }
+
+  void gantiPassword(String lama, String baru) {
+    if (_password == lama) {
+      if (baru.length &gt;= 8) {
+        _password = baru;
+        print('✅ password berhasil diubah.');
+      } else {
+        print('❌ password baru minimal 8 karakter.');
+      }
+    } else {
+      print('❌ password lama salah.');
+    }
+  }
+}
+            </div>
+            <p>✨ method gantiPassword dengan validasi aman ✨</p>
+        </div>
+
+        <!-- slide 14: ringkasan & latihan -->
+        <div class="footer-note">
+            <span class="slide-number" style="background: #ffb0cb;">📌 slide 14</span>
+            <h3>💗 Ringkasan & Latihan 💗</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+                <div style="flex:1;">
+                    <ul class="bullet-list" style="font-size:1.2rem;">
+                        <li>Dart punya banyak jenis constructor</li>
+                        <li>Enkapsulasi lindungi data (private _field)</li>
+                        <li>Getter/setter = kontrol akses aman</li>
+                    </ul>
+                </div>
+                <div style="flex:1.5; background:#fec7d5; border-radius: 40px; padding: 1.5rem; border: 5px solid white;">
+                    <h4 style="color:#92274a;">🏦 Latihan Mandiri</h4>
+                    <p><strong>RekeningBank</strong> dengan field private:<br>
+                    <code>_nomorRekening, _saldo</code></p>
+                    <p>method: deposit(), tarik(), cekSaldo()<br>
+                    ➕ validasi saldo tidak boleh negatif.<br>
+                    🌸 simulasi transaksi sederhana</p>
+                    <div class="btn-latihan">🌸 ayo coba coding! 🌸</div>
+                </div>
+            </div>
+            <hr>
+            <div style="text-align: right; font-weight: bold;">💖 pinky happy coding 💖</div>
+        </div>
+
+        <!-- dekorasi kecil -->
+        <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 0.5rem;">
+            <span style="background: #feb6c9; border-radius: 60px; padding: 0.5rem 2rem; border: 4px solid white;">🌟 200 menit belajar menyenangkan</span>
+        </div>
+    </div>
+</body>
+</html>
