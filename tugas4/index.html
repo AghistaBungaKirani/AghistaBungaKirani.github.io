@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 
 <head>
@@ -345,12 +345,12 @@
     <div class="container">
 
         <section>
-            <h2>01. Pewarisan</h2>
+            <h2>🎀 Pewarisan</h2>
            <ul>
-                <li><span class="highlight"></span>:• Inheritance: extends keyword </li>
-                <li><span class="highlight"></span>:• Instance nyata yang tercipta dari sebuah class.</li>
-                <li><span class="highlight"></span>:• Representasi data melalui variabel di dalam class.</li>
-                <li><span class="highlight"></span>:• Logika fungsional atau fungsi di dalam class.</li>
+                <li><span class=></span>• Inheritance: extends keyword </li>
+                <li><span class=></span>• Instance nyata yang tercipta dari sebuah class.</li>
+                <li><span class=></span>• Representasi data melalui variabel di dalam class.</li>
+                <li><span class=></span>• Logika fungsional atau fungsi di dalam class.</li>
             </ul>
 
             <div class="code-container">
@@ -382,281 +382,631 @@ void main() {
         </section>
 
         <section>
-            <h2>02. Pengantar Polimorfisme</h2>
+            <h2>| Pengantar Polimorfisme</h2>
             <ul>
-                <li><span class="highlight">Class</span>: Blueprint atau cetakan untuk membuat objek.</li>
-                <li><span class="highlight">Object</span>: Instance nyata yang tercipta dari sebuah class.</li>
-                <li><span class="highlight">Attribute</span>: Representasi data melalui variabel di dalam class.</li>
-                <li><span class="highlight">Method</span>: Logika fungsional atau fungsi di dalam class.</li>
+                <li><span class="highlight">Arti</span>: "Banyak bentuk" (poly = banyak, morph = bentuk).</li>
+                <li><span class="highlight">Konsep</span>: Objek dari subclass dapat diperlakukan sebagai objek dari superclass.</li>
+                <li><span class="highlight">Cobtoh</span>: Semua Kucing, Anjing, Burung adalah Hewan.</li>
+                <li><span class="highlight">Tipe</span>: i. Compile-time polymorphism: Method overloading (tidak didukung Dart)
+                                                        ii. Runtime polymorphism: Method overriding (didukung Dart).</li>
             </ul>
         </section>
 
         <section>
-            <h2>03. Class Sederhana (Motor Listrik)</h2>
-            <p>Pada contoh di bawah ini terdapat class MotorListrik yang memiliki atribut merk dan dayaBaterai.
-                Terdapat pula method akselerasi() dan recharge() sebagai aksi utama dari objek kendaraan tersebut.</p>
+            <h2>🎀 Polimorfisme dengan Inheritance</h2>
+            <p>Referensi tipe parent dapat menampung objek child.</p>
 
             <div class="code-container">
                 <div class="code-header">DART SOURCE CODE</div>
-                <pre><code>// Nama   : Aghista Bunga Kirani
-// Nim    : 251410027
-// Kelas  : SI2A
+                <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
 
-class MotorListrik {
-  String? merk;
-  int? dayaBaterai;
-  
-  void akselerasi() {
-    print('Motor $merk sedang melaju kencang...');
-  }
-  
-  void recharge() {
-    print('Motor $merk sedang melakukan pengisian daya.');
+
+abstract class Bentuk {
+  void gambar();
+}
+
+class Lingkaran extends Bentuk {
+  @override
+  void gambar() {
+    print('🔵 Menggambar Lingkaran');
   }
 }
 
-void main() {
-  MotorListrik evAghista = MotorListrik();
-  
-  evAghista.merk = "Gesits G1";
-  evAghista.dayaBaterai = 90;
-  evAghista.akselerasi();
-  evAghista.recharge();
-}</code></pre>
-            </div>
-            <button onclick="openModal('https://dartpad.dev/?id=d88c22d6136a5cda966a3a92494d2059')">Run Program</button>
-        </section>
-
-        <section>
-            <h2>04. Object Instantiation</h2>
-            <p>Object Instantiation adalah proses menciptakan wujud nyata dari sebuah rancangan.
-                Pada kode berikut, objek villaAghista dibuat dari class VillaPintar untuk mengontrol keamanan area.</p>
-
-            <div class="code-container">
-                <div class="code-header">DART SOURCE CODE</div>
-                <pre><code>// Nama   : Aghista Bunga Kirani
-// Nim    : 251410027
-// Kelas  : SI2A
-
-class VillaPintar {
-  String? lokasi; 
-  bool isLocked = true; 
-}
-
-void main() {
-  VillaPintar villaAghista = VillaPintar();
-  
-  villaAghista.lokasi = "Uluwatu"; 
-  villaAghista.isLocked = false;
-
-  print("Lokasi Villa: ${villaAghista.lokasi}"); 
-  print("Status Kunci: ${villaAghista.isLocked ? 'Terkunci' : 'Terbuka'}");
-}</code></pre>
-            </div>
-            <button onclick="openModal('https://dartpad.dev/?id=adcf14ee69787ee011841f63acbd2f1d')">Run Program</button>
-        </section>
-
-        <section>
-            <h2>05. Constructor</h2>
-            <p>Constructor digunakan untuk menginisialisasi nilai atribut secara otomatis.
-                Pada contoh class KonsolGame, constructor KonsolGame(this.seri, this.storage) berfungsi mengatur spek
-                saat objek lahir.</p>
-
-            <div class="code-container">
-                <div class="code-header">DART SOURCE CODE</div>
-                <pre><code>// Nama   : Aghista Bunga Kirani
-// Nim    : 251410027
-// Kelas  : SI2A
-
-class KonsolGame {
-  String seri; 
-  int storage;
-
-  KonsolGame(this.seri, this.storage);
-
-  void play() {
-    print('Menjalankan game pada $seri ($storage GB)...'); 
+class Persegi extends Bentuk {
+  @override
+  void gambar() {
+    print('🟥 Menggambar Persegi');
   }
 }
 
+class Segitiga extends Bentuk {
+  @override
+  void gambar() {
+    print('🔺 Menggambar Segitiga');
+  }
+}
+
+void tampilkanGambar(Bentuk bentuk) {
+  bentuk.gambar(); // Polimorfisme terjadi di sini
+}
+
 void main() {
-  KonsolGame consoleAghista = KonsolGame("PlayStation 5", 825);
-  consoleAghista.play(); 
+  List<Bentuk> daftarBentuk = [
+    Lingkaran(),
+    Persegi(),
+    Segitiga(),
+  ];
+
+  for (var bentuk in daftarBentuk) {
+    tampilkanGambar(bentuk);
+  }
 }</code></pre>
             </div>
-            <button onclick="openModal('https://dartpad.dev/?id=7d6752938d650ddfff64a03906d43eeb')">Run Program</button>
+            <button onclick="openModal('https://dartpad.dev/?id=40293c3a971f4aa69b481595f02bca89')">Run Program</button>
         </section>
 
         <section>
-            <h2>06. Practice: Mahasiswa</h2>
-            <p>Implementasi class Mahasiswa dengan method tampilkanNilai() guna menyajikan laporan akademik Aghista
-                secara sistematis.</p>
+            <h2>🎀 Manfaat Polimorfisme</h2>
+            <ul>
+                <li><span class="highlight">Fleksibilitas</span>: Kode dapat bekerja dengan berbagai tipe.</li>
+                <li><span class="highlight">Extensibility</span>: Mudah menambah tipe baru.</li>
+                <li><span class="highlight">Code Reusability</span>: Method umum di superclass.</li>
+                <li><span class="highlight">Maintainability</span>: Perubahan mudah dikelola.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>🎀 is dan as Operator</h2>
+            <ul>
+                <li><span class="highlight">• is</span>: Mengecek tipe objek.</li>
+                <li><span class="highlight">• as</span>: Casting tipe objek.</li>
+            </ul>
 
             <div class="code-container">
                 <div class="code-header">DART SOURCE CODE</div>
-                <pre><code>// Nama   : Aghista Bunga Kirani
-// Nim    : 251410027
-// Kelas  : SI2A
+                <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
 
-class Mahasiswa {
-  String nama, nim; 
-  double ipk;  
 
-  Mahasiswa(this.nama, this.nim, this.ipk);
+class Kendaraan {}
 
-  void tampilkanNilai() {
-    print('--- HASIL STUDI ---');
-    print('NAMA : $nama');
-    print('NIM  : $nim');
-    print('IPK  : $ipk');
-    print('-------------------');
+class Mobil extends Kendaraan {
+  void klakson() {
+    print('Tin!');
   }
 }
 
 void main() {
-  Mahasiswa mhs = Mahasiswa("Aghista Bunga Kirani", "251410027", 3.88);
-  mhs.tampilkanNilai();
-}</code></pre>
-            </div>
-            <button onclick="openModal('https://dartpad.dev/?id=9a99c1ad1e39a5645ed0df744f2b99fe')">Run Program</button>
-        </section>
+  Kendaraan k = Mobil();
 
-        <section>
-            <h2>07. Encapsulation</h2>
-            <p>Menggunakan class StudioFoto untuk melindungi data jumlah foto (_totalFoto) melalui akses private dan
-                getter.</p>
-
-            <div class="code-container">
-                <div class="code-header">DART SOURCE CODE</div>
-                <pre><code>// Nama   : Aghista Bunga Kirani
-// Nim    : 251410027
-// Kelas  : SI2A
-
-class StudioFoto {
-  String namaStudio;
-  int _totalFoto; 
-
-  StudioFoto(this.namaStudio, this._totalFoto);
-
-  void ambilFoto(int jumlah) {
-    if (jumlah > 0) _totalFoto += jumlah;
+  // Menggunakan is (cek tipe)
+  if (k is Mobil) {
+    (k as Mobil).klakson(); // casting
   }
-  
-  int get cekStok => _totalFoto;
-}
 
-void main() {
-  StudioFoto studioAghista = StudioFoto("Aghista Capture", 100);
-  print('Studio: ${studioAghista.namaStudio}'); 
-  studioAghista.ambilFoto(25);
-  print('Total Koleksi Foto: ${studioAghista.cekStok} file'); 
+  // Safe casting dengan as?
+  (k as Mobil?)?.klakson();
 }</code></pre>
             </div>
-            <button onclick="openModal('https://dartpad.dev/?id=fc5ef856acbccf3d37370cd594582706')">Run Program</button>
+            <button onclick="openModal('https://dartpad.dev/?id=721d96fa99e7639c3ecf9f93b9ab0b81')">Run Program</button>
         </section>
 
         <section>
-            <h2>08. This Keyword</h2>
-            <p>Melalui class Robot, keyword 'this' digunakan untuk membedakan antara parameter input dengan field yang
-                ada di dalam class.</p>
+            <h2>🎀 Praktik 1 – Polimorfisme dengan List</h2>
+            <p>Membuat list hewan dengan berbagai objek subclass seperti Kucing, anjing, burung.Loop list, panggil method (bersuara).</p>
 
             <div class="code-container">
                 <div class="code-header">DART SOURCE CODE</div>
-                <pre><code>// Nama   : Aghista Bunga Kirani
-// Nim    : 251410027
-// Kelas  : SI2A
+                <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
 
-class Robot {
-  String model; 
-  Robot(this.model);
+
+abstract class Hewan {
+  void bersuara();
 }
 
-void main() {
-  Robot botAghista = Robot("Aghista Gandus");
-  print("Aktivasi Model: ${botAghista.model}"); 
-}</code></pre>
-            </div>
-            <button onclick="openModal('https://dartpad.dev/?id=4cd51bd8d74a2687b54138add51d05c0')">Run Program</button>
-        </section>
-
-        <section>
-            <h2>09. Product Class (Cloud)</h2>
-            <p>Class CloudService menerapkan named parameters untuk mengatur detail akun dan kapasitas penyimpanan user
-                secara fleksibel agar data tetap terorganisir.</p>
-
-            <div class="code-container">
-                <div class="code-header">DART SOURCE CODE</div>
-                <pre><code>// Nama   : Aghista Bunga Kirani
-// Nim    : 251410027
-// Kelas  : SI2A
-
-class CloudService {
-  final String email, zona; 
-  final int kapasitasGb; 
-
-  CloudService({
-    required this.email,
-    required this.kapasitasGb,
-    this.zona = 'Asia-Southeast',
-  });
-}
-
-void main() {
-  CloudService user1 = CloudService(
-    email: "aghista@cloud.com",
-    kapasitasGb: 100,
-    zona: "Global-US",
-  );
-
-  CloudService user2 = CloudService(
-    email: "bunga@cloud.com",
-    kapasitasGb: 15,
-  );
-
-  print('User 1: ${user1.email} (Zona: ${user1.zona})'); 
-  print('User 2: ${user2.email}'); 
-}</code></pre>
-            </div>
-            <button onclick="openModal('https://dartpad.dev/?id=2e597c80044e04614d0f82afcc70dad5')">Run Program</button>
-        </section>
-
-        <section>
-            <h2>10. Kesimpulan</h2>
-            <p>Pemrograman Berorientasi Objek di Dart memberikan fondasi yang kuat untuk membangun aplikasi yang bersih,
-                modular, dan siap dikembangkan lebih jauh.</p>
-        </section>
-
-        <section>
-            <h2>11. Bonus: hewan Class</h2>
-            <p>Implementasi class Hewan sebagai dasar personifikasi objek. Di sini objek mewakili seekor burung
-                peliharaan dengan kemampuan berkicau.</p>
-
-            <div class="code-container">
-                <div class="code-header">DART SOURCE CODE</div>
-                <pre><code>// Nama   : Aghista Bunga Kirani
-// Nim    : 251410027
-// Kelas  : SI2A
-
-class Hewan {
-  String nama;
-  Hewan(this.nama);
+class Kucing extends Hewan {
+  @override
   void bersuara() {
-    print('$nama sedang berkicau dengan merdu... 🐦');
+    print('Kucing: Meong 🐱');
   }
 }
+
+class Anjing extends Hewan {
+  @override
+  void bersuara() {
+    print('Anjing: Guk guk 🐶');
+  }
+}
+
+class Burung extends Hewan {
+  @override
+  void bersuara() {
+    print('Burung: Cuit cuit 🐦');
+  }
+}
+
 void main() {
-  var petAghista = Hewan('Burung Merpati');
-  print('Peliharaan: ${petAghista.nama}');
-  petAghista.bersuara();
+  // List berisi berbagai subclass
+  List<Hewan> daftarHewan = [
+    Kucing(),
+    Anjing(),
+    Burung(),
+  ];
+
+  // Loop dan panggil method bersuara()
+  for (var hewan in daftarHewan) {
+    hewan.bersuara(); // Polimorfisme
+  }
 }</code></pre>
             </div>
-            <button onclick="openModal('https://dartpad.dev/d7d3b8a5b55486647117c70c7215f873')">Run Program</button>
+            <button onclick="openModal('https://dartpad.dev/?id=b5b478693e9167470c3e8993cd22ec18')">Run Program</button>
         </section>
+
+        <section>
+            <h2>🎀 Soal(Bonus)Slide 17 – Pekerja & Polimorfisme(Bonus 1)</h2>
+            <p>1. abstract class, 2. 3 subclass, dan 3. List untuk polimorfisme.</p>
+
+            <div class="code-container">
+                <div class="code-header">DART SOURCE CODE</div>
+                <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+
+abstract class Pekerja {
+  // Method abstract
+  void bekerja();
+
+  // Method non-abstract
+  void istirahat() {
+    print('Sedang istirahat...');
+  }
+}
+
+class Programmer extends Pekerja {
+  @override
+  void bekerja() {
+    print('Programmer: Menulis kode 💻');
+  }
+}
+
+class Dokter extends Pekerja {
+  @override
+  void bekerja() {
+    print('Dokter: Mengobati pasien 🩺');
+  }
+}
+
+class Guru extends Pekerja {
+  @override
+  void bekerja() {
+    print('Guru: Mengajar di kelas 📚');
+  }
+}
+
+void main() {
+  // List berisi berbagai jenis pekerja
+  List<Pekerja> daftarPekerja = [
+    Programmer(),
+    Dokter(),
+    Guru(),
+  ];
+
+  // Demonstrasi polimorfisme
+  for (var pekerja in daftarPekerja) {
+    pekerja.bekerja();   // method berbeda tergantung objek
+    pekerja.istirahat(); // method sama dari superclass
+    print('---');
+  }
+}</code></pre>
+            </div>
+            <button onclick="openModal('https://dartpad.dev/?id=1c46e333915e22233e03735408470566')">Run Program</button>
+        </section>
+
+        <section>
+            <h2> 4.Tablet – Multiple Inheritance dengan implements/mixins(Bonus 2)</h2>
+            <p>Class Tablet mewarisi kemampuan Komputer, Kamera, Telepon (multiple inheritance disimulasikan dengan implements).</p>
+
+            <div class="code-container">
+                <div class="code-header">DART SOURCE CODE</div>
+                <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+
+// Superclass
+class Komputer {
+  void prosesData() {
+    print('Komputer: Memproses data 💻');
+  }
+}
+
+// "Interface"
+class Kamera {
+  void ambilFoto() {}
+}
+
+class Telepon {
+  void telepon() {}
+}
+
+// Subclass Tablet
+class Tablet extends Komputer implements Kamera, Telepon {
+  @override
+  void ambilFoto() {
+    print('Tablet: Mengambil foto 📸');
+  }
+
+  @override
+  void telepon() {
+    print('Tablet: Menelepon 📞');
+  }
+}
+
+void main() {
+  Tablet tablet = Tablet();
+
+  tablet.prosesData(); // dari Komputer
+  tablet.ambilFoto();  // dari Kamera
+  tablet.telepon();    // dari Telepon
+}</code></pre>
+            </div>
+            <button onclick="openModal('https://dartpad.dev/?id=30e5376a2d80f2ce89787f8d908cbf26')">Run Program</button>
+        </section>
+
+        <section>
+            <h2>5.MathUtils – Static Methods (Faktorial, Prima, Random, Rata2, Median)(Bonus 3)</h2>
+
+            <div class="code-container">
+                <div class="code-header">DART SOURCE CODE</div>
+                <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+
+import 'dart:math';
+
+class MathUtils {
+  // 1. Faktorial
+  static int factorial(int n) {
+    if (n < 0) throw Exception('Tidak boleh negatif');
+    int hasil = 1;
+    for (int i = 1; i <= n; i++) {
+      hasil *= i;
+    }
+    return hasil;
+  }
+
+  // 2. Cek bilangan prima
+  static bool isPrime(int n) {
+    if (n <= 1) return false;
+    for (int i = 2; i <= sqrt(n); i++) {
+      if (n % i == 0) return false;
+    }
+    return true;
+  }
+
+  // 3. Membulatkan double ke desimal tertentu
+  static double roundDouble(double value, int places) {
+    double mod = pow(10.0, places).toDouble();
+    return (value * mod).round() / mod;
+  }
+
+  // 4. Random integer dalam range [min, max]
+  static int randomInt(int min, int max) {
+    return min + Random().nextInt(max - min + 1);
+  }
+
+  // 5. Random double dalam range [min, max]
+  static double randomDouble(double min, double max) {
+    return min + Random().nextDouble() * (max - min);
+  }
+
+  // 6. Rata-rata (mean)
+  static double mean(List<num> data) {
+    if (data.isEmpty) throw Exception('List kosong');
+    return data.reduce((a, b) => a + b) / data.length;
+  }
+
+  // 7. Median
+  static double median(List<num> data) {
+    if (data.isEmpty) throw Exception('List kosong');
+
+    List<num> sorted = List.from(data)..sort();
+    int n = sorted.length;
+
+    if (n % 2 == 1) {
+      return sorted[n ~/ 2].toDouble();
+    } else {
+      return (sorted[n ~/ 2 - 1] + sorted[n ~/ 2]) / 2;
+    }
+  }
+}
+
+void main() {
+  print('Faktorial 5: ${MathUtils.factorial(5)}');
+  print('7 prima? ${MathUtils.isPrime(7)}');
+  print('Pembulatan: ${MathUtils.roundDouble(3.14159, 2)}');
+  print('Random int: ${MathUtils.randomInt(1, 10)}');
+  print('Random double: ${MathUtils.randomDouble(1, 5)}');
+  
+  List<num> angka = [1, 2, 3, 4, 5];
+  print('Mean: ${MathUtils.mean(angka)}');
+  print('Median: ${MathUtils.median(angka)}');
+}</code></pre>
+            </div>
+            <button onclick="openModal('https://dartpad.dev/?id=50268ca24199edbf475b00b696893d53')">Run Program</button>
+        </section>
+
+        <section>
+            <h2>🎀 Pengantar Abstraksi</h2>
+            <ul>
+                <li><span class="highlight">💖Konsep</span>: Menyembunyikan detail implementasi, hanya menunjukkanfungsionalitas.</li>
+                <li><span class="highlight">💖Tujuan</span>: i. Fokus pada "apa" bukan "bagaimana"
+                                                             ii. Kontrak yang harus dipenuhi
+                                                            iii. Fleksibilitas implementasi</li>
+                <li><span class="highlight">💖Cara di Dart</span>: abstract class dan interface.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>🎀 Abstract Class</h2>
+            <p> Abstract class adalah class yang:
+                  ❌ Tidak bisa dibuat objek langsung
+                  ✅ Digunakan sebagai kerangka dasar
+                  ✅ Bisa punya:
+                        • Method abstract → tanpa isi (harus dioverride)
+                        • Method concrete → ada isi (bisa langsung dipakai).</p>
+
+            <div class="code-container">
+                <div class="code-header">DART SOURCE CODE</div>
+                <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+
+abstract class Kendaraan {
+  String merk;
+
+  Kendaraan(this.merk);
+
+  // Method abstract
+  void start();
+
+  // Method concrete
+  void stop() {
+    print('Kendaraan berhenti');
+  }
+}
+
+class Mobil extends Kendaraan {
+  Mobil(String merk) : super(merk);
+
+  @override
+  void start() {
+    print('Mobil $merk menyala 🚗');
+  }
+}
+
+void main() {
+  // Kendaraan k = Kendaraan(); ❌ ERROR (tidak bisa diinstansiasi)
+
+  Mobil mobil = Mobil('Toyota');
+
+  mobil.start(); // method dari override
+  mobil.stop();  // method dari abstract class
+}</code></pre>
+            </div>
+            <button onclick="openModal('https://dartpad.dev/?id=ca27aded8fed07daed7d38622628e5ca')">Run Program</button>
+        </section>
+
+        <section>
+            <h2>🎀 Abstract Method</h2>
+            <p>Abstract method adalah method yang hanya dideklarasikan (tanpa badan/implementasi) di dalam abstract class.</p>
+
+            <div class="code-container">
+                <div class="code-header">DART SOURCE CODE</div>
+                <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+
+// Abstract class
+abstract class AlatMusik {
+  // Abstract method (tanpa body)
+  void mainkan();
+
+  // Concrete method (sudah ada implementasi)
+  void info() {
+    print('Ini adalah alat musik');
+  }
+}
+
+// Subclass yang mengimplementasikan abstract method
+class Gitar extends AlatMusik {
+  @override
+  void mainkan() {
+    print('Jreng jreng...');
+  }
+}
+
+class Drum extends AlatMusik {
+  @override
+  void mainkan() {
+    print('Dug dug dug...');
+  }
+}
+
+void main() {
+  // AlatMusik alat = AlatMusik(); // ERROR: abstract class tidak bisa diinstansiasi
+  
+  Gitar gitar = Gitar();
+  gitar.mainkan(); // Output: Jreng jreng...
+  gitar.info();    // Output: Ini adalah alat musik
+  
+  print('---');
+  
+  Drum drum = Drum();
+  drum.mainkan(); // Output: Dug dug dug...
+  drum.info();    // Output: Ini adalah alat musik
+}</code></pre>
+            </div>
+            <button onclick="openModal('https://dartpad.dev/?id=0437233c7efa2904697a775d59aca48b')">Run Program</button>
+        </section>
+
+        <section>
+            <h2>🎀 Interface di Dart</h2>
+                <li><span class=></span>:• Sejak Dart 3.0, Dart memiliki keyword interface class untuk mendefinisikan interface secara eksplisit.</li>
+                <li><span class=></span>:• Semua class sebenarnya sudah bisa menjadi implicit interface (tanpa keyword interface).</li>
+                <li><span class=></span>:• Ketika menggunakan implements, method dari interface class tidak diwarisi (harus diimplementasi ulang).</li>
+            </ul>
+
+            <div class="code-container">
+                <div class="code-header">DART SOURCE CODE</div>
+                <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+
+// Interface class (Dart 3.0 ke atas)
+interface class Flyable {
+  void terbang() {
+    print('Terbang...');
+  }
+  
+  void landing() {
+    print('Mendarat...');
+  }
+}
+
+// Class mengimplementasi interface
+class Bird implements Flyable {
+  @override
+  void terbang() {
+    print('Burung terbang tinggi sekali');
+  }
+  
+  @override
+  void landing() {
+    print('Burung hinggap di pohon');
+  }
+  
+  // Method tambahan milik Bird sendiri
+  void bernyanyi() {
+    print('Cuit cuit...');
+  }
+}
+
+class Plane implements Flyable {
+  @override
+  void terbang() {
+    print('Pesawat terbang dengan kecepatan 900 km/jam');
+  }
+  
+  @override
+  void landing() {
+    print('Pesawat mendarat di bandara');
+  }
+}
+
+// Contoh class yang mengimplementasi interface
+class Drone implements Flyable {
+  @override
+  void terbang() {
+    print('Drone terbang diam di udara');
+  }
+  
+  @override
+  void landing() {
+    print('Drone mendarat perlahan');
+  }
+}
+
+void main() {
+  print('=== INTERFACE DI DART ===\n');
+  
+  // Membuat objek dari masing-masing class
+  Bird burung = Bird();
+  Plane pesawat = Plane();
+  Drone drone = Drone();
+  
+  print('-- Burung --');
+  burung.terbang();
+  burung.landing();
+  burung.bernyanyi();
+  
+  print('\n-- Pesawat --');
+  pesawat.terbang();
+  pesawat.landing();
+  
+  print('\n-- Drone --');
+  drone.terbang();
+  drone.landing();
+  
+  print('\n--- POLIMORFISME DENGAN INTERFACE ---');
+  
+  // Polymorphism: semua bisa diperlakukan sebagai Flyable
+  List<Flyable> daftarTerbang = [burung, pesawat, drone];
+  
+  for (var obj in daftarTerbang) {
+    obj.terbang();
+  }
+}</code></pre>
+            </div>
+            <button onclick="openModal('https://dartpad.dev/?id=416ae66930cf794b9ecb12c728638553')">Run Program</button>
+        </section>
+
+        <section>
+            <h2>🎀 Static Members dan Method</h2>
+                <li><span class=></span>:• Static members adalah properti atau method yang dimiliki oleh class itu sendiri, bukan oleh objek class. Static member diakses langsung melalui class name.</li>
+                <li><span class=></span>:• Properti dan method static sangat berguna untuk membuat utility class atau menyimpan konstanta yang terkait dengan class, sehingga dapat diakses langsung tanpa perlu membuat objek.</li>
+            </ul>
+
+            <div class="code-container">
+                <div class="code-header">DART SOURCE CODE</div>
+                <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+
+// ========== STATIC MEMBERS - CONTOH SEDERHANA ==========
+
+class MathUtils {
+  // Static property (milik class)
+  static double pi = 3.14;
+  
+  // Static method (milik class)
+  static int tambah(int a, int b) {
+    return a + b;
+  }
+}
+
+void main() {
+  // ✅ Akses langsung lewat NAMA CLASS (tanpa membuat objek)
+  print('Nilai PI: ${MathUtils.pi}');
+  print('10 + 20 = ${MathUtils.tambah(10, 20)}');
+  
+  // ❌ Ini ERROR! Tidak bisa akses static lewat objek
+  // var math = MathUtils(); // Tidak perlu!
+  // print(math.pi); // ERROR!
+}</code></pre>
+            </div>
+            <button onclick="openModal('https://dartpad.dev/?id=0b74cb9c11ba018e0f53d6e8ab10567b')">Run Program</button>
+        </section>
+
+
+
+
 
     </div>
 
     <footer>
-        &copy; 2026 Aghista Bunga Kirani &bull; Tugas 2
+        &copy; 2026 Aghista Bunga Kirani &bull; Tugas 4
     </footer>
 
     <div id="modal" class="modal">
