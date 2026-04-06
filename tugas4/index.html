@@ -549,7 +549,7 @@ void main() {
 
         <section>
             <h2>🎀 Soal(Bonus)Slide 17 – Pekerja & Polimorfisme(Bonus 1)</h2>
-            <p>1). abstract class, 2). 3 subclass, dan 3). List untuk polimorfisme.</p>
+            <p> abstract class, 3 subclass, dan List untuk polimorfisme.</p>
 
             <div class="code-container">
                 <div class="code-header">DART SOURCE CODE</div>
@@ -590,7 +590,7 @@ class Guru extends Pekerja {
 }
 
 void main() {
-  // List berisi berbagai jenis pekerja
+  // ✅ Perbaikan di sini
   List<Pekerja> daftarPekerja = [
     Programmer(),
     Dokter(),
@@ -598,14 +598,14 @@ void main() {
   ];
 
   // Demonstrasi polimorfisme
-  for (var pekerja in daftarPekerja) {
+  for (Pekerja pekerja in daftarPekerja) {
     pekerja.bekerja();   // method berbeda tergantung objek
     pekerja.istirahat(); // method sama dari superclass
     print('---');
   }
 }</code></pre>
             </div>
-            <button onclick="openModal('https://dartpad.dev/embed-dart.html?id=1c46e333915e22233e03735408470566&run=true')">Run Program</button>
+            <button onclick="openModal('https://dartpad.dev/embed-dart.html?id=96ebdd546d68404ebc975c8899920e6e&run=true')">Run Program</button>
         </section>
 
         <section>
@@ -674,73 +674,86 @@ import 'dart:math';
 class MathUtils {
   // 1. Faktorial
   static int factorial(int n) {
-    if (n < 0) throw Exception('Tidak boleh negatif');
-    int hasil = 1;
-    for (int i = 1; i <= n; i++) {
-      hasil *= i;
+    if (n < 0) {
+      throw ArgumentError("Input tidak boleh negatif");
     }
-    return hasil;
+    int result = 1;
+    for (int i = 1; i <= n; i++) {
+      result *= i;
+    }
+    return result;
   }
 
   // 2. Cek bilangan prima
   static bool isPrime(int n) {
     if (n <= 1) return false;
-    for (int i = 2; i <= sqrt(n); i++) {
+    if (n == 2) return true;
+    if (n % 2 == 0) return false;
+
+    for (int i = 3; i <= sqrt(n).toInt(); i += 2) {
       if (n % i == 0) return false;
     }
     return true;
   }
 
   // 3. Membulatkan double ke desimal tertentu
-  static double roundDouble(double value, int places) {
-    double mod = pow(10.0, places).toDouble();
-    return (value * mod).round() / mod;
+  static double roundTo(double value, int decimals) {
+    double factor = pow(10, decimals).toDouble();
+    return (value * factor).round() / factor;
   }
 
   // 4. Random integer dalam range [min, max]
   static int randomInt(int min, int max) {
-    return min + Random().nextInt(max - min + 1);
+    Random rand = Random();
+    return min + rand.nextInt(max - min + 1);
   }
 
   // 5. Random double dalam range [min, max]
   static double randomDouble(double min, double max) {
-    return min + Random().nextDouble() * (max - min);
+    Random rand = Random();
+    return min + rand.nextDouble() * (max - min);
   }
 
   // 6. Rata-rata (mean)
-  static double mean(List<num> data) {
-    if (data.isEmpty) throw Exception('List kosong');
-    return data.reduce((a, b) => a + b) / data.length;
+  static double mean(List<double> numbers) {
+    if (numbers.isEmpty) {
+      throw ArgumentError("List tidak boleh kosong");
+    }
+    double sum = numbers.reduce((a, b) => a + b);
+    return sum / numbers.length;
   }
 
   // 7. Median
-  static double median(List<num> data) {
-    if (data.isEmpty) throw Exception('List kosong');
+  static double median(List<double> numbers) {
+    if (numbers.isEmpty) {
+      throw ArgumentError("List tidak boleh kosong");
+    }
 
-    List<num> sorted = List.from(data)..sort();
+    List<double> sorted = List.from(numbers)..sort();
     int n = sorted.length;
 
     if (n % 2 == 1) {
-      return sorted[n ~/ 2].toDouble();
+      return sorted[n ~/ 2];
     } else {
       return (sorted[n ~/ 2 - 1] + sorted[n ~/ 2]) / 2;
     }
   }
 }
 
+// Contoh penggunaan
 void main() {
-  print('Faktorial 5: ${MathUtils.factorial(5)}');
-  print('7 prima? ${MathUtils.isPrime(7)}');
-  print('Pembulatan: ${MathUtils.roundDouble(3.14159, 2)}');
-  print('Random int: ${MathUtils.randomInt(1, 10)}');
-  print('Random double: ${MathUtils.randomDouble(1, 5)}');
-  
-  List<num> angka = [1, 2, 3, 4, 5];
-  print('Mean: ${MathUtils.mean(angka)}');
-  print('Median: ${MathUtils.median(angka)}');
+  print("Faktorial 5: ${MathUtils.factorial(5)}");
+  print("Apakah 7 prima? ${MathUtils.isPrime(7)}");
+  print("Pembulatan 3.14159 ke 2 desimal: ${MathUtils.roundTo(3.14159, 2)}");
+  print("Random int (1-10): ${MathUtils.randomInt(1, 10)}");
+  print("Random double (0-1): ${MathUtils.randomDouble(0, 1)}");
+
+  List<double> data = [1, 2, 3, 4, 5];
+  print("Mean: ${MathUtils.mean(data)}");
+  print("Median: ${MathUtils.median(data)}");
 }</code></pre>
             </div>
-            <button onclick="openModal('https://dartpad.dev/embed-dart.html?id=50268ca24199edbf475b00b696893d53&run=true')">Run Program</button>
+            <button onclick="openModal('https://dartpad.dev/embed-dart.html?id=842c6ec4eba07a63577825fe690123dd&run=true')">Run Program</button>
         </section>
 
         <section>
