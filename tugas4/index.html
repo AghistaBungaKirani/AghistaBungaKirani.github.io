@@ -382,11 +382,11 @@ void main() {
         </section>
 
         <section>
-            <h2>| Pengantar Polimorfisme</h2>
+            <h2>🎀 Pengantar Polimorfisme</h2>
             <ul>
                 <li><span class="highlight">Arti</span>: "Banyak bentuk" (poly = banyak, morph = bentuk).</li>
                 <li><span class="highlight">Konsep</span>: Objek dari subclass dapat diperlakukan sebagai objek dari superclass.</li>
-                <li><span class="highlight">Cobtoh</span>: Semua Kucing, Anjing, Burung adalah Hewan.</li>
+                <li><span class="highlight">Contoh</span>: Semua Kucing, Anjing, Burung adalah Hewan.</li>
                 <li><span class="highlight">Tipe</span>: i. Compile-time polymorphism: Method overloading (tidak didukung Dart)
                                                         ii. Runtime polymorphism: Method overriding (didukung Dart).</li>
             </ul>
@@ -549,7 +549,7 @@ void main() {
 
         <section>
             <h2>🎀 Soal(Bonus)Slide 17 – Pekerja & Polimorfisme(Bonus 1)</h2>
-            <p>1. abstract class, 2. 3 subclass, dan 3. List untuk polimorfisme.</p>
+            <p>1). abstract class, 2). 3 subclass, dan 3). List untuk polimorfisme.</p>
 
             <div class="code-container">
                 <div class="code-header">DART SOURCE CODE</div>
@@ -861,9 +861,9 @@ void main() {
 
         <section>
             <h2>🎀 Interface di Dart</h2>
-                <li><span class=></span>:• Sejak Dart 3.0, Dart memiliki keyword interface class untuk mendefinisikan interface secara eksplisit.</li>
-                <li><span class=></span>:• Semua class sebenarnya sudah bisa menjadi implicit interface (tanpa keyword interface).</li>
-                <li><span class=></span>:• Ketika menggunakan implements, method dari interface class tidak diwarisi (harus diimplementasi ulang).</li>
+                <li><span class=></span> Sejak Dart 3.0, Dart memiliki keyword interface class untuk mendefinisikan interface secara eksplisit.</li>
+                <li><span class=></span> Semua class sebenarnya sudah bisa menjadi implicit interface (tanpa keyword interface).</li>
+                <li><span class=></span> Ketika menggunakan implements, method dari interface class tidak diwarisi (harus diimplementasi ulang).</li>
             </ul>
 
             <div class="code-container">
@@ -963,8 +963,9 @@ void main() {
 
         <section>
             <h2>🎀 Static Members dan Method</h2>
-                <li><span class=></span>:• Static members adalah properti atau method yang dimiliki oleh class itu sendiri, bukan oleh objek class. Static member diakses langsung melalui class name.</li>
-                <li><span class=></span>:• Properti dan method static sangat berguna untuk membuat utility class atau menyimpan konstanta yang terkait dengan class, sehingga dapat diakses langsung tanpa perlu membuat objek.</li>
+            <ul>
+                <li><span class=></span> Static members adalah properti atau method yang dimiliki oleh class itu sendiri, bukan oleh objek class. Static member diakses langsung melalui class name.</li>
+                <li><span class=></span> Properti dan method static sangat berguna untuk membuat utility class atau menyimpan konstanta yang terkait dengan class, sehingga dapat diakses langsung tanpa perlu membuat objek.</li>
             </ul>
 
             <div class="code-container">
@@ -998,6 +999,422 @@ void main() {
             </div>
             <button onclick="openModal('https://dartpad.dev/?id=0b74cb9c11ba018e0f53d6e8ab10567b')">Run Program</button>
         </section>
+
+        <section>
+            <h2>🎀 Praktik 2 – Sistem Pembayaran</h2>
+                
+            <div class="code-container">
+                <div class="code-header">DART SOURCE CODE</div>
+                <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+
+// Abstract class defining the payment method contract
+abstract class MetodePembayaran {
+  void bayar(double jumlah);
+}
+
+// Credit Card payment implementation
+class KartuKredit implements MetodePembayaran {
+  @override
+  void bayar(double jumlah) {
+    print('Bayar $jumlah dengan Kartu Kredit');
+  }
+}
+
+// E-Wallet payment implementation
+class EWallet implements MetodePembayaran {
+  @override
+  void bayar(double jumlah) {
+    print('Bayar $jumlah dengan E-Wallet');
+  }
+}
+
+// Cash payment implementation
+class Tunai implements MetodePembayaran {
+  @override
+  void bayar(double jumlah) {
+    print('Bayar $jumlah dengan Tunai');
+  }
+}
+
+// Main function to demonstrate the payment system
+void main() {
+  print('=== DEMO SISTEM PEMBAYARAN ===\n');
+  
+  // Create instances of each payment method
+  MetodePembayaran kartuKredit = KartuKredit();
+  MetodePembayaran eWallet = EWallet();
+  MetodePembayaran tunai = Tunai();
+  
+  // Process payments with different amounts
+  print('Contoh Transaksi:');
+  kartuKredit.bayar(150000.0);
+  eWallet.bayar(75000.0);
+  tunai.bayar(50000.0);
+  
+  print('\n=== Proses Pembayaran Selesai ===');
+}</code></pre>
+            </div>
+            <button onclick="openModal('https://dartpad.dev/?id=8577f44ebfb6bd2e53ccc41faff7bed5')">Run Program</button>
+        </section>
+
+        <section>
+            <h2>🎀 Studi Kasus: Sistem Bentuk Geometri</h2>
+                
+            <div class="code-container">
+                <div class="code-header">DART SOURCE CODE</div>
+                <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+
+// Abstract class defining the contract for all shapes
+abstract class Bentuk {
+  double hitungLuas();
+  double hitungKeliling();
+
+  void info() {
+    print('Luas: ${hitungLuas()}, Keliling: ${hitungKeliling()}');
+  }
+}
+
+// Persegi (Square) class implementing Bentuk
+class Persegi implements Bentuk {
+  double sisi;
+  Persegi(this.sisi);
+
+  @override
+  double hitungLuas() => sisi * sisi;
+
+  @override
+  double hitungKeliling() => 4 * sisi;
+
+  @override
+  void info() {
+    print('Persegi dengan sisi $sisi memiliki luas ${hitungLuas()} dan keliling ${hitungKeliling()}.');
+  }
+}
+
+// Lingkaran (Circle) class implementing Bentuk
+class Lingkaran implements Bentuk {
+  double radius;
+  Lingkaran(this.radius);
+
+  @override
+  double hitungLuas() => 3.14 * radius * radius;
+
+  @override
+  double hitungKeliling() => 2 * 3.14 * radius;
+
+  @override
+  void info() {
+    print('Lingkaran dengan radius $radius memiliki luas ${hitungLuas()} dan keliling ${hitungKeliling()}.');
+  }
+}
+
+// Segitiga (Triangle) - additional shape to demonstrate extensibility
+class Segitiga implements Bentuk {
+  double alas;
+  double tinggi;
+  double sisiMiring;
+  
+  Segitiga(this.alas, this.tinggi, this.sisiMiring);
+
+  @override
+  double hitungLuas() => 0.5 * alas * tinggi;
+
+  @override
+  double hitungKeliling() => alas + tinggi + sisiMiring;
+
+  @override
+  void info() {
+    print('Segitiga dengan alas $alas, tinggi $tinggi, sisi miring $sisiMiring memiliki luas ${hitungLuas()} dan keliling ${hitungKeliling()}.');
+  }
+}
+
+void main() {
+  print('===== SISTEM BENTUK GEOMETRI =====\n');
+  
+  // Create instances of different shapes
+  Bentuk persegi = Persegi(5.0);
+  Bentuk lingkaran = Lingkaran(7.0);
+  Bentuk segitiga = Segitiga(3.0, 4.0, 5.0);
+  
+  // Demonstrate polymorphism by storing shapes in a list
+  List<Bentuk> daftarBentuk = [persegi, lingkaran, segitiga];
+  
+  // Process each shape using the abstract interface
+  for (var bentuk in daftarBentuk) {
+    bentuk.info();
+    print('---');
+  }
+  
+  print('\n===== DEMONSTRASI METHOD OVERRIDE =====');
+  
+  // Direct calls showing polymorphic behavior
+  print('Memanggil info() pada Persegi:');
+  persegi.info();
+  
+  print('\nMemanggil info() pada Lingkaran:');
+  lingkaran.info();
+  
+  print('\nMemanggil info() pada Segitiga:');
+  segitiga.info();
+  
+  print('\n===== PERHITUNGAN LANGSUNG =====');
+  print('Luas persegi (sisi=5): ${persegi.hitungLuas()}');
+  print('Keliling lingkaran (radius=7): ${lingkaran.hitungKeliling()}');
+  print('Luas segitiga (alas=3, tinggi=4): ${segitiga.hitungLuas()}');
+}</code></pre>
+            </div>
+            <button onclick="openModal('https://dartpad.dev/?id=9e1df7ac4b6d5e529c8c0fd03ac988d2')">Run Program</button>
+        </section>
+
+        <section>
+            <h2>🎀 Ringkasan:</h2>
+            <ul>
+                <li><span class="highlight">Polimorfisme</span>:• Objek child dapat diperlakukan sebagai parent </li>
+                <li><span class="highlight">Abstract class</span>:• Template dengan method abstract/concrete.</li>
+                <li><span class="highlight">Interface</span>:• Kontrak yang harus diimplementasi.</li>
+                <li><span class="highlight">multiple inheritance</span>:• mewarisi fungsi dari dua atau lebih hierarki class yangberbeda 16.</li>
+            </ul>
+
+            </div>
+            <button onclick="openModal('https://dartpad.dev/?id=0b74cb9c11ba018e0f53d6e8ab10567b')">Run Program</button>
+        </section>
+
+        <section>
+            <h2>🎀🎵 Challenge: MediaPlayer + Playable/Pausable </h2>
+            <p>Abstract MediaPlayer, interface Playable & Pausable, class AudioPlayer & VideoPlayer.</p>
+
+            <div class="code-container">
+                <div class="code-header">DART SOURCE CODE</div>
+                <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+
+// Abstract class MediaPlayer
+abstract class MediaPlayer {
+  String name;
+  int duration; // in seconds
+  
+  MediaPlayer(this.name, this.duration);
+  
+  void displayInfo();
+}
+
+// Interface Playable (using abstract class in Dart)
+abstract class Playable {
+  void play();
+  void stop();
+}
+
+// Interface Pausable
+abstract class Pausable {
+  void pause();
+  void resume();
+}
+
+// AudioPlayer implementation
+class AudioPlayer extends MediaPlayer implements Playable, Pausable {
+  bool _isPlaying = false;
+  bool _isPaused = false;
+  int _currentPosition = 0;
+  
+  AudioPlayer(String name, int duration) : super(name, duration);
+  
+  @override
+  void play() {
+    if (_isPaused) {
+      print('Resuming audio: $name');
+      _isPaused = false;
+      _isPlaying = true;
+    } else if (!_isPlaying) {
+      print('Playing audio: $name (Duration: ${duration} seconds)');
+      _isPlaying = true;
+      _currentPosition = 0;
+    } else {
+      print('Audio $name is already playing');
+    }
+  }
+  
+  @override
+  void stop() {
+    if (_isPlaying || _isPaused) {
+      print('Stopping audio: $name');
+      _isPlaying = false;
+      _isPaused = false;
+      _currentPosition = 0;
+    } else {
+      print('Audio $name is not playing');
+    }
+  }
+  
+  @override
+  void pause() {
+    if (_isPlaying && !_isPaused) {
+      print('Pausing audio: $name at position $_currentPosition seconds');
+      _isPlaying = false;
+      _isPaused = true;
+    } else if (!_isPlaying) {
+      print('Cannot pause $name - audio is not playing');
+    } else {
+      print('Audio $name is already paused');
+    }
+  }
+  
+  @override
+  void resume() {
+    if (_isPaused) {
+      print('Resuming audio: $name from position $_currentPosition seconds');
+      _isPlaying = true;
+      _isPaused = false;
+    } else {
+      print('Cannot resume $name - audio is not paused');
+    }
+  }
+  
+  @override
+  void displayInfo() {
+    print('=== Audio Player Info ===');
+    print('Name: $name');
+    print('Duration: ${duration} seconds');
+    print('Status: ${_isPlaying ? 'Playing' : (_isPaused ? 'Paused' : 'Stopped')}');
+    print('Current position: $_currentPosition seconds');
+    print('========================\n');
+  }
+}
+
+// VideoPlayer implementation
+class VideoPlayer extends MediaPlayer implements Playable, Pausable {
+  bool _isPlaying = false;
+  bool _isPaused = false;
+  int _currentPosition = 0;
+  String _quality = '720p';
+  
+  VideoPlayer(String name, int duration) : super(name, duration);
+  
+  void setQuality(String quality) {
+    _quality = quality;
+    print('Video quality set to: $_quality');
+  }
+  
+  @override
+  void play() {
+    if (_isPaused) {
+      print('Resuming video: $name at $_quality quality');
+      _isPaused = false;
+      _isPlaying = true;
+    } else if (!_isPlaying) {
+      print('Playing video: $name (Duration: ${duration} seconds, Quality: $_quality)');
+      _isPlaying = true;
+      _currentPosition = 0;
+    } else {
+      print('Video $name is already playing');
+    }
+  }
+  
+  @override
+  void stop() {
+    if (_isPlaying || _isPaused) {
+      print('Stopping video: $name');
+      _isPlaying = false;
+      _isPaused = false;
+      _currentPosition = 0;
+    } else {
+      print('Video $name is not playing');
+    }
+  }
+  
+  @override
+  void pause() {
+    if (_isPlaying && !_isPaused) {
+      print('Pausing video: $name at position $_currentPosition seconds');
+      _isPlaying = false;
+      _isPaused = true;
+    } else if (!_isPlaying) {
+      print('Cannot pause $name - video is not playing');
+    } else {
+      print('Video $name is already paused');
+    }
+  }
+  
+  @override
+  void resume() {
+    if (_isPaused) {
+      print('Resuming video: $name from position $_currentPosition seconds');
+      _isPlaying = true;
+      _isPaused = false;
+    } else {
+      print('Cannot resume $name - video is not paused');
+    }
+  }
+  
+  @override
+  void displayInfo() {
+    print('=== Video Player Info ===');
+    print('Name: $name');
+    print('Duration: ${duration} seconds');
+    print('Quality: $_quality');
+    print('Status: ${_isPlaying ? 'Playing' : (_isPaused ? 'Paused' : 'Stopped')}');
+    print('Current position: $_currentPosition seconds');
+    print('========================\n');
+  }
+}
+
+// Main function to demonstrate the system
+void main() {
+  print('=== MEDIA PLAYER SYSTEM DEMO ===\n');
+  
+  // Create instances
+  var audioPlayer = AudioPlayer('Summer Vibes.mp3', 180);
+  var videoPlayer = VideoPlayer('Nature Documentary.mp4', 360);
+  
+  // Display initial info
+  audioPlayer.displayInfo();
+  videoPlayer.displayInfo();
+  
+  // Test AudioPlayer
+  print('--- Testing AudioPlayer ---');
+  audioPlayer.play();
+  audioPlayer.pause();
+  audioPlayer.resume();
+  audioPlayer.stop();
+  audioPlayer.displayInfo();
+  
+  print('\n--- Testing VideoPlayer ---');
+  videoPlayer.play();
+  videoPlayer.setQuality('1080p');
+  videoPlayer.pause();
+  videoPlayer.resume();
+  videoPlayer.stop();
+  videoPlayer.displayInfo();
+  
+  print('\n--- Polymorphism Test ---');
+  List<MediaPlayer> players = [audioPlayer, videoPlayer];
+  
+  for (var player in players) {
+    player.displayInfo();
+    if (player is Playable) {
+      print('This player supports Playable interface');
+      (player as Playable).play();
+      (player as Playable).stop();
+    }
+    if (player is Pausable) {
+      print('This player supports Pausable interface');
+    }
+    print('---');
+  }
+}</code></pre>
+            </div>
+            <button onclick="openModal('https://dartpad.dev/?id=9600c7bb6e7029fe4704e66937f35094')">Run Program</button>
+        </section>
+
+
+
 
 
 
