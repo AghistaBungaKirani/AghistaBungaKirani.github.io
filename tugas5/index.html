@@ -20,7 +20,7 @@
             --accent-glow: #fa4e73d8;
             --text-pri: #ffffff;
             --text-sec: #f3f3f5;
-            --border: #ee226d;
+            --border: #610728;
             --code-bg: #eb75b0;
             --radius: 8px;
         }
@@ -355,39 +355,13 @@
 
             <div class="code-container">
                 <div class="code-header">DART SOURCE CODE</div>
-                <pre><code>//Nama: Aghista Bunga Kirani
-//Nim: 251410027
-//Kelas: SI2A
-
-
-// Abstract class
-abstract class Bentuk {
-  double hitungLuas();
+                <pre><code>abstract class Bentuk {
+    double hitungLuas();
 }
 
-// Class Persegi yang mengimplementasikan Bentuk
 class Persegi implements Bentuk {
-  double sisi;
-
-  // Constructor
-  Persegi(this.sisi);
-
-  @override
-  double hitungLuas() {
-    return sisi * sisi;
-  }
-}
-
-void main() {
-  // Membuat objek Persegi
-  Persegi persegi = Persegi(5);
-
-  // Menghitung luas
-  print("Sisi: ${persegi.sisi}");
-  print("Luas Persegi: ${persegi.hitungLuas()}");
-}</code></pre>
-            </div>
-            <button onclick="openModal('https://dartpad.dev/embed-dart.html?id=6c0bba05fe5766e4df4f0e71bd792e1c&run=true')">Run Program</button>
+    @override double hitungLuas() => sisi * sisi;
+} &run=true')">Run Program</button>
         </section>
 
         <section>
@@ -571,7 +545,7 @@ void main() {
               </ul>
 
             <div class="code-container">
-                <div class="code-header">DART SOURCE CODE</div>
+                <div class=></div>
                 <pre><code>//Nama: Aghista Bunga Kirani
 //Nim: 251410027
 //Kelas: SI2A
@@ -614,7 +588,7 @@ void main() {
   handleResponse(res2);
 }</code></pre>
             </div>
-            <button onclick="openModal('https://dartpad.dev/embed-dart.html?id=7c93dc12bce0fbd66b90484affc11e76&run=true')">Run Program</button>
+            <button onclick="openModal('https://raw.githubusercontent.com/AghistaBungaKirani/AghistaBungaKirani.github.io/main/ss_sealed_class.png')">CAPTURE</button>
         </section>
 
         <section>
@@ -1507,15 +1481,16 @@ void main() {
     </div>
 
     <footer>
-        &copy; 2026 Aghista Bunga Kirani &bull; Tugas 4
+        &copy; 2026 Aghista Bunga Kirani &bull; Tugas 5
     </footer>
 
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <iframe id="dartFrame" src=""></iframe>
-        </div>
+    <div id="imageModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeImageModal()">&times;</span>
+        <iframe id="dartFrame"></iframe>
+        <img id="captureImage" src="" style="width:100%; height:100%; object-fit:contain;">
     </div>
+</div>
 
     <script>
         const sections = document.querySelectorAll("section");
@@ -1528,17 +1503,17 @@ void main() {
         }, { threshold: 0.1 });
         sections.forEach(sec => observer.observe(sec));
 
-        function openModal(link) {
-            document.getElementById("modal").style.display = "block";
-            document.getElementById("dartFrame").src = link;
-            document.body.style.overflow = "hidden";
-        }
+        function openImageModal(link) {
+    document.getElementById("imageModal").style.display = "block";
+    document.getElementById("captureImage").src = link;
+    document.body.style.overflow = "hidden";
+}
 
-        function closeModal() {
-            document.getElementById("modal").style.display = "none";
-            document.getElementById("dartFrame").src = "";
-            document.body.style.overflow = "auto";
-        }
+        function closeImageModal() {
+    document.getElementById("imageModal").style.display = "none";
+    document.getElementById("captureImage").src = "";
+    document.body.style.overflow = "auto";
+}
 
         window.onclick = function (e) {
             if (e.target == document.getElementById("modal")) closeModal();
