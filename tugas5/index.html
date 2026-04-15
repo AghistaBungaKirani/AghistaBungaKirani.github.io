@@ -354,14 +354,13 @@
             </ul>
 
             <div class="code-container">
-                <div class="code-header">DART SOURCE CODE</div>
-                <pre><code>abstract class Bentuk {
+                <div class=></div>
+                <pre><code> abstract class Bentuk {
     double hitungLuas();
 }
-
-class Persegi implements Bentuk {
+  class Persegi implements Bentuk {
     @override double hitungLuas() => sisi * sisi;
-} &run=true')">Run Program</button>
+}
         </section>
 
         <section>
@@ -588,7 +587,7 @@ void main() {
   handleResponse(res2);
 }</code></pre>
             </div>
-            <button onclick="openModal('https://raw.githubusercontent.com/AghistaBungaKirani/AghistaBungaKirani.github.io/main/ss_sealed_class.png')">CAPTURE</button>
+            <button onclick="openImageModal('https://raw.githubusercontent.com/AghistaBungaKirani/AghistaBungaKirani.github.io/main/ss_sealed_class.png')">CAPTURE</button>
         </section>
 
         <section>
@@ -600,7 +599,7 @@ void main() {
            </ul>
 
             <div class="code-container">
-                <div class="code-header">DART SOURCE CODE</div>
+                <div class=></div>
                 <pre><code>//Nama: Aghista Bunga Kirani
 //Nim: 251410027
 //Kelas: SI2A
@@ -639,7 +638,7 @@ void main() {
   handleResponse(res2);
 }</code></pre>
             </div>
-            <button onclick="openModal('https://dartpad.dev/embed-dart.html?id=c9a32f695e8ed1342e499c9a16f37d2b&run=true')">Run Program</button>
+           <button onclick="openImageModal('https://raw.githubusercontent.com/AghistaBungaKirani/AghistaBungaKirani.github.io/main/ss2_keuntungan_sealed_class.png')">CAPTURE</button> 
         </section>
 
         <section>
@@ -652,151 +651,62 @@ void main() {
            </ul>
 
             <div class="code-container">
-                <div class="code-header">DART SOURCE CODE</div>
+                <div class=></div>
                 <pre><code>//Nama: Aghista Bunga Kirani
 //Nim: 251410027
 //Kelas: SI2A
 
 
-// main.dart
+// libbase.dart
 
-// Sealed class
-sealed class ApiResponse {}
-
-// Subclass Success
-class Success extends ApiResponse {
-  final String message;
-
-  Success(this.message);
-}
-
-// Subclass Error
-class Error extends ApiResponse {
-  final String errorMessage;
-
-  Error(this.errorMessage);
-}
-
-// Function untuk handle response
-void handleResponse(ApiResponse response) {
-  if (response is Success) {
-    print("Success: ${response.message}");
-  } else if (response is Error) {
-    print("Error: ${response.errorMessage}");
-  }
-}
-
-// Main program (entry point)
-void main() {
-  ApiResponse res1 = Success("Data berhasil diambil");
-  ApiResponse res2 = Error("Terjadi kesalahan");
-
-  handleResponse(res1);
-  handleResponse(res2);
+base class Animal {
+  void speak() {}
 }</code></pre>
             </div>
-            <button onclick="openModal('https://dartpad.dev/embed-dart.html?id=3c91dc7e5572c401e307486324f98e5b&run=true')">Run Program</button>
         </section>
 
         <section>
-            <h2>5.MathUtils – Static Methods (Faktorial, Prima, Random, Rata2, Median)(Bonus 3)</h2>
+            <h2>₊˚⊹♡ Kapan Menggunakan Base Class ♡⊹˚₊</h2>
+            <p>Saat ingin membuat hierarki yang hanya boleh di-extend</p>
 
             <div class="code-container">
-                <div class="code-header">DART SOURCE CODE</div>
+                <div class=></div>
                 <pre><code>//Nama: Aghista Bunga Kirani
 //Nim: 251410027
 //Kelas: SI2A
 
 
-import 'dart:math';
+import 'libbase.dart';
 
-class MathUtils {
-  // 1. Faktorial
-  static int factorial(int n) {
-    if (n < 0) {
-      throw ArgumentError("Input tidak boleh negatif");
-    }
-    int result = 1;
-    for (int i = 1; i <= n; i++) {
-      result *= i;
-    }
-    return result;
-  }
-
-  // 2. Cek bilangan prima
-  static bool isPrime(int n) {
-    if (n <= 1) return false;
-    if (n == 2) return true;
-    if (n % 2 == 0) return false;
-
-    for (int i = 3; i <= sqrt(n).toInt(); i += 2) {
-      if (n % i == 0) return false;
-    }
-    return true;
-  }
-
-  // 3. Membulatkan double ke desimal tertentu
-  static double roundTo(double value, int decimals) {
-    double factor = pow(10, decimals).toDouble();
-    return (value * factor).round() / factor;
-  }
-
-  // 4. Random integer dalam range [min, max]
-  static int randomInt(int min, int max) {
-    Random rand = Random();
-    return min + rand.nextInt(max - min + 1);
-  }
-
-  // 5. Random double dalam range [min, max]
-  static double randomDouble(double min, double max) {
-    Random rand = Random();
-    return min + rand.nextDouble() * (max - min);
-  }
-
-  // 6. Rata-rata (mean)
-  static double mean(List<double> numbers) {
-    if (numbers.isEmpty) {
-      throw ArgumentError("List tidak boleh kosong");
-    }
-    double sum = numbers.reduce((a, b) => a + b);
-    return sum / numbers.length;
-  }
-
-  // 7. Median
-  static double median(List<double> numbers) {
-    if (numbers.isEmpty) {
-      throw ArgumentError("List tidak boleh kosong");
-    }
-
-    List<double> sorted = List.from(numbers)..sort();
-    int n = sorted.length;
-
-    if (n % 2 == 1) {
-      return sorted[n ~/ 2];
-    } else {
-      return (sorted[n ~/ 2 - 1] + sorted[n ~/ 2]) / 2;
-    }
+class Dog extends Animal {
+  @override
+  void speak() {
+    print("Woof!");
   }
 }
 
-// Contoh penggunaan
-void main() {
-  print("Faktorial 5: ${MathUtils.factorial(5)}");
-  print("Apakah 7 prima? ${MathUtils.isPrime(7)}");
-  print("Pembulatan 3.14159 ke 2 desimal: ${MathUtils.roundTo(3.14159, 2)}");
-  print("Random int (1-10): ${MathUtils.randomInt(1, 10)}");
-  print("Random double (0-1): ${MathUtils.randomDouble(0, 1)}");
+class Cat extends Animal {
+  @override
+  void speak() {
+    print("Meow!");
+  }
+}
 
-  List<double> data = [1, 2, 3, 4, 5];
-  print("Mean: ${MathUtils.mean(data)}");
-  print("Median: ${MathUtils.median(data)}");
+void main() {
+  // ❌ Animal animal = Animal(); // tidak perlu & bisa error konsep base
+
+  Animal dog = Dog();
+  dog.speak(); // Woof!
+
+  Animal cat = Cat();
+  cat.speak(); // Meow!
 }</code></pre>
             </div>
-            <button onclick="openModal('https://dartpad.dev/embed-dart.html?id=842c6ec4eba07a63577825fe690123dd&run=true')">Run Program</button>
+            <button onclick="openImageModal('https://raw.githubusercontent.com/AghistaBungaKirani/AghistaBungaKirani.github.io/main/ss3_kapan_menggunakan_bases_class.png')">CAPTURE</button> 
         </section>
 
         <section>
-            <h2>🎀 Pengantar Abstraksi</h2>
+            <h2>₊˚⊹♡ Kapan Menggunakan Base Class ♡⊹˚₊</h2>
             <ul>
                 <li><span class="highlight">💖Konsep</span>: Menyembunyikan detail implementasi, hanya menunjukkanfungsionalitas.</li>
                 <li><span class="highlight">💖Tujuan</span>: i. Fokus pada "apa" bukan "bagaimana"
@@ -1484,40 +1394,64 @@ void main() {
         &copy; 2026 Aghista Bunga Kirani &bull; Tugas 5
     </footer>
 
-    <div id="imageModal" class="modal">
+    <!-- MODAL UNTUK RUN PROGRAM -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <iframe id="dartFrame"></iframe>
+    </div>
+</div>
+
+<!-- MODAL UNTUK GAMBAR (CAPTURE) -->
+<div id="imageModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeImageModal()">&times;</span>
-        <iframe id="dartFrame"></iframe>
         <img id="captureImage" src="" style="width:100%; height:100%; object-fit:contain;">
     </div>
 </div>
 
     <script>
-        const sections = document.querySelectorAll("section");
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("show");
-                }
-            });
-        }, { threshold: 0.1 });
-        sections.forEach(sec => observer.observe(sec));
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("show");
+            }
+        });
+    }, { threshold: 0.1 });
+    sections.forEach(sec => observer.observe(sec));
 
-        function openImageModal(link) {
-    document.getElementById("imageModal").style.display = "block";
-    document.getElementById("captureImage").src = link;
-    document.body.style.overflow = "hidden";
-}
+    // ✅ RUN PROGRAM
+    function openModal(link) {
+        document.getElementById("modal").style.display = "block";
+        document.getElementById("dartFrame").src = link;
+        document.body.style.overflow = "hidden";
+    }
 
-        function closeImageModal() {
-    document.getElementById("imageModal").style.display = "none";
-    document.getElementById("captureImage").src = "";
-    document.body.style.overflow = "auto";
-}
+    function closeModal() {
+        document.getElementById("modal").style.display = "none";
+        document.getElementById("dartFrame").src = "";
+        document.body.style.overflow = "auto";
+    }
 
-        window.onclick = function (e) {
-            if (e.target == document.getElementById("modal")) closeModal();
-        }
+    // ✅ CAPTURE GAMBAR
+    function openImageModal(link) {
+        document.getElementById("imageModal").style.display = "block";
+        document.getElementById("captureImage").src = link;
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeImageModal() {
+        document.getElementById("imageModal").style.display = "none";
+        document.getElementById("captureImage").src = "";
+        document.body.style.overflow = "auto";
+    }
+
+    // ✅ KLIK LUAR MODAL
+    window.onclick = function (e) {
+        if (e.target == document.getElementById("modal")) closeModal();
+        if (e.target == document.getElementById("imageModal")) closeImageModal();
+    }
     </script>
 </body>
 
