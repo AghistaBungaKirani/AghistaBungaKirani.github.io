@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title> Extension Methods</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e3a8a, #2563eb);
+      color: white;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      color: #93c5fd;
+    }
+
+    header p {
+      margin: 6px 0;
+      font-size: 1.1em;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    .card h2 {
+      color: #bfdbfe;
+      margin-bottom: 15px;
+    }
+
+    pre {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.9em;
+      font-family: 'Courier New', monospace;
+      margin: 15px 0;
+      border: 1px solid #334155;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    code {
+      font-family: 'Courier New', monospace;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .btn-preview {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: 500;
+      transition: background 0.3s;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      margin-top: 5px;
+    }
+
+    .btn-preview:hover {
+      background: #2563eb;
+      transform: translateY(-1px);
+    }
+
+    .btn-preview:active {
+      transform: translateY(0);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #c7d2fe;
+      font-size: 0.9em;
+    }
+
+    /* Modal (popup) */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.85);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 1000px;
+      height: 85%;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      color: #1e293b;
+    }
+
+    .modal-header h3 {
+      margin: 0;
+      font-size: 1.3em;
+    }
+
+    .close {
+      font-size: 32px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #64748b;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .close:hover {
+      color: #0f172a;
+    }
+
+    .modal-body {
+      flex: 1;
+      min-height: 0;
+    }
+
+    .modal-body iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 12px;
+      background: #f8fafc;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Extension Methods</h1>
+  <p>Nama: Aghista Bunga Kirani</p>
+  <p>NIM: 251410027</p>
+  <p>Kelas: SI2A</p>
+</header>
+
+<div class="container">
+
+  
+  <!-- Program 1 -->
+  <div class="card">
+    <h2>₊˚⊹♡ Review Sesi 8 – Builder Pattern ♡⊹˚₊</h2>
+    <p> Slide ini menjelaskan tentang Builder Pattern, yaitu pola pemrograman yang digunakan untuk membuat objek yang memiliki banyak pengaturan atau data agar penulisannya lebih rapi dan mudah dibaca. 
+        Builder Pattern biasanya dipakai pada objek yang kompleks supaya tidak perlu membuat constructor yang terlalu panjang. </p>
+    <ul>
+      <li> Builder Pattern untuk objek kompleks </code></li>
+      <li> Method chaining untuk fluent API </code></li>
+      <li> Contoh: Pizza.builder().size('large').addTopping('cheese').build() </code></li>
+    </ul>
+    <p><strong> Contoh cepat: </strong> </p>
+   <Pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+class ConfigBuilder {
+  ConfigBuilder host(String h) { return this; }
+  ConfigBuilder port(int p) { return this; }
+  Config build() { return Config(); }
+}</code></Pre>
+  </div>
+
+  <!-- Program 2 -->
+  <div class="card">
+    <h2>₊˚⊹♡ Pengantar Extension Methods ♡⊹˚₊</h2>
+    <p><strong>Apa itu? </strong> Extension Methods adalah fitur di Dart yang digunakan untuk menambahkan fungsi atau metode baru pada tipe data yang sudah ada, seperti String, int, atau List. </p>
+    <p><strong>Tanpa modifikasi kode asli </strong> Kita tidak perlu mengubah source code bawaan dari class tersebut. Jadi, class asli tetap aman dan tidak diubah. </p>
+    <p><strong>Tersedia sejak Dart 2.7 </strong> Fitur ini mulai diperkenalkan pada versi Dart 2.7 untuk mempermudah pengembangan program.</p>
+    <p><strong>Analogi </strong> Extension Methods seperti memberi kemampuan tambahan pada sebuah benda tanpa mengubah bentuk aslinya. Contohnya seperti menambahkan aksesoris pada HP agar punya fungsi baru, tetapi HP aslinya tetap sama.</p>
+  </div>
+
+  <!-- Program 3 -->
+  <div class="card">
+    <h2>₊˚⊹♡ Masalah Tanpa Extension Methods ♡⊹˚₊</h2>
+    <p>Slide ini menjelaskan bagaimana programmer biasanya menambahkan fungsi pada String sebelum adanya Extension Methods di Dart. Program membuat class bantuan bernama StringUtils yang berisi method capitalize() dan isEmail().</p>
+    <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+// Utility class yang kurang natural
+class StringUtils {
+  static String capitalize(String text) {
+    if (text.isEmpty) return text;
+    return text[0].toUpperCase() + text.substring(1);
+  }
+
+  static bool isEmail(String text) {
+    return text.contains('@');
+  }
+}
+
+void main() {
+  // Penggunaan kurang natural
+  var name = 'tata';
+
+  var capitalized = StringUtils.capitalize(name); // 'Tata'
+  var isEmail = StringUtils.isEmail('test@mail.com');
+
+  // Cetak variabel name, capitalized, dan isEmail
+  print('Original name: $name');
+  print('Capitalized name: $capitalized');
+  print('Is "test@mail.com" an email? $isEmail');
+}</code></pre>
+<button class="btn-preview" data-src="https://dartpad.dev/embed-dart.html?id=723cb23dba5d964e9189492d6a3b1fa8&run=true">Lihat Program</button>
+  </div>
+
+  <!-- Program 4 -->
+  <div class="card">
+    <h2>₊˚⊹♡ Solusi dengan Extension Methods ♡⊹˚₊ </h2>
+    <p>Slide ini menjelaskan tentang Extension Methods pada bahasa pemrograman Dart.
+        Extension Method digunakan untuk menambahkan fungsi baru ke tipe data yang sudah ada, seperti String, tanpa harus mengubah class aslinya.
+        Pada kode di slide, dibuat extension bernama StringExtensions untuk tipe data String.</p>
+    <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+// Extension method untuk String
+extension StringExtensions on String {
+  String capitalize() {
+    if (isEmpty) return this;
+    return this[0].toUpperCase() + substring(1);
+  }
+
+  bool get isEmail => contains('@');
+
+  String reverse() {
+    return split('').reversed.join();
+  }
+}
+
+void main() {
+  // Penggunaan lebih natural
+  var name = 'tata';
+  var capitalized = name.capitalize(); // 'Tata'
+  var isEmail = 'test@mail.com'.isEmail; // true
+  var reversed = 'hello'.reverse(); // 'olleh'
+
+  // Cetak variabel
+  print('Original name: $name');
+  print('Capitalized name: $capitalized');
+  print('Is "test@mail.com" an email? $isEmail');
+  print('Reversed "hello": $reversed');
+}</code></pre>
+    <button class="btn-preview" data-src="https://dartpad.dev/?embed=true&id=c81b3142ea68f3765e122dc8cb7b7c97&run=true">Lihat Program</button>
+  </div>
+
+   <!-- Program 5 -->
+  <div class="card">
+    <h2>₊˚⊹♡ Sintaks Extension Methods ♡⊹˚₊</h2>
+    <p> Slide ini menjelaskan tentang sintaks dasar Extension Methods di Dart.
+  Extension Method digunakan untuk menambahkan fitur baru pada class atau tipe data yang sudah ada tanpa mengubah source code aslinya. </p>
+    <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+// Sintaks dasar Extension Method
+extension DateTimeExtensions on DateTime {
+
+  // Method
+  String toFormattedString() {
+    return '$day/$month/$year';
+  }
+
+  // Getter
+  bool get isToday {
+    var now = DateTime.now();
+
+    return year == now.year &&
+        month == now.month &&
+        day == now.day;
+  }
+
+  // Operator
+  DateTime operator +(Duration duration) {
+    return add(duration);
+  }
+}
+
+void main() {
+
+  // Membuat object DateTime
+  var now = DateTime.now();
+
+  // Menggunakan method
+  print('Formatted Date: ${now.toFormattedString()}');
+
+  // Menggunakan getter
+  print('Is today? ${now.isToday}');
+
+  // Menggunakan operator
+  var nextWeek = now + Duration(days: 7);
+
+  print('7 days later: ${nextWeek.toFormattedString()}');
+}</code></pre>
+    <button class="btn-preview" data-src="https://dartpad.dev/embed-dart.html?id=ff5a90561feb89e0b952cd20803b79fa&run=true">Lihat Program</button>
+  </div>
+
+  <!-- Program 6 -->
+  <div class="card">
+    <h2> ₊˚⊹♡ Tipe yang Bisa Di-extend ♡⊹˚₊ </h2>
+    <p>Slide ini menjelaskan bahwa Extension Methods di Dart dapat digunakan pada berbagai jenis tipe data. Dengan extension, programmer bisa menambahkan fungsi baru tanpa mengubah class aslinya. </p>
+    <p> Beberapa tipe yang dapat di-extend yaitu:</p>
+    <ul>
+        <li><span class="highlight"> Built-in types </span>: Tipe bawaan Dart seperti String, int, double, List, dan Map dapat ditambahkan method atau getter baru agar lebih mudah digunakan. </li>
+        <li><span class="highlight"> Custom classes </span>: Class buatan sendiri juga bisa menggunakan extension sehingga programmer dapat menambah fitur tambahan tanpa mengedit class utama. </li>
+        <li><span class="highlight"> Generic types </span>: Tipe generic seperti List<T> dan Map<K,V> dapat di-extend agar bisa dipakai pada banyak tipe data secara fleksibel. </li>
+        <li><span class="highlight"> Nullable types </span>: Tipe nullable seperti String? atau int? juga dapat diberi extension untuk menangani data yang mungkin bernilai null.</li>
+    </ul>
+    <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+// Extension untuk List<int>
+extension IntListExtensions on List<int> {
+
+  int get sum => fold(0, (total, item) => total + item);
+
+  double get average => isEmpty ? 0 : sum / length;
+}
+
+void main() {
+
+  var numbers = [1, 2, 3, 4, 5];
+
+  print(numbers.sum);      // 15
+  print(numbers.average);  // 3.0
+
+}</code></pre>
+    <button class="btn-preview" data-src="https://dartpad.dev/embed-dart.html?id=7217eea8fe4c252652caea1b8157ce01&run=true">Lihat Program</button>
+  </div>
+
+  <!-- Program 7 -->
+  <div class="card">
+    <h2>₊˚⊹♡ Extension untuk Null Safety ♡⊹˚₊</h2>
+    <p>Slide ini menjelaskan penggunaan Extension Methods pada tipe data nullable (String?) untuk membantu menangani nilai null dengan lebih aman dan mudah.
+      Dalam Dart, null safety digunakan agar program terhindar dari error ketika variabel belum memiliki nilai. Dengan extension method, programmer dapat menambahkan fungsi tambahan pada nullable string sehingga pengecekan null menjadi lebih praktis.</p>
+    <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+extension NullableStringExtensions on String? {
+
+  // Safe access untuk nullable string
+  String orEmpty() => this ?? '';
+
+  bool get isNullOrEmpty => this == null || this!.isEmpty;
+
+  bool get isNotNullOrEmpty => !isNullOrEmpty;
+
+  String withDefault(String defaultValue) =>
+      this ?? defaultValue;
+}
+
+void main() {
+
+  // Penggunaan
+  String? name;
+
+  print(name.orEmpty());              // ''
+  print(name.isNullOrEmpty);          // true
+  print(name.isNotNullOrEmpty);       // false
+  print(name.withDefault('Guest'));   // 'Guest'
+
+}</code></pre>
+    <button class="btn-preview" data-src="https://dartpad.dev/embed-dart.html?id=7be6069a9b1839ab244f79a5ee0b7436&run=true">Lihat Program</button>
+  </div>
+  
+  <!-- Program 9 -->
+  <div class="card">
+    <h2>₊˚⊹♡ Praktik 1 – Utilities untuk Dart Types ♡⊹˚₊</h2>
+    <p>Slide ini menjelaskan contoh penggunaan Extension Methods pada tipe data num untuk menambahkan fungsi utilitas yang sering digunakan.
+        Dengan extension method, tipe data angka seperti int dan double dapat memiliki method tambahan sehingga kode menjadi lebih praktis dan mudah dibaca.<p>
+    <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+extension NumberExtensions on num {
+
+  // Format ke Rupiah
+  String toRupiah() {
+    return 'Rp${toStringAsFixed(0).replaceAllMapped(
+      RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+      (match) => '${match[1]}.',
+    )}';
+  }
+
+  // Cek jika dalam range
+  bool isBetween(num min, num max) {
+    return this >= min && this <= max;
+  }
+
+  // Pangkat
+  num power(int exponent) {
+    var result = this;
+
+    for (var i = 1; i < exponent; i++) {
+      result *= this;
+    }
+
+    return result;
+  }
+}
+
+void main() {
+
+  // Penggunaan
+  var price = 1500000;
+
+  print(price.toRupiah());   // Rp1.500.000
+  print(5.isBetween(1, 10)); // true
+  print(2.power(3));         // 8
+
+}</code></pre>
+    <button class="btn-preview" data-src="https://dartpad.dev/embed-dart.html?id=d8b4743805e7d20aacc7ea99344d4e83&run=true">Lihat Program</button>
+  </div>
+
+  <!-- Program 10 -->
+  <div class="card">
+    <h2>₊˚⊹♡ Generic Extensions ♡⊹˚₊</h2>
+    <p>Slide ini menjelaskan tentang Generic Extensions pada bahasa pemrograman Dart.
+        Extension digunakan untuk menambahkan fungsi baru ke tipe data yang sudah ada tanpa mengubah class aslinya.</p>
+    <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+// Extension untuk List<T> generic
+extension ListExtensions<T> on List<T> {
+
+  // Mengambil data dengan aman
+  T? getOrNull(int index) {
+    if (index < 0 || index >= length) return null;
+    return this[index];
+  }
+
+  // Membagi list menjadi beberapa bagian
+  List<List<T>> chunk(int size) {
+    var chunks = <List<T>>[];
+
+    for (var i = 0; i < length; i += size) {
+      chunks.add(
+        sublist(i, i + size > length ? length : i + size),
+      );
+    }
+
+    return chunks;
+  }
+
+  // Menghapus data duplikat
+  List<T> distinct() {
+    var result = <T>[];
+
+    for (var item in this) {
+      if (!result.contains(item)) {
+        result.add(item);
+      }
+    }
+
+    return result;
+  }
+}
+
+void main() {
+
+  // Contoh penggunaan chunk
+  var numbers = [1, 2, 3, 4, 5, 6, 7];
+  print(numbers.chunk(3));
+
+  // Contoh penggunaan distinct
+  print([1, 2, 2, 3, 3, 3].distinct());
+}</code></pre>
+    <button class="btn-preview" data-src="https://dartpad.dev/embed-dart.html?id=61a0f37d0f4a6521b589e9abc50870ad&run=true">Lihat Program</button>
+  </div>
+
+<!-- Program 11 -->
+  <div class="card">
+    <h2>₊˚⊹♡ Unnamed Extensions ♡⊹˚₊</h2>
+    <p>extension on DateTime digunakan untuk menambahkan fungsi baru pada DateTime tanpa memberi nama extension. </p>
+    <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+// File: date_utils.dart
+
+extension on DateTime {
+
+  String get toYYYYMMDD {
+    return '$year-${month.toString().padLeft(2, '0')}-${day.toString().padLeft(2, '0')}';
+  }
+
+  DateTime get startOfDay {
+    return DateTime(year, month, day);
+  }
+}
+
+void main() {
+
+  // Hanya bisa diakses di file ini
+  var today = DateTime.now();
+
+  print(today.toYYYYMMDD); // '2026-05-21'
+  print(today.startOfDay); // 2026-05-21 00:00:00.000
+}</code></pre>
+    <button class="btn-preview" data-src="https://dartpad.dev/embed-dart.html?id=340b756a7d7e6884cc6e749e357a2c37&run=true">Lihat Program</button>
+  </div>
+
+  <!-- Program 12 -->
+  <div class="card">
+    <h2>₊˚⊹♡ Konflik Nama Extension ♡⊹˚₊</h2>
+    <p>Slide ini menjelaskan tentang konflik nama extension pada Dart.
+        Konflik terjadi ketika ada dua extension berbeda yang memiliki nama method yang sama, misalnya capitalize().</p>
+        <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+// Slide 11: Konflik Nama Extension
+
+extension StringCaseExtensions on String {
+
+  String capitalize() {
+    return '${this[0].toUpperCase()}${substring(1)}';
+  }
+}
+
+extension TextUtilsExtensions on String {
+
+  String capitalizeUpper() {
+    return toUpperCase();
+  }
+}
+
+void main() {
+
+  var text = 'hello';
+
+  // Menggunakan extension pertama
+  print(text.capitalize());
+
+  // Menggunakan extension kedua
+  print(text.capitalizeUpper());
+}</code></pre>
+     <button class="btn-preview" data-src="https://dartpad.dev/embed-dart.html?id=edcdb1dd95df09eda2d83bd22631b561&run=true">Lihat Program</button>
+  </div>
+
+  <!-- Program 13 -->
+  <div class="card">
+    <h2>₊˚⊹♡ Extension untuk Custom Classes ♡⊹˚₊</h2>
+    <p>Slide ini menjelaskan tentang Extension untuk Custom Classes pada Dart. Extension digunakan untuk menambahkan method atau property baru pada class buatan sendiri tanpa mengubah class aslinya.</p>
+        <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+class Product {
+  final String name;
+  final double price;
+
+  Product(this.name, this.price);
+}
+
+// Extension untuk formatting double ke Rupiah
+extension DoubleRupiahFormatter on double {
+
+  String toRupiah() {
+
+    // Convert value to int
+    final intValue = toInt();
+
+    // Convert to string
+    String numberString = intValue.toString();
+
+    // Add thousands separator
+    String formattedString = '';
+    int counter = 0;
+
+    for (int i = numberString.length - 1; i >= 0; i--) {
+      formattedString = numberString[i] + formattedString;
+      counter++;
+
+      if (counter % 3 == 0 && i != 0) {
+        formattedString = '.' + formattedString;
+      }
+    }
+
+    return 'Rp$formattedString';
+  }
+}
+
+// Extension untuk Product
+extension ProductExtensions on Product {
+
+  // Method untuk diskon
+  Product withDiscount(double percentage) {
+    var discountedPrice = price * (1 - percentage / 100);
+    return Product(name, discountedPrice);
+  }
+
+  // Format untuk display
+  String get displayInfo => '$name - ${price.toRupiah()}';
+
+  // Cek jika mahal
+  bool get isExpensive => price > 100000;
+}
+
+void main() {
+
+  // Penggunaan
+  var laptop = Product('Laptop', 15000000);
+
+  var discounted = laptop.withDiscount(10);
+
+  print(discounted.displayInfo);
+  print(laptop.isExpensive);
+
+  var keyboard = Product('Keyboard', 75000);
+
+  print(keyboard.displayInfo);
+  print(keyboard.isExpensive);
+}</code></pre>
+     <button class="btn-preview" data-src="https://dartpad.dev/embed-dart.html?id=7f2436aa1e821852acc2a701c4c9014a&run=true">Lihat Program</button>
+  </div>
+
+  <!-- Program 14 -->
+  <div class="card">
+    <h2>₊˚⊹♡ Praktik 2 – Validator Extensions ♡⊹˚₊</h2>
+    <p>Slide ini membahas tentang Validator Extensions pada bahasa pemrograman Dart. Extension digunakan untuk menambahkan fungsi baru pada tipe data yang sudah ada seperti String dan int tanpa mengubah class aslinya.</p>
+        <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+// Validator extensions untuk berbagai tipe
+extension StringValidators on String {
+
+  // Validasi email
+  bool get isEmail {
+    return RegExp(r'^[\w\.-]+@[\w\.-]+\.\w{2,4}$')
+        .hasMatch(this);
+  }
+
+  // Validasi nomor HP
+  bool get isPhoneNumber {
+    return RegExp(r'^[0-9]{10,13}$')
+        .hasMatch(this);
+  }
+
+  // Validasi password kuat
+  bool get isStrongPassword {
+    return length >= 8 &&
+        contains(RegExp(r'[A-Z]')) &&
+        contains(RegExp(r'[a-z]')) &&
+        contains(RegExp(r'[0-9]'));
+  }
+
+  // Validasi URL
+  bool get isUrl {
+    try {
+      Uri.parse(this);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+}
+
+// Extension untuk integer
+extension IntValidators on int {
+
+  // Cek usia dewasa
+  bool get isAdult => this >= 18;
+
+  // Cek bilangan positif
+  bool get isPositive => this > 0;
+
+  // Cek bilangan genap
+  bool get isEven => this % 2 == 0;
+
+  // Cek bilangan ganjil
+  bool get isOdd => this % 2 != 0;
+}
+
+void main() {
+
+  // Penggunaan
+  var email = 'test@example.com';
+  var age = 25;
+  var password = 'Pass1234';
+
+  print(email.isEmail);          // true
+  print(age.isAdult);            // true
+  print(password.isStrongPassword); // true
+  print(10.isEven);              // true
+}</code></pre>
+     <button class="btn-preview" data-src="https://dartpad.dev/embed-dart.html?id=538d2b1638e3b605a810f793184184a6&run=true">Lihat Program</button>
+  </div>
+
+  <!-- Program 15 -->
+  <div class="card">
+    <h2>₊˚⊹♡ Ringkasan & Best Practices ♡⊹˚₊</h2>
+    <p> Ringkasan: </p>
+    <ul>
+       <li><span class="highlight"> Extension methods</span>: Extension methods digunakan untuk menambahkan fungsi baru pada tipe data yang sudah ada seperti String, int, atau List tanpa mengubah class aslinya. Hal ini membuat kode lebih praktis dan mudah digunakan.</li>
+       <li><span class="highlight"> Sintaks </span>: Sintaks dasar extension pada Dart menggunakan format extension NamaExtension on TipeData. Sintaks ini menunjukkan bahwa extension dibuat untuk tipe data tertentu.</li>
+       <li><span class="highlight"> Support </span>: Extension mendukung penambahan berbagai fitur seperti method, getter, setter, dan operator sehingga tipe data dapat memiliki fungsi tambahan sesuai kebutuhan program.</li>
+       <li><span class="highlight"> Generic extensions </span>: Generic extension memungkinkan extension digunakan pada berbagai tipe data generic, misalnya List<T>. Dengan begitu extension menjadi lebih fleksibel dan dapat dipakai untuk banyak jenis data.</li>
+    </ul>
+    <p>Best Practices: </p>
+    <ul>
+       <li><span class="highlight"> Nama jelas</span>: Gunakan nama extension yang mudah dipahami agar fungsi extension langsung terlihat kegunaannya. Dengan nama yang jelas, kode menjadi lebih mudah dibaca dan dipelajari oleh programmer lain. </li>
+       <li><span class="highlight"> Group by type </span>: Pisahkan extension berdasarkan tipe data utama, misalnya extension untuk String dipisah dengan extension untuk int. Tujuannya agar struktur file lebih rapi dan mudah dikelola.</li>
+       <li><span class="highlight"> Avoid overuse </span>: Jangan semua fungsi dijadikan extension. Gunakan extension hanya jika benar-benar membantu menyederhanakan kode dan meningkatkan keterbacaan program.</li>
+       <li><span class="highlight"> Null safety </span>: Extension harus memperhatikan nilai null agar program tidak mudah error. Penanganan nullable type membuat aplikasi lebih aman dan stabil saat dijalankan.</li>
+       <li><span class="highlight"> Dokumentasi </span>: Tambahkan komentar atau dokumentasi pada extension, terutama jika digunakan dalam project besar atau oleh banyak programmer. Dokumentasi membantu orang lain memahami fungsi extension dengan lebih cepat.</li>
+    </ul>
+  </div>
+
+<!-- Modal Popup untuk iframe -->
+<div id="iframeModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="modalTitle">Program</h3>
+      <span class="close" id="closeModal">&times;</span>
+    </div>
+    <div class="modal-body">
+      <iframe id="modalIframe" src="" title="Program Preview"></iframe>
+    </div>
+  </div>
+</div>
+
+<footer>
+  © 2026 Aghista Bunga Kirani • GitHub Pages
+</footer>
+
+<script>
+  (function() {
+    const modal = document.getElementById('iframeModal');
+    const modalIframe = document.getElementById('modalIframe');
+    const closeBtn = document.getElementById('closeModal');
+    const modalTitle = document.getElementById('modalTitle');
+
+    const previewButtons = document.querySelectorAll('.btn-preview');
+
+    function openModal(src, programName) {
+      modalIframe.src = src;
+      modalTitle.textContent = programName;
+      modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      modal.style.display = 'none';
+      modalIframe.src = '';
+    }
+
+    previewButtons.forEach((btn) => {
+      btn.addEventListener('click', function() {
+        const src = this.dataset.src;
+        const programName = this.closest('.card').querySelector('h2').textContent;
+        openModal(src, programName);
+      });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', function(event) {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape' && modal.style.display === 'flex') {
+        closeModal();
+      }
+    });
+  })();
+</script>
+</body>
+</html>
