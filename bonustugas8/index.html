@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title> Extension Methods</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e3a8a, #2563eb);
+      color: white;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      color: #93c5fd;
+    }
+
+    header p {
+      margin: 6px 0;
+      font-size: 1.1em;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    .card h2 {
+      color: #bfdbfe;
+      margin-bottom: 15px;
+    }
+
+    pre {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.9em;
+      font-family: 'Courier New', monospace;
+      margin: 15px 0;
+      border: 1px solid #334155;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    code {
+      font-family: 'Courier New', monospace;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .btn-preview {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: 500;
+      transition: background 0.3s;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      margin-top: 5px;
+    }
+
+    .btn-preview:hover {
+      background: #2563eb;
+      transform: translateY(-1px);
+    }
+
+    .btn-preview:active {
+      transform: translateY(0);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #c7d2fe;
+      font-size: 0.9em;
+    }
+
+    /* Modal (popup) */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.85);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 1000px;
+      height: 85%;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      color: #1e293b;
+    }
+
+    .modal-header h3 {
+      margin: 0;
+      font-size: 1.3em;
+    }
+
+    .close {
+      font-size: 32px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #64748b;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .close:hover {
+      color: #0f172a;
+    }
+
+    .modal-body {
+      flex: 1;
+      min-height: 0;
+    }
+
+    .modal-body iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 12px;
+      background: #f8fafc;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Extension Methods</h1>
+  <h1> Bonus </h1>
+  <p>Nama: Aghista Bunga Kirani</p>
+  <p>NIM: 251410027</p>
+  <p>Kelas: SI2A</p>
+</header>
+
+<div class="container">
+
+
+  <div class="card">
+    <h2>₊˚⊹♡ Bonus 1 ♡⊹˚₊</h2>
+    <p>Pada kode tersebut akan terjadi konflik antar extension karena ada dua extension pada tipe String yang memiliki nama method sama yaitu toInt(). Dart menjadi bingung saat angka.toInt() dipanggil karena tidak tahu harus menggunakan method dari StringNumber atau StringDouble.
+         Walaupun return type berbeda (int dan double), Dart tetap menganggapnya konflik karena return type tidak digunakan untuk membedakan method. Akibatnya program menghasilkan error seperti “The method 'toInt' is defined in multiple extensions”. 
+        Agar tidak konflik, nama method harus dibedakan atau extension dipanggil secara langsung menggunakan nama extension.</p>
+    <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+extension StringNumber on String {
+  int toIntValue() {
+    return int.parse(this);
+  }
+}
+
+extension StringDouble on String {
+  double toDoubleValue() {
+    return double.parse(this);
+  }
+}
+
+void main() {
+  String angka = '123';
+
+  print(angka.toIntValue());
+  print(angka.toDoubleValue());
+}</code></pre>
+<button class="btn-preview" data-src="https://dartpad.dev/embed-dart.html?id=89a4e0407f47648981aae059a76c572f&run=true">Lihat Program</button>
+  </div>
+
+  <div class="card">
+    <h2>₊˚⊹♡ Bonus 2 ♡⊹˚₊ </h2>
+    <p>Kode tersebut gagal dikompilasi karena extension CounterStats mencoba mengakses member private _value dari class Counter. Dalam Dart, member yang diawali tanda _ bersifat private dan hanya bisa diakses di dalam library/class tertentu. 
+        Akibatnya baris return _value; menimbulkan error karena extension tidak memiliki akses langsung ke member private tersebut. 
+        Agar tetap bisa mengambil nilai _value tanpa mengubahnya menjadi public, solusi yang benar adalah membuat getter public di dalam class Counter, lalu extension memanggil getter tersebut.</p>
+    <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+class Counter {
+  int _value = 0; // private
+
+  void increment() {
+    _value++;
+  }
+
+  // getter public
+  int get value => _value;
+}
+
+extension CounterStats on Counter {
+  int getValue() {
+    return value;
+  }
+}
+
+void main() {
+  var c = Counter();
+
+  c.increment();
+
+  print(c.getValue());
+}</code></pre>
+    <button class="btn-preview" data-src="https://dartpad.dev/embed-dart.html?id=e8f7733452e10389438e2acc11fb2838&run=true">Lihat Program</button>
+  </div>
+
+
+<!-- Modal Popup untuk iframe -->
+<div id="iframeModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="modalTitle">Program</h3>
+      <span class="close" id="closeModal">&times;</span>
+    </div>
+    <div class="modal-body">
+      <iframe id="modalIframe" src="" title="Program Preview"></iframe>
+    </div>
+  </div>
+</div>
+
+<footer>
+  © 2026 Aghista Bunga Kirani • Bonus Extension Methods
+</footer>
+
+<script>
+  (function() {
+    const modal = document.getElementById('iframeModal');
+    const modalIframe = document.getElementById('modalIframe');
+    const closeBtn = document.getElementById('closeModal');
+    const modalTitle = document.getElementById('modalTitle');
+
+    const previewButtons = document.querySelectorAll('.btn-preview');
+
+    function openModal(src, programName) {
+      modalIframe.src = src;
+      modalTitle.textContent = programName;
+      modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      modal.style.display = 'none';
+      modalIframe.src = '';
+    }
+
+    previewButtons.forEach((btn) => {
+      btn.addEventListener('click', function() {
+        const src = this.dataset.src;
+        const programName = this.closest('.card').querySelector('h2').textContent;
+        openModal(src, programName);
+      });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', function(event) {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape' && modal.style.display === 'flex') {
+        closeModal();
+      }
+    });
+  })();
+</script>
+</body>
+</html>
