@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title> Extension Methods</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e3a8a, #2563eb);
+      color: white;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      color: #93c5fd;
+    }
+
+    header p {
+      margin: 6px 0;
+      font-size: 1.1em;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    .card h2 {
+      color: #bfdbfe;
+      margin-bottom: 15px;
+    }
+
+    pre {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.9em;
+      font-family: 'Courier New', monospace;
+      margin: 15px 0;
+      border: 1px solid #334155;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    code {
+      font-family: 'Courier New', monospace;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .btn-preview {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: 500;
+      transition: background 0.3s;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      margin-top: 5px;
+    }
+
+    .btn-preview:hover {
+      background: #2563eb;
+      transform: translateY(-1px);
+    }
+
+    .btn-preview:active {
+      transform: translateY(0);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #c7d2fe;
+      font-size: 0.9em;
+    }
+
+    /* Modal (popup) */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.85);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 1000px;
+      height: 85%;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      color: #1e293b;
+    }
+
+    .modal-header h3 {
+      margin: 0;
+      font-size: 1.3em;
+    }
+
+    .close {
+      font-size: 32px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #64748b;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .close:hover {
+      color: #0f172a;
+    }
+
+    .modal-body {
+      flex: 1;
+      min-height: 0;
+    }
+
+    .modal-body iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 12px;
+      background: #f8fafc;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1> Redirecting Constructors </h1>
+  <p>Nama: Aghista Bunga Kirani</p>
+  <p>NIM: 251410027</p>
+  <p>Kelas: SI2A</p>
+</header>
+
+<div class="container">
+
+
+  <div class="card">
+    <h2>₊˚⊹♡ Main Constructor dengan Radius ♡⊹˚₊</h2>
+    <p> Main Constructor adalah constructor utama yang digunakan untuk membuat objek Circle dengan memasukkan nilai radius secara langsung. Nilai radius yang diberikan akan disimpan ke dalam atribut radius. </p>
+    <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+class Circle {
+  double radius;
+
+  Circle(this.radius);
+}
+
+void main() {
+  var circle = Circle(7);
+
+  print("Radius: ${circle.radius}");
+}</code></pre>
+<button class="btn-preview" data-src="https://dartpad.dev/embed-dart.html?id=ec058e8d753f646532a30f6625df17c5&run=true">Lihat Program</button>
+  </div>
+
+  <div class="card">
+    <h2>₊˚⊹♡ Redirecting Constructor dari Diameter ♡⊹˚₊ </h2>
+    <p> Redirecting Constructor adalah constructor yang mengarahkan pemanggilan ke constructor lain dalam kelas yang sama. </p>
+    <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+class Circle {
+  double radius;
+
+  Circle(this.radius);
+
+  Circle.fromDiameter(double diameter)
+      : this(diameter / 2);
+}
+
+void main() {
+  var circle = Circle.fromDiameter(14);
+
+  print("Radius: ${circle.radius}");
+}</code></pre>
+    <button class="btn-preview" data-src="https://dartpad.dev/embed-dart.html?id=d60e41081c1026b5b16d30a2ababca72&run=true">Lihat Program</button>
+  </div>
+
+  <div class="card">
+    <h2>₊˚⊹♡ Redirecting Constructor dari Keliling ♡⊹˚₊ </h2>
+    <p> Constructor fromCircumference() menerima nilai keliling lingkaran. </p>
+    <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+import 'dart:math';
+
+class Circle {
+  double radius;
+
+  Circle(this.radius);
+
+  Circle.fromCircumference(double circumference)
+      : this(circumference / (2 * pi));
+}
+
+void main() {
+  var circle = Circle.fromCircumference(43.98);
+
+  print("Radius: ${circle.radius.toStringAsFixed(2)}");
+}</code></pre>
+    <button class="btn-preview" data-src="https://dartpad.dev/embed-dart.html?id=bc7fd63c98346855ed6d585ebeca0327&run=true">Lihat Program</button>
+  </div>
+
+  <div class="card">
+    <h2>₊˚⊹♡ Redirecting Constructor dari Luas ♡⊹˚₊ </h2>
+    <p> Constructor fromArea() menerima nilai luas lingkaran. </p>
+    <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+import 'dart:math';
+
+class Circle {
+  double radius;
+
+  Circle(this.radius);
+
+  Circle.fromArea(double area)
+      : this(sqrt(area / pi));
+}
+
+void main() {
+  var circle = Circle.fromArea(153.94);
+
+  print("Radius: ${circle.radius.toStringAsFixed(2)}");
+}</code></pre>
+    <button class="btn-preview" data-src="https://dartpad.dev/embed-dart.html?id=adf387f31214283eb03e178b46df9101&run=true">Lihat Program</button>
+  </div>
+  
+  <div class="card">
+    <h2>₊˚⊹♡ Ringkasan ♡⊹˚₊ </h2>
+    <ul>
+        <li><span class="highlight"> Redirecting Constructor Menggunakan : this(...) </span>: Redirecting Constructor adalah constructor yang digunakan untuk memanggil constructor lain dalam class yang sama dengan menggunakan sintaks : this(...). </li>
+        <li><span class="highlight"> Memanggil Constructor Lain dalam Class yang Sama </span>: Fungsi utama Redirecting Constructor adalah untuk meneruskan proses pembuatan objek ke constructor lain sehingga semua inisialisasi dapat dilakukan melalui satu constructor utama. </li>
+        <li><span class="highlight"> Mengurangi Duplikasi Kode </span>: Penggunaan Redirecting Constructor dapat mengurangi duplikasi kode karena proses inisialisasi objek hanya ditulis satu kali pada constructor utama. Constructor lainnya cukup meneruskan parameter yang diperlukan. </li>
+        <li><span class="highlight"> Tidak Bisa Berisi Logika Kompleks </span>: Redirecting Constructor tidak dapat berisi logika pemrograman yang kompleks seperti percabangan (if), perulangan (for, while), atau perintah lainnya karena hanya berfungsi untuk mengarahkan pemanggilan ke constructor lain. </li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>₊˚⊹♡ Kesimpulan   ♡⊹˚₊ </h2>
+    <p> Redirecting Constructor merupakan fitur dalam Dart yang digunakan untuk memanggil constructor lain dalam class yang sama menggunakan sintaks : this(...). Fitur ini membantu membuat kode lebih ringkas, mengurangi pengulangan kode, dan memusatkan proses inisialisasi objek pada satu constructor utama. Namun, Redirecting Constructor memiliki keterbatasan karena tidak dapat digunakan untuk menuliskan logika program yang kompleks. </p>
+  </div>
+  
+
+
+<!-- Modal Popup untuk iframe -->
+<div id="iframeModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="modalTitle">Program</h3>
+      <span class="close" id="closeModal">&times;</span>
+    </div>
+    <div class="modal-body">
+      <iframe id="modalIframe" src="" title="Program Preview"></iframe>
+    </div>
+  </div>
+</div>
+
+<footer>
+  © 2026 Aghista Bunga Kirani • 
+</footer>
+
+<script>
+  (function() {
+    const modal = document.getElementById('iframeModal');
+    const modalIframe = document.getElementById('modalIframe');
+    const closeBtn = document.getElementById('closeModal');
+    const modalTitle = document.getElementById('modalTitle');
+
+    const previewButtons = document.querySelectorAll('.btn-preview');
+
+    function openModal(src, programName) {
+      modalIframe.src = src;
+      modalTitle.textContent = programName;
+      modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      modal.style.display = 'none';
+      modalIframe.src = '';
+    }
+
+    previewButtons.forEach((btn) => {
+      btn.addEventListener('click', function() {
+        const src = this.dataset.src;
+        const programName = this.closest('.card').querySelector('h2').textContent;
+        openModal(src, programName);
+      });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', function(event) {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape' && modal.style.display === 'flex') {
+        closeModal();
+      }
+    });
+  })();
+</script>
+</body>
+</html>
