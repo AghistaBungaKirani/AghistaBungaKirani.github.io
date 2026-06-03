@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title> Extension Methods</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e3a8a, #2563eb);
+      color: white;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      color: #93c5fd;
+    }
+
+    header p {
+      margin: 6px 0;
+      font-size: 1.1em;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 30px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    .card h2 {
+      color: #bfdbfe;
+      margin-bottom: 15px;
+    }
+
+    pre {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.9em;
+      font-family: 'Courier New', monospace;
+      margin: 15px 0;
+      border: 1px solid #334155;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    code {
+      font-family: 'Courier New', monospace;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .btn-preview {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: 500;
+      transition: background 0.3s;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      margin-top: 5px;
+    }
+
+    .btn-preview:hover {
+      background: #2563eb;
+      transform: translateY(-1px);
+    }
+
+    .btn-preview:active {
+      transform: translateY(0);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #c7d2fe;
+      font-size: 0.9em;
+    }
+
+    /* Modal (popup) */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.85);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      width: 90%;
+      max-width: 1000px;
+      height: 85%;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      color: #1e293b;
+    }
+
+    .modal-header h3 {
+      margin: 0;
+      font-size: 1.3em;
+    }
+
+    .close {
+      font-size: 32px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #64748b;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .close:hover {
+      color: #0f172a;
+    }
+
+    .modal-body {
+      flex: 1;
+      min-height: 0;
+    }
+
+    .modal-body iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 12px;
+      background: #f8fafc;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1> Factory Constructors </h1>
+  <p>Nama: Aghista Bunga Kirani</p>
+  <p>NIM: 251410027</p>
+  <p>Kelas: SI2A</p>
+</header>
+
+<div class="container">
+
+
+  <div class="card">
+    <h2>₊˚⊹♡ ConnectionFactory dengan pooling koneksi database ♡⊹˚₊</h2>
+    <p> ConnectionFactory adalah implementasi pola Factory Method yang digunakan untuk membuat dan mengelola koneksi database. Pada contoh ini diterapkan connection pooling, yaitu teknik menyimpan koneksi yang sudah digunakan ke dalam sebuah pool agar dapat digunakan kembali tanpa harus membuat koneksi baru setiap kali diperlukan. </p>
+    <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+class DatabaseConnection {
+  final int id;
+
+  DatabaseConnection(this.id);
+
+  void connect() {
+    print("Koneksi $id digunakan");
+  }
+}
+
+class ConnectionFactory {
+  static final List<DatabaseConnection> _pool = [];
+  static int _counter = 1;
+
+  static DatabaseConnection getConnection() {
+    // Jika ada koneksi di pool, gunakan kembali
+    if (_pool.isNotEmpty) {
+      print("Mengambil koneksi dari pool...");
+      return _pool.removeLast();
+    }
+
+    // Jika tidak ada, buat koneksi baru
+    print("Membuat koneksi baru...");
+    return DatabaseConnection(_counter++);
+  }
+
+  static void releaseConnection(DatabaseConnection connection) {
+    print("Mengembalikan koneksi ${connection.id} ke pool...");
+    _pool.add(connection);
+  }
+}
+
+void main() {
+  var conn1 = ConnectionFactory.getConnection();
+  conn1.connect();
+
+  ConnectionFactory.releaseConnection(conn1);
+
+  var conn2 = ConnectionFactory.getConnection();
+  conn2.connect();
+
+  print(
+      "Apakah ID koneksi sama? ${conn1.id == conn2.id}");
+}</code></pre>
+<button class="btn-preview" data-src="https://dartpad.dev/embed-dart.html?id=02779a894616aa469f452a1c5848ef87&run=true">Lihat Program</button>
+  </div>
+
+  <div class="card">
+    <h2>₊˚⊹♡ NotificationFactory yang memilih subclass berdasarkan platform ♡⊹˚₊ </h2>
+    <p> NotificationFactory adalah implementasi Factory Method Pattern yang digunakan untuk membuat objek notifikasi berdasarkan platform yang dipilih. Factory akan menentukan subclass yang sesuai, seperti AndroidNotification, IOSNotification, atau WebNotification, tanpa pengguna perlu membuat objek secara langsung. 
+        Pada program ini, pengguna hanya memberikan nama platform sebagai input. Selanjutnya, NotificationFactory akan memilih dan membuat objek notifikasi yang tepat. </p>
+    <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+// Abstract Class
+abstract class Notification {
+  void send(String message);
+}
+
+// Subclass Android
+class AndroidNotification implements Notification {
+  @override
+  void send(String message) {
+    print("Android Notification: $message");
+  }
+}
+
+// Subclass iOS
+class IOSNotification implements Notification {
+  @override
+  void send(String message) {
+    print("iOS Notification: $message");
+  }
+}
+
+// Subclass Web
+class WebNotification implements Notification {
+  @override
+  void send(String message) {
+    print("Web Notification: $message");
+  }
+}
+
+// Factory
+class NotificationFactory {
+  static Notification createNotification(String platform) {
+    switch (platform.toLowerCase()) {
+      case 'android':
+        return AndroidNotification();
+
+      case 'ios':
+        return IOSNotification();
+
+      case 'web':
+        return WebNotification();
+
+      default:
+        throw Exception("Platform tidak didukung");
+    }
+  }
+}
+
+void main() {
+  Notification android =
+      NotificationFactory.createNotification("android");
+
+  Notification ios =
+      NotificationFactory.createNotification("ios");
+
+  Notification web =
+      NotificationFactory.createNotification("web");
+
+  android.send("Pesan untuk Android");
+  ios.send("Pesan untuk iOS");
+  web.send("Pesan untuk Web");
+}</code></pre>
+    <button class="btn-preview" data-src="https://dartpad.dev/embed-dart.html?id=5df85be49663d9df9306507999f29364&run=true">Lihat Program</button>
+  </div>
+
+  <div class="card">
+    <h2>₊˚⊹♡ ShapeFactory dengan cache untuk shapes yang sama ♡⊹˚₊ </h2>
+    <p> ShapeFactory merupakan implementasi Factory Method Pattern yang digunakan untuk membuat objek bentuk (shape) seperti Circle dan Square. Factory akan memilih subclass yang sesuai berdasarkan jenis shape yang diminta oleh pengguna. 
+        Pada program ini diterapkan cache (Flyweight) untuk menyimpan objek shape yang sudah pernah dibuat. Jika pengguna meminta shape dengan jenis dan ukuran yang sama, factory tidak akan membuat objek baru, melainkan mengembalikan objek yang sudah tersimpan di dalam cache. Hal ini dapat menghemat penggunaan memori dan meningkatkan efisiensi program. </p>
+    <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+// Abstract Class
+abstract class Shape {
+  void draw();
+}
+
+// Subclass Circle
+class Circle implements Shape {
+  final double radius;
+
+  Circle(this.radius);
+
+  @override
+  void draw() {
+    print("Menggambar Circle dengan radius $radius");
+  }
+}
+
+// Subclass Square
+class Square implements Shape {
+  final double side;
+
+  Square(this.side);
+
+  @override
+  void draw() {
+    print("Menggambar Square dengan sisi $side");
+  }
+}
+
+// Factory dengan Cache
+class ShapeFactory {
+  static final Map<String, Shape> _cache = {};
+
+  static Shape createShape(String type, double size) {
+    // Validasi
+    if (size <= 0) {
+      throw Exception("Ukuran harus lebih dari 0");
+    }
+
+    String key = "$type-$size";
+
+    // Cek cache
+    if (_cache.containsKey(key)) {
+      print("Mengambil shape dari cache...");
+      return _cache[key]!;
+    }
+
+    Shape shape;
+
+    switch (type.toLowerCase()) {
+      case "circle":
+        shape = Circle(size);
+        break;
+
+      case "square":
+        shape = Square(size);
+        break;
+
+      default:
+        throw Exception("Shape tidak tersedia");
+    }
+
+    _cache[key] = shape;
+    print("Membuat shape baru...");
+    return shape;
+  }
+}
+
+void main() {
+  Shape shape1 = ShapeFactory.createShape("circle", 10);
+  Shape shape2 = ShapeFactory.createShape("circle", 10);
+  Shape shape3 = ShapeFactory.createShape("square", 5);
+
+  shape1.draw();
+  shape3.draw();
+
+  print(
+      "shape1 dan shape2 objek sama? ${identical(shape1, shape2)}");
+}</code></pre>
+    <button class="btn-preview" data-src="https://dartpad.dev/embed-dart.html?id=503f3e7bf32dd0a8e737385669184973&run=true">Lihat Program</button>
+  </div>
+
+  <div class="card">
+    <h2>₊˚⊹♡ Challenge: AnimalFactory ♡⊹˚₊ </h2>
+    <p> AnimalFactory adalah implementasi Factory Method Pattern yang digunakan untuk membuat berbagai jenis hewan berdasarkan input pengguna. 
+        Factory akan memilih subclass yang sesuai, seperti Cat atau Dog, sehingga pembuatan objek menjadi lebih terpusat dan mudah dikelola. </p>
+    <pre><code>//Nama: Aghista Bunga Kirani
+//Nim: 251410027
+//Kelas: SI2A
+
+// Abstract Class
+abstract class Animal {
+  String get name;
+  int get age;
+
+  void makeSound();
+}
+
+// Subclass Cat
+class Cat implements Animal {
+  @override
+  final String name;
+
+  @override
+  final int age;
+
+  Cat(this.name, this.age);
+
+  @override
+  void makeSound() {
+    print("$name si Kucing berkata: Meow!");
+  }
+}
+
+// Subclass Dog
+class Dog implements Animal {
+  @override
+  final String name;
+
+  @override
+  final int age;
+
+  Dog(this.name, this.age);
+
+  @override
+  void makeSound() {
+    print("$name si Anjing berkata: Woof!");
+  }
+}
+
+// Factory dengan Cache
+class AnimalFactory {
+  static final Map<String, Animal> _cache = {};
+
+  static Animal createAnimal(
+      String type,
+      String name,
+      int age,
+      ) {
+
+    // Validasi parameter
+    if (name.isEmpty) {
+      throw Exception("Nama tidak boleh kosong");
+    }
+
+    if (age < 0) {
+      throw Exception("Umur tidak boleh negatif");
+    }
+
+    String key = "$type-$name-$age";
+
+    // Cek cache
+    if (_cache.containsKey(key)) {
+      print("Mengambil hewan dari cache...");
+      return _cache[key]!;
+    }
+
+    Animal animal;
+
+    // Pemilihan subclass berdasarkan input
+    switch (type.toLowerCase()) {
+      case "cat":
+        animal = Cat(name, age);
+        break;
+
+      case "dog":
+        animal = Dog(name, age);
+        break;
+
+      default:
+        throw Exception("Jenis hewan tidak tersedia");
+    }
+
+    _cache[key] = animal;
+    print("Membuat hewan baru...");
+    return animal;
+  }
+}
+
+void main() {
+  Animal animal1 =
+      AnimalFactory.createAnimal("cat", "Luna", 2);
+
+  Animal animal2 =
+      AnimalFactory.createAnimal("cat", "Luna", 2);
+
+  Animal animal3 =
+      AnimalFactory.createAnimal("dog", "Max", 3);
+
+  animal1.makeSound();
+  animal3.makeSound();
+
+  print(
+      "animal1 dan animal2 objek sama? ${identical(animal1, animal2)}");
+}</code></pre>
+    <button class="btn-preview" data-src="https://dartpad.dev/embed-dart.html?id=6ecb94ef5466ca2fca138f026ece26f4&run=true">Lihat Program</button>
+  </div>
+
+  
+  <div class="card">
+    <h2>₊˚⊹♡ Ringkasan Materi Factory Constructor  ♡⊹˚₊ </h2>
+    <p> Factory Constructor adalah constructor khusus dalam Dart yang digunakan untuk mengontrol proses pembuatan objek. Berbeda dengan constructor biasa yang selalu membuat objek baru, factory constructor dapat mengembalikan objek yang sudah ada, melakukan validasi, atau menentukan subclass yang akan dibuat. </p>
+  </div>
+  
+
+
+<!-- Modal Popup untuk iframe -->
+<div id="iframeModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="modalTitle">Program</h3>
+      <span class="close" id="closeModal">&times;</span>
+    </div>
+    <div class="modal-body">
+      <iframe id="modalIframe" src="" title="Program Preview"></iframe>
+    </div>
+  </div>
+</div>
+
+<footer>
+  © 2026 Aghista Bunga Kirani • 
+</footer>
+
+<script>
+  (function() {
+    const modal = document.getElementById('iframeModal');
+    const modalIframe = document.getElementById('modalIframe');
+    const closeBtn = document.getElementById('closeModal');
+    const modalTitle = document.getElementById('modalTitle');
+
+    const previewButtons = document.querySelectorAll('.btn-preview');
+
+    function openModal(src, programName) {
+      modalIframe.src = src;
+      modalTitle.textContent = programName;
+      modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      modal.style.display = 'none';
+      modalIframe.src = '';
+    }
+
+    previewButtons.forEach((btn) => {
+      btn.addEventListener('click', function() {
+        const src = this.dataset.src;
+        const programName = this.closest('.card').querySelector('h2').textContent;
+        openModal(src, programName);
+      });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', function(event) {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape' && modal.style.display === 'flex') {
+        closeModal();
+      }
+    });
+  })();
+</script>
+</body>
+</html>
