@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Laporan OOP Dart (Struktur: Judul, Penjelasan, Code, Tombol)</title>
+<title>Laporan OOP Dart - Sistem Manajemen Perpustakaan</title>
 
 <style>
 /* ===== POPUP IMAGE ===== */
@@ -35,7 +35,8 @@
     font-weight: bold;
     cursor: pointer;
 }
-/* ===== UI PERTAHAN (SESUAI ASLI) ===== */
+
+/* ===== UI UTAMA ===== */
 body{
     margin:0;
     font-family: Arial, Helvetica, sans-serif;
@@ -73,19 +74,6 @@ h2{
     margin-top:40px;
 }
 
-/* iframe wrapper */
-.iframe-wrapper {
-    margin-top: 15px;
-}
-
-iframe{
-    width:100%;
-    height:400px;
-    border:1px solid #ff99cc;
-    border-radius:6px;
-}
-
-/* tombol popup */
 .btn-popup {
     background-color: #cc0066;
     color: white;
@@ -101,29 +89,16 @@ iframe{
     align-items: center;
     gap: 8px;
     margin: 10px 0 5px 0;
-    position: relative;
-    z-index: 10;
 }
+
 .btn-popup:hover {
     background-color: #a30552;
 }
-.btn-popup:active {
-    transform: scale(0.97);
-}
 
-/* kontainer per topik - mengikuti struktur baru: judul, penjelasan, code, tombol, iframe */
 .topik-section {
     margin-bottom: 40px;
     border-bottom: 1px dashed #ffb3d9;
     padding-bottom: 25px;
-}
-
-.topik-judul {
-    color: #cc0066;
-    font-size: 1.5rem;
-    margin: 0 0 10px 0;
-    border-left: 6px solid #ff99cc;
-    padding-left: 15px;
 }
 
 .topik-penjelasan {
@@ -134,9 +109,8 @@ iframe{
     line-height: 1.6;
 }
 
-/* area kode Dart (pratinjau) - tampil seperti code snippet */
 .code-block {
-    background-color: #2d0a1f;  /* gelap biar kontras */
+    background-color: #2d0a1f;
     color: #ffe6f2;
     font-family: 'Courier New', Courier, monospace;
     font-size: 0.9rem;
@@ -144,19 +118,14 @@ iframe{
     border-radius: 14px;
     border: 1px solid #ff99cc;
     overflow-x: auto;
-    white-space: pre-wrap;       /* wrap kode panjang */
+    white-space: pre-wrap;
     word-break: break-word;
     margin: 15px 0 10px 0;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     line-height: 1.5;
 }
 
-/* kondisi iframe tersembunyi */
-iframe.hidden-iframe {
-    display: none;
-}
-
-/* Style untuk Modal */
+/* Modal */
 .modal {
     display: none;
     position: fixed;
@@ -210,12 +179,73 @@ iframe.hidden-iframe {
     background: #a30552;
 }
 
-/* footer */
+/* Diagram container */
+.diagram-container {
+    background: #fafafa;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #ffb3d9;
+    text-align: center;
+    overflow-x: auto;
+}
+
+.diagram-container svg {
+    max-width: 100%;
+    height: auto;
+}
+
+.note {
+    background: #fff0f7;
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin: 10px 0;
+    font-size: 0.95rem;
+}
+
+.note ul {
+    margin: 5px 0;
+    padding-left: 20px;
+}
+
+.btn-download {
+    background: #cc0066;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background 0.2s;
+    font-weight: bold;
+}
+
+.btn-download:hover {
+    background: #a30552;
+}
+
 footer{
     text-align:center;
     padding:15px;
     background:#ffb3d9;
     margin-top:40px;
+    border-radius: 8px;
+}
+
+.card {
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 15px;
+    }
+    .diagram-container svg {
+        width: 100%;
+        height: auto;
+    }
 }
 </style>
 </head>
@@ -223,273 +253,535 @@ footer{
 
 <header>
     <h1>Sistem Manajemen Perpustakaan</h1>
-    <p> Nabilah Cahya Suci | 251410018 | SI2A</p>
+    <p>Nabilah Cahya Suci | 251410018 | SI2A</p>
     <p>Aghista Bunga Kirani | 251410027 | SI2A</p>
-    
 </header>
 
+<!-- ============================================ -->
+<!-- SECTION 1: MASALAH -->
+<!-- ============================================ -->
 <section class="container">
-  <div class="card">
-    <h2> 🔹 Masalahnya </h2>
-    <div class="topik-section">
- <div class="topik-penjelasan">
+    <div class="card">
+        <h2>🔹 Masalahnya</h2>
+        <div class="topik-section">
+            <div class="topik-penjelasan">
+                <p>Dalam sistem manajemen perpustakaan, sering ditemukan berbagai permasalahan yang muncul akibat sistem yang belum terstruktur dengan baik atau masih dilakukan secara manual. Permasalahan ini tidak hanya menghambat proses kerja, tetapi juga dapat menyebabkan kesalahan data dan menurunkan kualitas pelayanan. Berikut penjelasan dari masing-masing masalah:</p>
 
-   <p>
-Dalam sistem manajemen perpustakaan, sering ditemukan berbagai permasalahan yang muncul akibat sistem yang belum terstruktur dengan baik atau masih dilakukan secara manual. Permasalahan ini tidak hanya menghambat proses kerja, tetapi juga dapat menyebabkan kesalahan data dan menurunkan kualitas pelayanan. Berikut penjelasan dari masing-masing masalah:
-</p>
+                <p><b>a. Data Buku, Anggota, dan Petugas Masih Tercampur</b><br>
+                Dalam sistem yang tidak terorganisir, data buku, anggota, dan petugas sering disimpan dalam satu tempat tanpa pemisahan yang jelas. Hal ini menyebabkan kesulitan dalam pengelolaan data, karena setiap jenis data memiliki karakteristik yang berbeda. Misalnya, data buku memiliki atribut seperti judul dan penulis, sedangkan anggota memiliki nama dan alamat. Jika semua data dicampur, maka akan sulit untuk mengelola, mencari, dan memperbarui data secara efisien. Selain itu, risiko kesalahan dalam pengolahan data juga menjadi lebih tinggi.</p>
 
-<p><b>a. Data Buku, Anggota, dan Petugas Masih Tercampur</b><br>
-Dalam sistem yang tidak terorganisir, data buku, anggota, dan petugas sering disimpan dalam satu tempat tanpa pemisahan yang jelas. Hal ini menyebabkan kesulitan dalam pengelolaan data, karena setiap jenis data memiliki karakteristik yang berbeda. Misalnya, data buku memiliki atribut seperti judul dan penulis, sedangkan anggota memiliki nama dan alamat. Jika semua data dicampur, maka akan sulit untuk mengelola, mencari, dan memperbarui data secara efisien. Selain itu, risiko kesalahan dalam pengolahan data juga menjadi lebih tinggi.
-</p>
+                <p><b>b. Sulit Melacak Siapa yang Meminjam Buku</b><br>
+                Tanpa sistem yang terstruktur, perpustakaan akan kesulitan dalam mengetahui siapa yang sedang meminjam suatu buku. Hal ini terjadi karena tidak adanya hubungan yang jelas antara data buku dan data anggota. Akibatnya, ketika terjadi keterlambatan pengembalian atau kehilangan buku, petugas tidak dapat dengan mudah melacak siapa peminjamnya. Masalah ini juga dapat menyebabkan kerugian bagi perpustakaan karena buku tidak kembali tepat waktu atau bahkan hilang.</p>
 
-<p><b>b. Sulit Melacak Siapa yang Meminjam Buku</b><br>
-Tanpa sistem yang terstruktur, perpustakaan akan kesulitan dalam mengetahui siapa yang sedang meminjam suatu buku. Hal ini terjadi karena tidak adanya hubungan yang jelas antara data buku dan data anggota. Akibatnya, ketika terjadi keterlambatan pengembalian atau kehilangan buku, petugas tidak dapat dengan mudah melacak siapa peminjamnya. Masalah ini juga dapat menyebabkan kerugian bagi perpustakaan karena buku tidak kembali tepat waktu atau bahkan hilang.
-</p>
+                <p><b>c. Proses Peminjaman dan Pengembalian Tidak Terstruktur</b><br>
+                Proses peminjaman dan pengembalian yang dilakukan tanpa alur yang jelas dapat menyebabkan kebingungan dan kesalahan pencatatan. Misalnya, tidak ada aturan yang mengatur kapan buku harus dikembalikan atau bagaimana mencatat tanggal peminjaman. Hal ini membuat proses menjadi tidak konsisten dan sulit untuk diawasi. Selain itu, tanpa sistem yang baik, petugas harus melakukan banyak pekerjaan manual yang memakan waktu dan tenaga.</p>
 
-<p><b>c. Proses Peminjaman dan Pengembalian Tidak Terstruktur</b><br>
-Proses peminjaman dan pengembalian yang dilakukan tanpa alur yang jelas dapat menyebabkan kebingungan dan kesalahan pencatatan. Misalnya, tidak ada aturan yang mengatur kapan buku harus dikembalikan atau bagaimana mencatat tanggal peminjaman. Hal ini membuat proses menjadi tidak konsisten dan sulit untuk diawasi. Selain itu, tanpa sistem yang baik, petugas harus melakukan banyak pekerjaan manual yang memakan waktu dan tenaga.
-</p>
+                <p><b>d. Data Mudah Duplikat atau Tidak Konsisten</b><br>
+                Karena tidak adanya mekanisme pengelolaan data yang baik, sering terjadi duplikasi data, seperti satu buku yang dicatat lebih dari satu kali atau data anggota yang sama tetapi dengan penulisan yang berbeda. Selain itu, data juga bisa menjadi tidak konsisten, misalnya status buku tidak sesuai antara data satu dengan yang lain. Hal ini dapat menyebabkan kebingungan dan menurunkan keakuratan informasi dalam sistem.</p>
 
-<p><b>d. Data Mudah Duplikat atau Tidak Konsisten</b><br>
-Karena tidak adanya mekanisme pengelolaan data yang baik, sering terjadi duplikasi data, seperti satu buku yang dicatat lebih dari satu kali atau data anggota yang sama tetapi dengan penulisan yang berbeda. Selain itu, data juga bisa menjadi tidak konsisten, misalnya status buku tidak sesuai antara data satu dengan yang lain. Hal ini dapat menyebabkan kebingungan dan menurunkan keakuratan informasi dalam sistem.
-</p>
+                <p><b>e. Sulit Dikembangkan Jika Fitur Bertambah</b><br>
+                Sistem yang tidak dirancang dengan konsep yang terstruktur akan sulit untuk dikembangkan di masa depan. Ketika ingin menambahkan fitur baru, seperti denda keterlambatan atau reservasi buku, sistem yang ada harus diubah secara besar-besaran. Hal ini tidak efisien dan berisiko menimbulkan error baru. Oleh karena itu, diperlukan pendekatan yang lebih terstruktur seperti Object-Oriented Programming (OOP) agar sistem mudah dikembangkan dan dipelihara.</p>
 
-<p><b>e. Sulit Dikembangkan Jika Fitur Bertambah</b><br>
-Sistem yang tidak dirancang dengan konsep yang terstruktur akan sulit untuk dikembangkan di masa depan. Ketika ingin menambahkan fitur baru, seperti denda keterlambatan atau reservasi buku, sistem yang ada harus diubah secara besar-besaran. Hal ini tidak efisien dan berisiko menimbulkan error baru. Oleh karena itu, diperlukan pendekatan yang lebih terstruktur seperti Object-Oriented Programming (OOP) agar sistem mudah dikembangkan dan dipelihara.
-</p>
-
-<p><b>Kesimpulan Masalah:</b><br>
-Berdasarkan permasalahan di atas, dapat disimpulkan bahwa sistem perpustakaan membutuhkan pendekatan yang lebih terstruktur dan modular. Penggunaan konsep Object-Oriented Programming (OOP) menjadi solusi yang tepat karena mampu memisahkan data berdasarkan objek, menghubungkan antar data dengan jelas, serta mempermudah pengembangan sistem di masa depan.
-</p>
-  </div>
+                <p><b>Kesimpulan Masalah:</b><br>
+                Berdasarkan permasalahan di atas, dapat disimpulkan bahwa sistem perpustakaan membutuhkan pendekatan yang lebih terstruktur dan modular. Penggunaan konsep Object-Oriented Programming (OOP) menjadi solusi yang tepat karena mampu memisahkan data berdasarkan objek, menghubungkan antar data dengan jelas, serta mempermudah pengembangan sistem di masa depan.</p>
+            </div>
+        </div>
+    </div>
 </section>
 
-
+<!-- ============================================ -->
+<!-- SECTION 2: KENAPA OOP -->
+<!-- ============================================ -->
 <section class="container">
-  <div class="card">
-    <h2> 🔹 Kenapa Lebih Baik Menggunakan OOP </h2>
-    <div class="topik-section">
- <div class="topik-penjelasan">
-  
-    <p>
-Permasalahan dalam sistem perpustakaan lebih efektif diselesaikan dengan Object-Oriented Programming (OOP) karena pendekatan ini mampu mengelola sistem secara terstruktur, fleksibel, dan sesuai dengan kondisi nyata. Berikut penjelasannya:
-</p>
+    <div class="card">
+        <h2>🔹 Kenapa Lebih Baik Menggunakan OOP</h2>
+        <div class="topik-section">
+            <div class="topik-penjelasan">
+                <p>Permasalahan dalam sistem perpustakaan lebih efektif diselesaikan dengan Object-Oriented Programming (OOP) karena pendekatan ini mampu mengelola sistem secara terstruktur, fleksibel, dan sesuai dengan kondisi nyata. Berikut penjelasannya:</p>
 
-<p><b>a. Data Lebih Terstruktur</b><br>
-Dalam OOP, setiap entitas seperti <i>Buku</i>, <i>Anggota</i>, <i>Petugas</i>, dan <i>Transaksi</i> dibuat dalam class terpisah. Hal ini membuat data tidak tercampur, lebih rapi, dan mudah dikelola.
-</p>
+                <p><b>a. Data Lebih Terstruktur</b><br>
+                Dalam OOP, setiap entitas seperti <i>Buku</i>, <i>Anggota</i>, <i>Petugas</i>, dan <i>Transaksi</i> dibuat dalam class terpisah. Hal ini membuat data tidak tercampur, lebih rapi, dan mudah dikelola.</p>
 
-<p><b>b. Mudah Dikembangkan</b><br>
-OOP memungkinkan penambahan fitur baru (seperti denda atau reservasi) tanpa mengubah seluruh sistem. Cukup menambahkan atau memperbarui class tertentu sehingga lebih fleksibel dan aman.
-</p>
+                <p><b>b. Mudah Dikembangkan</b><br>
+                OOP memungkinkan penambahan fitur baru (seperti denda atau reservasi) tanpa mengubah seluruh sistem. Cukup menambahkan atau memperbarui class tertentu sehingga lebih fleksibel dan aman.</p>
 
-<p><b>c. Menghindari Duplikasi Kode</b><br>
-Dengan konsep inheritance, kode yang sama dapat digunakan kembali. Hal ini membuat program lebih efisien, lebih singkat, dan mudah dipelihara.
-</p>
+                <p><b>c. Menghindari Duplikasi Kode</b><br>
+                Dengan konsep inheritance, kode yang sama dapat digunakan kembali. Hal ini membuat program lebih efisien, lebih singkat, dan mudah dipelihara.</p>
 
-<p><b>d. Keamanan Data (Encapsulation)</b><br>
-Data penting dilindungi dalam class dan hanya bisa diakses melalui method tertentu. Ini mencegah perubahan data secara sembarangan dan menjaga konsistensi sistem.
-</p>
+                <p><b>d. Keamanan Data (Encapsulation)</b><br>
+                Data penting dilindungi dalam class dan hanya bisa diakses melalui method tertentu. Ini mencegah perubahan data secara sembarangan dan menjaga konsistensi sistem.</p>
 
-<p><b>e. Sesuai dengan Dunia Nyata</b><br>
-Objek dalam OOP merepresentasikan objek nyata seperti buku dan anggota, sehingga sistem lebih mudah dipahami dan sesuai dengan alur kerja perpustakaan.
-</p>
-
-  </div>
+                <p><b>e. Sesuai dengan Dunia Nyata</b><br>
+                Objek dalam OOP merepresentasikan objek nyata seperti buku dan anggota, sehingga sistem lebih mudah dipahami dan sesuai dengan alur kerja perpustakaan.</p>
+            </div>
+        </div>
+    </div>
 </section>
 
+<!-- ============================================ -->
+<!-- SECTION 3: LANGKAH PENYELESAIAN -->
+<!-- ============================================ -->
 <section class="container">
-  <div class="card">
-    <h2> 🔹 Langkah Penyelesaian Masalah </h2>
-    <div class="topik-section">
- <div class="topik-penjelasan">
-  
-    <p>
-Untuk mengatasi berbagai permasalahan dalam sistem manajemen perpustakaan, diperlukan langkah-langkah penyelesaian yang terstruktur dengan menggunakan pendekatan Object-Oriented Programming (OOP). Berikut tahapan yang dapat dilakukan:
-</p>
+    <div class="card">
+        <h2>🔹 Langkah Penyelesaian Masalah</h2>
+        <div class="topik-section">
+            <div class="topik-penjelasan">
+                <p>Untuk mengatasi berbagai permasalahan dalam sistem manajemen perpustakaan, diperlukan langkah-langkah penyelesaian yang terstruktur dengan menggunakan pendekatan Object-Oriented Programming (OOP). Berikut tahapan yang dapat dilakukan:</p>
 
-<p><b>a. Identifikasi Kebutuhan Sistem</b><br>
-Menentukan kebutuhan utama sistem, seperti pengelolaan data buku, anggota, petugas, serta proses peminjaman dan pengembalian. Tahap ini penting agar sistem yang dibuat sesuai dengan kebutuhan perpustakaan.
-</p>
+                <p><b>a. Identifikasi Kebutuhan Sistem</b><br>
+                Menentukan kebutuhan utama sistem, seperti pengelolaan data buku, anggota, petugas, serta proses peminjaman dan pengembalian. Tahap ini penting agar sistem yang dibuat sesuai dengan kebutuhan perpustakaan.</p>
 
-<p><b>b. Menentukan Class dan Objek</b><br>
-Mengidentifikasi entitas yang akan dijadikan class, seperti <i>Buku</i>, <i>Anggota</i>, <i>Petugas</i>, dan <i>Transaksi</i>. Setiap class memiliki atribut dan method sesuai fungsinya.
-</p>
+                <p><b>b. Menentukan Class dan Objek</b><br>
+                Mengidentifikasi entitas yang akan dijadikan class, seperti <i>Buku</i>, <i>Anggota</i>, <i>Petugas</i>, dan <i>Transaksi</i>. Setiap class memiliki atribut dan method sesuai fungsinya.</p>
 
-<p><b>c. Mendesain Struktur OOP</b><br>
-Menyusun hubungan antar class menggunakan konsep OOP seperti:
-- <i>Encapsulation</i> untuk melindungi data  
-- <i>Inheritance</i> untuk pewarisan sifat  
-- <i>Association</i> untuk hubungan antar objek  
-Tahap ini biasanya divisualisasikan dalam bentuk class diagram.
-</p>
+                <p><b>c. Mendesain Struktur OOP</b><br>
+                Menyusun hubungan antar class menggunakan konsep OOP seperti:
+                - <i>Encapsulation</i> untuk melindungi data  
+                - <i>Inheritance</i> untuk pewarisan sifat  
+                - <i>Association</i> untuk hubungan antar objek  
+                Tahap ini biasanya divisualisasikan dalam bentuk class diagram.</p>
 
-<p><b>d. Implementasi Program</b><br>
-Menerjemahkan desain ke dalam kode program (misalnya Java, Python, atau C++). Setiap class diimplementasikan sesuai perannya dalam sistem.
-</p>
+                <p><b>d. Implementasi Program</b><br>
+                Menerjemahkan desain ke dalam kode program (misalnya Java, Python, atau C++). Setiap class diimplementasikan sesuai perannya dalam sistem.</p>
 
-<p><b>e. Pengujian Sistem</b><br>
-Melakukan testing untuk memastikan semua fitur berjalan dengan baik, seperti proses peminjaman, pengembalian, dan pencatatan data.
-</p>
+                <p><b>e. Pengujian Sistem</b><br>
+                Melakukan testing untuk memastikan semua fitur berjalan dengan baik, seperti proses peminjaman, pengembalian, dan pencatatan data.</p>
 
-<p><b>f. Pengembangan dan Pemeliharaan</b><br>
-Melakukan perbaikan dan penambahan fitur baru (misalnya denda atau notifikasi) tanpa merusak sistem utama, berkat struktur OOP yang fleksibel.
-</p>
+                <p><b>f. Pengembangan dan Pemeliharaan</b><br>
+                Melakukan perbaikan dan penambahan fitur baru (misalnya denda atau notifikasi) tanpa merusak sistem utama, berkat struktur OOP yang fleksibel.</p>
 
-<p><b>Kesimpulan:</b><br>
-Dengan mengikuti langkah-langkah tersebut, sistem perpustakaan dapat dibangun secara terstruktur, mudah dikembangkan, serta mampu menyelesaikan permasalahan yang ada secara efektif.
-</p>
-  </div>
+                <p><b>Kesimpulan:</b><br>
+                Dengan mengikuti langkah-langkah tersebut, sistem perpustakaan dapat dibangun secara terstruktur, mudah dikembangkan, serta mampu menyelesaikan permasalahan yang ada secara efektif.</p>
+            </div>
+        </div>
+    </div>
 </section>
 
-
-
+<!-- ============================================ -->
+<!-- SECTION 4: CLASS DIAGRAM -->
+<!-- ============================================ -->
 <section class="container">
-  <div class="card">
-    <h2>🔹 Implementasi Source Code Dart</h2>
-      <div class="code-block">
+    <div class="card">
+        <h2>🔹 Class Diagram UML</h2>
+        <div class="topik-section">
+            <div class="note">
+                <p><strong>Deskripsi:</strong> Class Diagram menunjukkan hubungan antar class dalam sistem perpustakaan:</p>
+                <ul>
+                    <li><strong>Buku</strong> - atribut: judul, penulis, tersedia | method: pinjam(), kembalikan(), tampilkanInfo()</li>
+                    <li><strong>Anggota</strong> - atribut: nama, idAnggota, alamat, totalPinjam | method: pinjamBuku(), kembalikanBuku(), tampilkanInfo()</li>
+                    <li><strong>Transaksi</strong> - atribut: idTransaksi, status | method: prosesPinjam(), prosesKembalikan(), tampilkanStruk()</li>
+                    <li><strong>LaporanBuku</strong> - method static: cetakDaftarBuku()</li>
+                </ul>
+            </div>
+
+            <div class="diagram-container">
+                <svg viewBox="0 0 1000 650" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="1000" height="650" fill="#fafafa" rx="10"/>
+
+                    <!-- CLASS BUKU -->
+                    <rect x="40" y="30" width="260" height="195" rx="12" fill="#fff0f7" stroke="#cc0066" stroke-width="2.5"/>
+                    <rect x="40" y="30" width="260" height="40" rx="12" fill="#cc0066"/>
+                    <rect x="40" y="60" width="260" height="10" fill="#cc0066"/>
+                    <text x="170" y="57" text-anchor="middle" fill="white" font-weight="bold" font-size="17">Buku</text>
+
+                    <line x1="55" y1="100" x2="285" y2="100" stroke="#cc0066" stroke-width="1.5"/>
+                    <text x="60" y="82" fill="#4a0d33" font-size="13">- judul: String</text>
+                    <text x="60" y="100" fill="#4a0d33" font-size="13">- penulis: String</text>
+                    <text x="60" y="118" fill="#4a0d33" font-size="13">- tersedia: bool</text>
+
+                    <line x1="55" y1="130" x2="285" y2="130" stroke="#cc0066" stroke-width="1.5" stroke-dasharray="6,4"/>
+                    <text x="60" y="148" fill="#4a0d33" font-size="12">+ tampilkanInfo(): void</text>
+                    <text x="60" y="166" fill="#4a0d33" font-size="12">+ pinjam(): bool</text>
+                    <text x="60" y="184" fill="#4a0d33" font-size="12">+ kembalikan(): void</text>
+
+                    <!-- CLASS ANGGOTA -->
+                    <rect x="500" y="30" width="270" height="210" rx="12" fill="#fff0f7" stroke="#cc0066" stroke-width="2.5"/>
+                    <rect x="500" y="30" width="270" height="40" rx="12" fill="#cc0066"/>
+                    <rect x="500" y="60" width="270" height="10" fill="#cc0066"/>
+                    <text x="635" y="57" text-anchor="middle" fill="white" font-weight="bold" font-size="17">Anggota</text>
+
+                    <line x1="515" y1="100" x2="755" y2="100" stroke="#cc0066" stroke-width="1.5"/>
+                    <text x="520" y="82" fill="#4a0d33" font-size="13">- nama: String</text>
+                    <text x="520" y="100" fill="#4a0d33" font-size="13">- idAnggota: String</text>
+                    <text x="520" y="118" fill="#4a0d33" font-size="13">- alamat: String</text>
+                    <text x="520" y="136" fill="#4a0d33" font-size="13">- totalPinjam: int</text>
+
+                    <line x1="515" y1="148" x2="755" y2="148" stroke="#cc0066" stroke-width="1.5" stroke-dasharray="6,4"/>
+                    <text x="520" y="166" fill="#4a0d33" font-size="12">+ tampilkanInfo(): void</text>
+                    <text x="520" y="184" fill="#4a0d33" font-size="12">+ pinjamBuku(t: Transaksi): void</text>
+                    <text x="520" y="202" fill="#4a0d33" font-size="12">+ kembalikanBuku(t: Transaksi): void</text>
+
+                    <!-- CLASS TRANSAKSI -->
+                    <rect x="40" y="310" width="290" height="210" rx="12" fill="#fff0f7" stroke="#cc0066" stroke-width="2.5"/>
+                    <rect x="40" y="310" width="290" height="40" rx="12" fill="#cc0066"/>
+                    <rect x="40" y="340" width="290" height="10" fill="#cc0066"/>
+                    <text x="185" y="337" text-anchor="middle" fill="white" font-weight="bold" font-size="17">Transaksi</text>
+
+                    <line x1="55" y1="380" x2="315" y2="380" stroke="#cc0066" stroke-width="1.5"/>
+                    <text x="60" y="362" fill="#4a0d33" font-size="13">- idTransaksi: String</text>
+                    <text x="60" y="380" fill="#4a0d33" font-size="13">- anggota: Anggota</text>
+                    <text x="60" y="398" fill="#4a0d33" font-size="13">- buku: Buku</text>
+                    <text x="60" y="416" fill="#4a0d33" font-size="13">- status: String</text>
+
+                    <line x1="55" y1="428" x2="315" y2="428" stroke="#cc0066" stroke-width="1.5" stroke-dasharray="6,4"/>
+                    <text x="60" y="446" fill="#4a0d33" font-size="12">+ prosesPinjam(): bool</text>
+                    <text x="60" y="464" fill="#4a0d33" font-size="12">+ prosesKembalikan(): void</text>
+                    <text x="60" y="482" fill="#4a0d33" font-size="12">+ tampilkanStruk(): void</text>
+
+                    <!-- CLASS LAPORANBUKU -->
+                    <rect x="480" y="310" width="280" height="170" rx="12" fill="#fff0f7" stroke="#cc0066" stroke-width="2.5"/>
+                    <rect x="480" y="310" width="280" height="40" rx="12" fill="#cc0066"/>
+                    <rect x="480" y="340" width="280" height="10" fill="#cc0066"/>
+                    <text x="620" y="337" text-anchor="middle" fill="white" font-weight="bold" font-size="16">LaporanBuku</text>
+
+                    <line x1="495" y1="370" x2="745" y2="370" stroke="#cc0066" stroke-width="1.5"/>
+                    <text x="500" y="390" fill="#4a0d33" font-size="13" font-style="italic">(tidak ada atribut)</text>
+
+                    <line x1="495" y1="405" x2="745" y2="405" stroke="#cc0066" stroke-width="1.5" stroke-dasharray="6,4"/>
+                    <text x="500" y="425" fill="#4a0d33" font-size="12">+ cetakDaftarBuku(</text>
+                    <text x="505" y="443" fill="#4a0d33" font-size="12">  daftar: List&lt;Buku&gt;): void</text>
+
+                    <!-- RELASI -->
+                    <line x1="185" y1="310" x2="185" y2="225" stroke="#cc0066" stroke-width="2" marker-end="url(#arrow)"/>
+                    <rect x="175" y="262" width="20" height="18" rx="3" fill="white" stroke="#cc0066" stroke-width="1.5"/>
+                    <text x="185" y="276" text-anchor="middle" fill="#cc0066" font-weight="bold" font-size="13">1</text>
+
+                    <line x1="330" y1="400" x2="500" y2="185" stroke="#cc0066" stroke-width="2" marker-end="url(#arrow)"/>
+                    <rect x="400" y="280" width="20" height="18" rx="3" fill="white" stroke="#cc0066" stroke-width="1.5"/>
+                    <text x="410" y="294" text-anchor="middle" fill="#cc0066" font-weight="bold" font-size="13">1</text>
+
+                    <line x1="500" y1="135" x2="330" y2="310" stroke="#cc0066" stroke-width="2" stroke-dasharray="8,4" marker-end="url(#arrow)"/>
+                    <rect x="400" y="210" width="20" height="18" rx="3" fill="white" stroke="#cc0066" stroke-width="1.5"/>
+                    <text x="410" y="224" text-anchor="middle" fill="#cc0066" font-weight="bold" font-size="13">*</text>
+
+                    <line x1="480" y1="380" x2="300" y2="140" stroke="#cc0066" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+                    <text x="390" y="250" fill="#cc0066" font-size="12" font-style="italic">&lt;&lt;use&gt;&gt;</text>
+
+                    <defs>
+                        <marker id="arrow" viewBox="0 0 12 12" refX="12" refY="6"
+                            markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+                            <path d="M 0 0 L 12 6 L 0 12 z" fill="#cc0066"/>
+                        </marker>
+                    </defs>
+
+                    <!-- LEGEND -->
+                    <rect x="40" y="540" width="920" height="90" rx="10" fill="#f5e6ed" stroke="#ffb3d9" stroke-width="1.5"/>
+                    <text x="70" y="568" fill="#4a0d33" font-weight="bold" font-size="15">📘 KETERANGAN RELASI:</text>
+
+                    <line x1="70" y1="592" x2="130" y2="592" stroke="#cc0066" stroke-width="2"/>
+                    <text x="140" y="597" fill="#4a0d33" font-size="13">→ Association (hubungan antar class)</text>
+
+                    <line x1="70" y1="615" x2="130" y2="615" stroke="#cc0066" stroke-width="2" stroke-dasharray="8,4"/>
+                    <text x="140" y="620" fill="#4a0d33" font-size="13">→ Dependency (ketergantungan)</text>
+
+                    <rect x="430" y="590" width="20" height="18" rx="3" fill="white" stroke="#cc0066" stroke-width="1.5"/>
+                    <text x="440" y="604" text-anchor="middle" fill="#cc0066" font-weight="bold" font-size="13">1</text>
+                    <text x="460" y="604" fill="#4a0d33" font-size="13">→ Satu objek berhubungan dengan satu objek lain</text>
+
+                    <rect x="430" y="615" width="20" height="18" rx="3" fill="white" stroke="#cc0066" stroke-width="1.5"/>
+                    <text x="440" y="629" text-anchor="middle" fill="#cc0066" font-weight="bold" font-size="13">*</text>
+                    <text x="460" y="629" fill="#4a0d33" font-size="13">→ Satu objek berhubungan dengan banyak objek (one-to-many)</text>
+                </svg>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SECTION 5: FLOWCHART PEMINJAMAN (DIPERBESAR) -->
+<!-- ============================================ -->
+<section class="container">
+    <div class="card">
+        <h2>🔹 Flowchart Peminjaman Buku</h2>
+        <div class="topik-section">
+            <div class="note">
+                <p><strong>Alur:</strong> Anggota memilih buku → sistem cek ketersediaan → jika tersedia, peminjaman berhasil → jika tidak, gagal.</p>
+            </div>
+
+            <div class="diagram-container">
+                <svg viewBox="0 0 800 850" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background -->
+                    <rect width="800" height="850" fill="#fafafa" rx="10"/>
+
+                    <!-- START -->
+                    <ellipse cx="400" cy="50" rx="80" ry="35" fill="#cc0066" stroke="#a30552" stroke-width="3"/>
+                    <text x="400" y="58" text-anchor="middle" fill="white" font-weight="bold" font-size="18">MULAI</text>
+
+                    <!-- Panah ke Input Anggota -->
+                    <line x1="400" y1="85" x2="400" y2="125" stroke="#4a0d33" stroke-width="3" marker-end="url(#arrow2)"/>
+
+                    <!-- INPUT ANGGOTA -->
+                    <rect x="250" y="125" width="300" height="60" rx="10" fill="#fff0f7" stroke="#cc0066" stroke-width="3"/>
+                    <text x="400" y="155" text-anchor="middle" fill="#4a0d33" font-weight="bold" font-size="16">Input Anggota</text>
+                    <text x="400" y="175" text-anchor="middle" fill="#4a0d33" font-size="13">(Pilih Anggota)</text>
+
+                    <!-- Panah ke Input Buku -->
+                    <line x1="400" y1="185" x2="400" y2="225" stroke="#4a0d33" stroke-width="3" marker-end="url(#arrow2)"/>
+
+                    <!-- INPUT BUKU -->
+                    <rect x="250" y="225" width="300" height="60" rx="10" fill="#fff0f7" stroke="#cc0066" stroke-width="3"/>
+                    <text x="400" y="255" text-anchor="middle" fill="#4a0d33" font-weight="bold" font-size="16">Input Buku</text>
+                    <text x="400" y="275" text-anchor="middle" fill="#4a0d33" font-size="13">(Pilih Buku)</text>
+
+                    <!-- Panah ke Decision -->
+                    <line x1="400" y1="285" x2="400" y2="335" stroke="#4a0d33" stroke-width="3" marker-end="url(#arrow2)"/>
+
+                    <!-- DECISION: Buku Tersedia? -->
+                    <polygon points="400,335 520,415 400,495 280,415" fill="#ffd9e6" stroke="#cc0066" stroke-width="3"/>
+                    <text x="400" y="405" text-anchor="middle" fill="#4a0d33" font-weight="bold" font-size="17">Buku</text>
+                    <text x="400" y="430" text-anchor="middle" fill="#4a0d33" font-weight="bold" font-size="17">Tersedia?</text>
+
+                    <!-- YES -->
+                    <line x1="520" y1="415" x2="640" y2="415" stroke="#4a0d33" stroke-width="3" marker-end="url(#arrow2)"/>
+                    <text x="580" y="400" text-anchor="middle" fill="#008000" font-weight="bold" font-size="18">YA</text>
+
+                    <!-- PROSES PEMINJAMAN -->
+                    <rect x="640" y="385" width="130" height="60" rx="10" fill="#cc0066" stroke="#a30552" stroke-width="3"/>
+                    <text x="705" y="415" text-anchor="middle" fill="white" font-weight="bold" font-size="14">Proses</text>
+                    <text x="705" y="435" text-anchor="middle" fill="white" font-weight="bold" font-size="14">Peminjaman</text>
+
+                    <!-- Panah ke Status Berhasil -->
+                    <line x1="705" y1="445" x2="705" y2="485" stroke="#4a0d33" stroke-width="3" marker-end="url(#arrow2)"/>
+
+                    <!-- STATUS BERHASIL -->
+                    <rect x="640" y="485" width="130" height="55" rx="10" fill="#d4edda" stroke="#28a745" stroke-width="3"/>
+                    <text x="705" y="512" text-anchor="middle" fill="#155724" font-weight="bold" font-size="14">Status:</text>
+                    <text x="705" y="530" text-anchor="middle" fill="#155724" font-weight="bold" font-size="14">BERHASIL</text>
+
+                    <!-- Panah ke Cetak -->
+                    <line x1="705" y1="540" x2="705" y2="580" stroke="#4a0d33" stroke-width="3" marker-end="url(#arrow2)"/>
+
+                    <!-- CETAK STRUK -->
+                    <rect x="640" y="580" width="130" height="55" rx="10" fill="#fff0f7" stroke="#cc0066" stroke-width="3"/>
+                    <text x="705" y="608" text-anchor="middle" fill="#4a0d33" font-weight="bold" font-size="14">Cetak Struk</text>
+                    <text x="705" y="625" text-anchor="middle" fill="#4a0d33" font-size="12">Peminjaman</text>
+
+                    <!-- Panah ke End -->
+                    <line x1="705" y1="635" x2="705" y2="680" stroke="#4a0d33" stroke-width="3"/>
+                    <line x1="705" y1="680" x2="400" y2="680" stroke="#4a0d33" stroke-width="3"/>
+                    <line x1="400" y1="680" x2="400" y2="730" stroke="#4a0d33" stroke-width="3" marker-end="url(#arrow2)"/>
+
+                    <!-- NO -->
+                    <line x1="280" y1="415" x2="150" y2="415" stroke="#4a0d33" stroke-width="3" marker-end="url(#arrow2)"/>
+                    <text x="215" y="400" text-anchor="middle" fill="#cc0000" font-weight="bold" font-size="18">TIDAK</text>
+
+                    <!-- STATUS GAGAL -->
+                    <rect x="60" y="385" width="140" height="55" rx="10" fill="#f8d7da" stroke="#dc3545" stroke-width="3"/>
+                    <text x="130" y="412" text-anchor="middle" fill="#721c24" font-weight="bold" font-size="14">Status:</text>
+                    <text x="130" y="430" text-anchor="middle" fill="#721c24" font-weight="bold" font-size="14">GAGAL</text>
+
+                    <!-- Panah ke End -->
+                    <line x1="130" y1="440" x2="130" y2="680" stroke="#4a0d33" stroke-width="3"/>
+                    <line x1="130" y1="680" x2="400" y2="680" stroke="#4a0d33" stroke-width="3"/>
+
+                    <!-- SELESAI -->
+                    <ellipse cx="400" cy="760" rx="80" ry="35" fill="#cc0066" stroke="#a30552" stroke-width="3"/>
+                    <text x="400" y="768" text-anchor="middle" fill="white" font-weight="bold" font-size="18">SELESAI</text>
+
+                    <!-- Legend -->
+                    <defs>
+                        <marker id="arrow2" viewBox="0 0 12 12" refX="12" refY="6"
+                            markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+                            <path d="M 0 0 L 12 6 L 0 12 z" fill="#4a0d33"/>
+                        </marker>
+                    </defs>
+
+                    <!-- LEGEND -->
+                    <rect x="60" y="810" width="680" height="35" rx="8" fill="#f5e6ed" stroke="#ffb3d9" stroke-width="1.5"/>
+                    <text x="80" y="833" fill="#4a0d33" font-weight="bold" font-size="13">📌 KETERANGAN: Oval = Mulai/Selesai | Persegi panjang = Proses/Input/Output | Belah ketupat = Decision</text>
+                </svg>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SECTION 6: PSEUDOCODE PEMINJAMAN -->
+<!-- ============================================ -->
+<section class="container">
+    <div class="card">
+        <h2>🔹 Kode Semu (Pseudocode) Peminjaman</h2>
+        <div class="code-block">
+<pre>
+ALGORITMA PEMINJAMAN_BUKU
+
+Mulai
+
+Input anggota
+Input buku
+
+Jika buku tersedia maka
+    status ← berhasil
+    buku tersedia ← false
+    totalPinjam ← totalPinjam + 1
+    Cetak struk
+Jika tidak
+    status ← gagal
+    Tampilkan pesan
+EndIf
+
+Selesai
+</pre>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SECTION 7: FLOWCHART PENGEMBALIAN (DIPERBESAR) -->
+<!-- ============================================ -->
+<section class="container">
+    <div class="card">
+        <h2>🔹 Flowchart Pengembalian Buku</h2>
+        <div class="topik-section">
+            <div class="note">
+                <p><strong>Alur:</strong> Anggota mengembalikan buku → sistem cek apakah buku sedang dipinjam → jika ya, status berubah menjadi tersedia → jika tidak, tampilkan pesan.</p>
+            </div>
+
+            <div class="diagram-container">
+                <svg viewBox="0 0 800 850" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="800" height="850" fill="#fafafa" rx="10"/>
+
+                    <!-- START -->
+                    <ellipse cx="400" cy="50" rx="80" ry="35" fill="#cc0066" stroke="#a30552" stroke-width="3"/>
+                    <text x="400" y="58" text-anchor="middle" fill="white" font-weight="bold" font-size="18">MULAI</text>
+
+                    <!-- Panah ke Input Transaksi -->
+                    <line x1="400" y1="85" x2="400" y2="125" stroke="#4a0d33" stroke-width="3" marker-end="url(#arrow3)"/>
+
+                    <!-- INPUT TRANSAKSI -->
+                    <rect x="230" y="125" width="340" height="60" rx="10" fill="#fff0f7" stroke="#cc0066" stroke-width="3"/>
+                    <text x="400" y="155" text-anchor="middle" fill="#4a0d33" font-weight="bold" font-size="16">Input Transaksi</text>
+                    <text x="400" y="175" text-anchor="middle" fill="#4a0d33" font-size="13">(Pilih Transaksi Pinjam)</text>
+
+                    <!-- Panah ke Decision -->
+                    <line x1="400" y1="185" x2="400" y2="235" stroke="#4a0d33" stroke-width="3" marker-end="url(#arrow3)"/>
+
+                    <!-- DECISION: Buku Dipinjam? -->
+                    <polygon points="400,235 530,315 400,395 270,315" fill="#ffd9e6" stroke="#cc0066" stroke-width="3"/>
+                    <text x="400" y="305" text-anchor="middle" fill="#4a0d33" font-weight="bold" font-size="16">Buku Sedang</text>
+                    <text x="400" y="330" text-anchor="middle" fill="#4a0d33" font-weight="bold" font-size="16">Dipinjam?</text>
+
+                    <!-- YES -->
+                    <line x1="530" y1="315" x2="650" y2="315" stroke="#4a0d33" stroke-width="3" marker-end="url(#arrow3)"/>
+                    <text x="590" y="300" text-anchor="middle" fill="#008000" font-weight="bold" font-size="18">YA</text>
+
+                    <!-- PROSES PENGEMBALIAN -->
+                    <rect x="650" y="285" width="130" height="60" rx="10" fill="#cc0066" stroke="#a30552" stroke-width="3"/>
+                    <text x="715" y="315" text-anchor="middle" fill="white" font-weight="bold" font-size="14">Proses</text>
+                    <text x="715" y="335" text-anchor="middle" fill="white" font-weight="bold" font-size="14">Pengembalian</text>
+
+                    <!-- Panah ke Status Dikembalikan -->
+                    <line x1="715" y1="345" x2="715" y2="385" stroke="#4a0d33" stroke-width="3" marker-end="url(#arrow3)"/>
+
+                    <!-- STATUS DIKEMBALIKAN -->
+                    <rect x="650" y="385" width="130" height="55" rx="10" fill="#d4edda" stroke="#28a745" stroke-width="3"/>
+                    <text x="715" y="412" text-anchor="middle" fill="#155724" font-weight="bold" font-size="14">Status:</text>
+                    <text x="715" y="430" text-anchor="middle" fill="#155724" font-weight="bold" font-size="14">DIKEMBALIKAN</text>
+
+                    <!-- Panah ke Update -->
+                    <line x1="715" y1="440" x2="715" y2="480" stroke="#4a0d33" stroke-width="3" marker-end="url(#arrow3)"/>
+
+                    <!-- UPDATE TOTAL PINJAM -->
+                    <rect x="640" y="480" width="150" height="55" rx="10" fill="#fff0f7" stroke="#cc0066" stroke-width="3"/>
+                    <text x="715" y="508" text-anchor="middle" fill="#4a0d33" font-weight="bold" font-size="14">Update</text>
+                    <text x="715" y="525" text-anchor="middle" fill="#4a0d33" font-weight="bold" font-size="14">totalPinjam - 1</text>
+
+                    <!-- Panah ke Cetak -->
+                    <line x1="715" y1="535" x2="715" y2="575" stroke="#4a0d33" stroke-width="3" marker-end="url(#arrow3)"/>
+
+                    <!-- CETAK BUKTI -->
+                    <rect x="640" y="575" width="150" height="55" rx="10" fill="#fff0f7" stroke="#cc0066" stroke-width="3"/>
+                    <text x="715" y="603" text-anchor="middle" fill="#4a0d33" font-weight="bold" font-size="14">Cetak Bukti</text>
+                    <text x="715" y="620" text-anchor="middle" fill="#4a0d33" font-size="12">Pengembalian</text>
+
+                    <!-- Panah ke End -->
+                    <line x1="715" y1="630" x2="715" y2="680" stroke="#4a0d33" stroke-width="3"/>
+                    <line x1="715" y1="680" x2="400" y2="680" stroke="#4a0d33" stroke-width="3"/>
+                    <line x1="400" y1="680" x2="400" y2="730" stroke="#4a0d33" stroke-width="3" marker-end="url(#arrow3)"/>
+
+                    <!-- NO -->
+                    <line x1="270" y1="315" x2="140" y2="315" stroke="#4a0d33" stroke-width="3" marker-end="url(#arrow3)"/>
+                    <text x="205" y="300" text-anchor="middle" fill="#cc0000" font-weight="bold" font-size="18">TIDAK</text>
+
+                    <!-- PESAN -->
+                    <rect x="50" y="290" width="160" height="50" rx="10" fill="#f8d7da" stroke="#dc3545" stroke-width="3"/>
+                    <text x="130" y="317" text-anchor="middle" fill="#721c24" font-weight="bold" font-size="14">Pesan:</text>
+                    <text x="130" y="333" text-anchor="middle" fill="#721c24" font-weight="bold" font-size="13">Buku tersedia</text>
+
+                    <!-- Panah ke End -->
+                    <line x1="130" y1="340" x2="130" y2="680" stroke="#4a0d33" stroke-width="3"/>
+                    <line x1="130" y1="680" x2="400" y2="680" stroke="#4a0d33" stroke-width="3"/>
+
+                    <!-- SELESAI -->
+                    <ellipse cx="400" cy="760" rx="80" ry="35" fill="#cc0066" stroke="#a30552" stroke-width="3"/>
+                    <text x="400" y="768" text-anchor="middle" fill="white" font-weight="bold" font-size="18">SELESAI</text>
+
+                    <defs>
+                        <marker id="arrow3" viewBox="0 0 12 12" refX="12" refY="6"
+                            markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+                            <path d="M 0 0 L 12 6 L 0 12 z" fill="#4a0d33"/>
+                        </marker>
+                    </defs>
+
+                    <!-- LEGEND -->
+                    <rect x="60" y="810" width="680" height="35" rx="8" fill="#f5e6ed" stroke="#ffb3d9" stroke-width="1.5"/>
+                    <text x="80" y="833" fill="#4a0d33" font-weight="bold" font-size="13">📌 KETERANGAN: Oval = Mulai/Selesai | Persegi panjang = Proses/Input/Output | Belah ketupat = Decision</text>
+                </svg>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SECTION 8: PSEUDOCODE PENGEMBALIAN -->
+<!-- ============================================ -->
+<section class="container">
+    <div class="card">
+        <h2>🔹 Kode Semu (Pseudocode) Pengembalian</h2>
+        <div class="code-block">
+<pre>
+ALGORITMA PENGEMBALIAN_BUKU
+
+Mulai
+
+Input transaksi
+
+Jika buku sedang dipinjam maka
+    buku tersedia ← true
+    status ← dikembalikan
+
+    Jika totalPinjam > 0 maka
+        totalPinjam ← totalPinjam - 1
+    EndIf
+
+    Cetak bukti pengembalian
+Jika tidak
+    Tampilkan pesan
+    "Buku sudah tersedia"
+EndIf
+
+Selesai
+</pre>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SECTION 9: SOURCE CODE DART -->
+<!-- ============================================ -->
+<section class="container">
+    <div class="card">
+        <h2>🔹 Implementasi Source Code Dart</h2>
+        <div class="code-block">
 <pre><code>
-// ======================================================
-// NAMA  : Nabilah Cahya Suci (251410018)
-// NAMA  : Aghista Bunga Kirani (251410027)
-// KELAS : SI2A
-// PROJECT : SISTEM MANAJEMEN PERPUSTAKAAN
-// ======================================================
-
-
-// ======================================================
-// CLASS DIAGRAM
-// ======================================================
-
-/*
-
-+----------------------+
-|        Buku          |
-+----------------------+
-| judul : String       |
-| penulis : String     |
-| tersedia : bool      |
-+----------------------+
-| tampilkanInfo()      |
-| pinjam()             |
-| kembalikan()         |
-+----------------------+
-
-           ^
-           |
-           |
-
-+----------------------+
-|      Transaksi       |
-+----------------------+
-| idTransaksi:String   |
-| status : String      |
-| anggota : Anggota    |
-| buku : Buku          |
-+----------------------+
-| prosesPinjam()       |
-| prosesKembalikan()   |
-| tampilkanStruk()     |
-+----------------------+
-
-           |
-           |
-           v
-
-+----------------------+
-|      Anggota         |
-+----------------------+
-| nama : String        |
-| idAnggota : String   |
-| alamat : String      |
-| totalPinjam : int    |
-+----------------------+
-| tampilkanInfo()      |
-| pinjamBuku()         |
-+----------------------+
-
-*/
-
-
-// ======================================================
-// FLOWCHART SISTEM
-// ======================================================
-
-/*
-
-+--------+
-| MULAI  |
-+--------+
-     |
-     v
-
-+-------------------+
-| Input Data Buku   |
-+-------------------+
-     |
-     v
-
-+---------------------+
-| Input Data Anggota  |
-+---------------------+
-     |
-     v
-
-+----------------------+
-| Proses Peminjaman    |
-+----------------------+
-     |
-     v
-
-+----------------------+
-| Buku Tersedia ?      |
-+----------------------+
-    /          \
-  YA            TIDAK
-   |              |
-   v              v
-
-+---------+   +---------+
-| Berhasil|   | Gagal   |
-+---------+   +---------+
-      |
-      v
-
-+----------------------+
-| Pengembalian Buku    |
-+----------------------+
-      |
-      v
-
-+----------------------+
-| Update Status Buku   |
-+----------------------+
-      |
-      v
-
-+----------------------+
-| Cetak Data Anggota   |
-+----------------------+
-      |
-      v
-
-+----------------------+
-| Cetak Data Buku      |
-+----------------------+
-      |
-      v
-
-+---------+
-| Selesai |
-+---------+
-
-*/
-
+// Nama : Nabilah Cahya Suci (251410018)
+// Nama : Aghista Bunga Kirani (251410027)
+// Kelas : SI2A
+// Project : SISTEM MANAJEMEN PERPUSTAKAAN
 
 // ======================================================
 // CLASS BUKU
 // ======================================================
-
 class Buku {
   String judul;
   String penulis;
@@ -516,11 +808,9 @@ class Buku {
   }
 }
 
-
 // ======================================================
 // CLASS ANGGOTA
 // ======================================================
-
 class Anggota {
   String nama;
   String idAnggota;
@@ -544,13 +834,19 @@ class Anggota {
       totalPinjam++;
     }
   }
-}
 
+  void kembalikanBuku(Transaksi t) {
+    t.prosesKembalikan();
+
+    if (totalPinjam > 0) {
+      totalPinjam--;
+    }
+  }
+}
 
 // ======================================================
 // CLASS TRANSAKSI
 // ======================================================
-
 class Transaksi {
   String idTransaksi;
   Anggota anggota;
@@ -567,112 +863,156 @@ class Transaksi {
       return true;
     } else {
       status = "Gagal";
-      print("Transaksi $idTransaksi GAGAL (Buku Tidak Tersedia)");
+      print("Transaksi $idTransaksi GAGAL (Buku tidak tersedia)");
       return false;
     }
   }
 
   void prosesKembalikan() {
-    buku.kembalikan();
-    status = "Dikembalikan";
-    print("Transaksi $idTransaksi BERHASIL DIKEMBALIKAN");
+    if (!buku.tersedia) {
+      buku.kembalikan();
+      status = "Dikembalikan";
+      print("Transaksi $idTransaksi BERHASIL DIKEMBALIKAN");
+    } else {
+      print("Buku ${buku.judul} sudah tersedia");
+    }
   }
 
   void tampilkanStruk() {
     print("ID Transaksi : $idTransaksi");
-    print("Nama Anggota : ${anggota.nama}");
-    print("Judul Buku   : ${buku.judul}");
+    print("Anggota      : ${anggota.nama}");
+    print("Buku         : ${buku.judul}");
     print("Status       : $status");
-    print("--------------------------");
+    print("-----------------------------");
   }
 }
 
+// ======================================================
+// CLASS LAPORAN BUKU
+// ======================================================
+class LaporanBuku {
+  static void cetakDaftarBuku(List<Buku> daftarBuku) {
+    print("\n=== DATA BUKU ===");
+
+    for (var buku in daftarBuku) {
+      buku.tampilkanInfo();
+      print("-----------------------------");
+    }
+  }
+}
 
 // ======================================================
 // MAIN PROGRAM
 // ======================================================
-
 void main() {
 
-  Buku b1 = Buku("Object Oriented Programming", "Andi", true);
+  // DATA BUKU
+  Buku b1 = Buku("OOP", "Andi", true);
   Buku b2 = Buku("Basis Data", "Budi", true);
   Buku b3 = Buku("Jaringan Komputer", "Citra", true);
 
+  // DATA ANGGOTA
   List<Anggota> anggota = [
-    Anggota("A1", "ID001", "Jakarta"),
-    Anggota("A2", "ID002", "Bandung"),
-    Anggota("A3", "ID003", "Surabaya"),
-    Anggota("A4", "ID004", "Medan"),
-    Anggota("A5", "ID005", "Padang"),
-    Anggota("A6", "ID006", "Aceh"),
-    Anggota("A7", "ID007", "Riau"),
-    Anggota("A8", "ID008", "Lampung"),
-    Anggota("A9", "ID009", "Bali"),
-    Anggota("A10", "ID010", "Papua"),
+    Anggota("A1", "ID1", "Jakarta"),
+    Anggota("A2", "ID2", "Bandung"),
+    Anggota("A3", "ID3", "Surabaya"),
+    Anggota("A4", "ID4", "Medan"),
+    Anggota("A5", "ID5", "Padang"),
+    Anggota("A6", "ID6", "Aceh"),
+    Anggota("A7", "ID7", "Riau"),
+    Anggota("A8", "ID8", "Lampung"),
+    Anggota("A9", "ID9", "Bali"),
+    Anggota("A10", "ID10", "Papua"),
   ];
 
+  // DATA TRANSAKSI
   List<Transaksi> transaksi = [
-    Transaksi("T001", anggota[0], b1),
-    Transaksi("T002", anggota[1], b2),
-    Transaksi("T003", anggota[2], b3),
-    Transaksi("T004", anggota[3], b1),
-    Transaksi("T005", anggota[4], b2),
-    Transaksi("T006", anggota[5], b3),
+    Transaksi("T1", anggota[0], b1),
+    Transaksi("T2", anggota[1], b2),
+    Transaksi("T3", anggota[2], b3),
+    Transaksi("T4", anggota[3], b1),
+    Transaksi("T5", anggota[4], b2),
+    Transaksi("T6", anggota[5], b3),
+    Transaksi("T7", anggota[6], b1),
+    Transaksi("T8", anggota[7], b2),
+    Transaksi("T9", anggota[8], b3),
+    Transaksi("T10", anggota[9], b1),
+    Transaksi("T11", anggota[0], b2),
+    Transaksi("T12", anggota[1], b3),
   ];
 
+  // PROSES PEMINJAMAN
   print("=== PROSES PEMINJAMAN ===");
-
   for (var t in transaksi) {
     t.anggota.pinjamBuku(t);
     t.tampilkanStruk();
   }
 
+  // PROSES PENGEMBALIAN
   print("\n=== PROSES PENGEMBALIAN ===");
+  anggota[0].kembalikanBuku(transaksi[0]);
+  anggota[1].kembalikanBuku(transaksi[1]);
+  anggota[2].kembalikanBuku(transaksi[2]);
 
-  transaksi[0].prosesKembalikan();
-  transaksi[1].prosesKembalikan();
-
+  // DATA ANGGOTA
   print("\n=== DATA ANGGOTA ===");
-
   for (var a in anggota) {
     a.tampilkanInfo();
     print("");
   }
 
-  print("\n=== DATA BUKU ===");
-
+  // DATA BUKU
   List<Buku> daftarBuku = [b1, b2, b3];
+  LaporanBuku.cetakDaftarBuku(daftarBuku);
 
-  for (var buku in daftarBuku) {
-    buku.tampilkanInfo();
-    print("");
-  }
+  // PENJELASAN PROGRAM
+  print("\n=== PENJELASAN APLIKASI ===");
+  print("Program ini merupakan Sistem Manajemen Perpustakaan.");
+  print("Sistem digunakan untuk mengelola data buku, anggota,");
+  print("peminjaman, dan pengembalian buku.");
+  print("Terdapat 4 class utama:");
+  print("1. Buku");
+  print("2. Anggota");
+  print("3. Transaksi");
+  print("4. LaporanBuku");
+  print("Setiap transaksi akan memeriksa ketersediaan buku.");
+  print("Jika tersedia maka peminjaman berhasil.");
+  print("Jika tidak tersedia maka transaksi gagal.");
 
-  print("\n=== PROGRAM SELESAI ===");
+  // CARA PENGGUNAAN
+  print("\n=== CARA PENGGUNAAN ===");
+  print("1. Tambahkan data buku.");
+  print("2. Tambahkan data anggota.");
+  print("3. Lakukan transaksi peminjaman.");
+  print("4. Lakukan transaksi pengembalian.");
+  print("5. Tampilkan data anggota.");
+  print("6. Tampilkan data buku.");
+  print("7. Cetak laporan perpustakaan.");
 }
-
-</div>
-    <button class="btn-popup" onclick="openDartPad('e53c4c3d3e75e388a0de2eac495e8335')">▶ Jalankan Kode di DartPad</button>
-</button>
-  </div>
-</div>
-
-<section class="container">
-  <div class="card">
-    <h2> 🔹 Kesimpulan  </h2>
-    <div class="topik-section">
- <div class="topik-penjelasan">
-  
-    <p>
- Sistem manajemen perpustakaan memiliki berbagai permasalahan seperti data yang tidak terstruktur, sulitnya melacak peminjaman, serta proses yang tidak efisien. Dengan menggunakan Object-Oriented Programming (OOP), semua masalah tersebut dapat diselesaikan secara lebih terorganisir dan sistematis.
- Melalui OOP, setiap komponen seperti Buku, Anggota, dan Transaksi dipisahkan ke dalam class masing-masing sehingga data menjadi lebih rapi, mudah dikelola, dan tidak saling tercampur. Selain itu, OOP juga memudahkan pengembangan sistem di masa depan, mengurangi duplikasi kode, serta meningkatkan keamanan data melalui konsep encapsulation.
- Implementasi dalam bentuk program (seperti menggunakan Dart) menunjukkan bahwa proses peminjaman dan pengembalian dapat berjalan lebih jelas, terstruktur, dan sesuai dengan kondisi nyata di perpustakaan.
-</p>
-
-</div>
+</code></pre>
+        <button class="btn-popup" onclick="openDartPad('e53c4c3d3e75e388a0de2eac495e8335')">▶ Jalankan Kode di DartPad</button>
+    </div>
 </section>
 
-    <!-- MODAL UNTUK DARTPAD -->
+<!-- ============================================ -->
+<!-- SECTION 10: KESIMPULAN -->
+<!-- ============================================ -->
+<section class="container">
+    <div class="card">
+        <h2>🔹 Kesimpulan</h2>
+        <div class="topik-section">
+            <div class="topik-penjelasan">
+                <p>Sistem manajemen perpustakaan memiliki berbagai permasalahan seperti data yang tidak terstruktur, sulitnya melacak peminjaman, serta proses yang tidak efisien. Dengan menggunakan Object-Oriented Programming (OOP), semua masalah tersebut dapat diselesaikan secara lebih terorganisir dan sistematis.</p>
+                <p>Melalui OOP, setiap komponen seperti Buku, Anggota, dan Transaksi dipisahkan ke dalam class masing-masing sehingga data menjadi lebih rapi, mudah dikelola, dan tidak saling tercampur. Selain itu, OOP juga memudahkan pengembangan sistem di masa depan, mengurangi duplikasi kode, serta meningkatkan keamanan data melalui konsep encapsulation.</p>
+                <p>Implementasi dalam bentuk program (seperti menggunakan Dart) menunjukkan bahwa proses peminjaman dan pengembalian dapat berjalan lebih jelas, terstruktur, dan sesuai dengan kondisi nyata di perpustakaan.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- MODAL DARTPAD -->
+<!-- ============================================ -->
 <div id="dartpadModal" class="modal">
     <div class="modal-content">
         <span class="close-btn" onclick="closeDartPad()">&times;</span>
@@ -680,80 +1020,77 @@ void main() {
     </div>
 </div>
 
-<script>
-    // SECURITY PROTOCOL: ANTI-VANDALISM & ANTI-VIEWSOURCE
-    document.addEventListener('contextmenu', e => e.preventDefault());
-    document.onkeydown = function (e) {
-      if (e.keyCode == 123) return false; // F12
-      if (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) return false; // Ctrl+Shift+I/J/C
-      if (e.ctrlKey && e.keyCode == 85) return false; // Ctrl+U
-      if (e.ctrlKey && e.keyCode == 83) return false; // Ctrl+S
-    };
-    
-    // Fungsi untuk membuka DartPad di modal
-    function openDartPad(id) {
-        const modal = document.getElementById('dartpadModal');
-        const iframe = document.getElementById('dartpadIframe');
-        
-        // Set src iframe dengan ID yang benar
-        iframe.src = 'https://dartpad.dev/embed-inline.html?id=' + id + '&theme=dark&run=true';
-        
-        // Tampilkan modal
-        modal.style.display = 'block';
-        
-        // Cegah scroll di background
-        document.body.style.overflow = 'hidden';
-    }
-    // Fungsi buka gambar
-function openImage(src) {
-    const modal = document.getElementById("imageModal");
-    const img = document.getElementById("popupImage");
-
-    img.src = src;
-    modal.style.display = "block";
-    document.body.style.overflow = "hidden";
-}
-
-// Fungsi tutup gambar
-function closeImage() {
-    const modal = document.getElementById("imageModal");
-
-    modal.style.display = "none";
-    document.body.style.overflow = "auto";
-}
-
-    // Fungsi untuk menutup modal
-    function closeDartPad() {
-        const modal = document.getElementById('dartpadModal');
-        const iframe = document.getElementById('dartpadIframe');
-        
-        // Sembunyikan modal
-        modal.style.display = 'none';
-        
-        // Hentikan iframe dengan mengosongkan src
-        iframe.src = '';
-        
-        // Kembalikan scroll
-        document.body.style.overflow = 'auto';
-    }
-
-    // Tutup modal jika klik di luar konten modal
-    window.onclick = function(event) {
-    const dartModal = document.getElementById('dartpadModal');
-    const imageModal = document.getElementById('imageModal');
-
-    if (event.target == dartModal) {
-        closeDartPad();
-    }
-    if (event.target == imageModal) {
-        closeImage();
-    }
-}
-</script>
+<!-- ============================================ -->
 <!-- MODAL IMAGE -->
+<!-- ============================================ -->
 <div id="imageModal" class="image-modal">
     <span class="close-image" onclick="closeImage()">&times;</span>
     <img class="image-modal-content" id="popupImage">
 </div>
+
+<!-- ============================================ -->
+<!-- FOOTER -->
+<!-- ============================================ -->
+<footer>
+    <p style="margin:0;color:#4a0d33;font-weight:bold;">
+        Nabilah Cahya Suci | 251410018 &nbsp;|&nbsp; Aghista Bunga Kirani | 251410027<br>
+        SI2A - Sistem Manajemen Perpustakaan
+    </p>
+</footer>
+
+<!-- ============================================ -->
+<!-- JAVASCRIPT -->
+<!-- ============================================ -->
+<script>
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.onkeydown = function (e) {
+        if (e.keyCode == 123) return false;
+        if (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) return false;
+        if (e.ctrlKey && e.keyCode == 85) return false;
+        if (e.ctrlKey && e.keyCode == 83) return false;
+    };
+
+    function openDartPad(id) {
+        const modal = document.getElementById('dartpadModal');
+        const iframe = document.getElementById('dartpadIframe');
+        iframe.src = 'https://dartpad.dev/embed-inline.html?id=' + id + '&theme=dark&run=true';
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function openImage(src) {
+        const modal = document.getElementById("imageModal");
+        const img = document.getElementById("popupImage");
+        img.src = src;
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeImage() {
+        const modal = document.getElementById("imageModal");
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+
+    function closeDartPad() {
+        const modal = document.getElementById('dartpadModal');
+        const iframe = document.getElementById('dartpadIframe');
+        modal.style.display = 'none';
+        iframe.src = '';
+        document.body.style.overflow = 'auto';
+    }
+
+    window.onclick = function(event) {
+        const dartModal = document.getElementById('dartpadModal');
+        const imageModal = document.getElementById('imageModal');
+        if (event.target == dartModal) {
+            closeDartPad();
+        }
+        if (event.target == imageModal) {
+            closeImage();
+        }
+    }
+</script>
+
 </body>
 </html>
